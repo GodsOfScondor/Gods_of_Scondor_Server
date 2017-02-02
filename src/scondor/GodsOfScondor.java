@@ -15,8 +15,8 @@ public class GodsOfScondor {
 		System.out.println(Color.GREEN + " - Gods of Scondor | Server - ");
 		
 		GNetServer server = new GNetServer(IP, PORT);
-		server.start();
 		server.bind();
+		server.start();
 		server.addEventListener(new Server());
 		System.out.println(Color.INFO + "Trying to start server...");
 		
