@@ -2,12 +2,12 @@ package scondor.deck.card;
 
 import scondor.mana.ManaType;
 
-public abstract class CardData {
+public abstract class Card {
 	
 	private int mana_cost;
 	private ManaType mana_type;
 	
-	public CardData(int mana_cost,ManaType mana_type){
+	public Card(int mana_cost,ManaType mana_type){
 		this.mana_type = mana_type;
 		this.mana_cost = mana_cost;
 	}

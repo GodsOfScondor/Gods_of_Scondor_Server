@@ -13,7 +13,7 @@ import scondor.mana.ManaType;
 
 public class CardMaster {
 
-	private static CardData[] cards = new CardData[1024];
+	private static Card[] cards = new Card[1024];
 	private static final String PATH = "data/cards.dat";
 
 	private static BufferedReader reader;
@@ -85,7 +85,7 @@ public class CardMaster {
 	 * get card raw data by id
 	 * 
 	 */
-	public CardData getCardData(int id) {
+	public Card getCardData(int id) {
 		return cards[id];
 	}
 

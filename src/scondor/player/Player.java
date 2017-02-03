@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import scondor.deck.DeckData;
-import scondor.deck.card.CardData;
+import scondor.deck.card.Card;
 
 public class Player {
 	private DeckData player_deck;
-	private List<CardData> card_list=new ArrayList<>();
+	private List<Card> card_list=new ArrayList<>();
 	
 	public Player(){
 		this.setPlayer_deck(new DeckData(card_list));

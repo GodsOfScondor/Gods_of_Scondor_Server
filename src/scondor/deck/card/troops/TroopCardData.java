@@ -1,9 +1,9 @@
 package scondor.deck.card.troops;
 
-import scondor.deck.card.CardData;
+import scondor.deck.card.Card;
 import scondor.mana.ManaType;
 
-public abstract class TroopCardData extends CardData {
+public abstract class TroopCardData extends Card {
 
 	private int attack;
 	private int live;

@@ -3,17 +3,17 @@ package scondor.deck;
 import java.util.ArrayList;
 import java.util.List;
 
-import scondor.deck.card.CardData;
+import scondor.deck.card.Card;
 
 public class DeckData {
 	
-	private List<CardData> cards = new ArrayList<>();
+	private List<Card> cards = new ArrayList<>();
 	
-	public DeckData(List<CardData> cards) {
+	public DeckData(List<Card> cards) {
 		this.cards = cards;
 	}
 	
-	public List<CardData> getCards() {
+	public List<Card> getCards() {
 		return cards;
 	}
 
