@@ -1,19 +1,18 @@
 package scondor.deck.card.troops;
 
 import scondor.deck.card.CardData;
+import scondor.mana.ManaType;
 
 public abstract class TroopCardData extends CardData {
 
 	private int attack;
 	private int live;
-	private int countdown;
 	private int fcode;
 
-	public TroopCardData(int mana_cost, int attack, int live, int countdown, int fcode) {
-		super(mana_cost);
+	public TroopCardData(int mana_cost, int attack, int live, ManaType mana_type, int fcode) {
+		super(mana_cost, mana_type);
 		this.attack = attack;
 		this.live = live;
-		this.countdown = countdown;
 		this.fcode = fcode;
 	}
 
@@ -33,14 +32,6 @@ public abstract class TroopCardData extends CardData {
 		this.live = defense;
 	}
 
-	public int getCountdown() {
-		return countdown;
-	}
-
-	public void setCountdown(int count) {
-		this.countdown = count;
-	}
-	
 	public int getFCode() {
 		return fcode;
 	}
