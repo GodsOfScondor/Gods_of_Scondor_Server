@@ -9,12 +9,17 @@ import java.io.InputStreamReader;
 
 public class CardMaster {
 	
-	private static Card[] cards = new Card[1024];
+	private static CardData[] cards = new CardData[1024];
 	private static final String PATH = "data/cards.dat";
 	
 	private static BufferedReader reader;
 	private static String line;
 	
+	/**
+	 * 
+	 * load raw data from card lib
+	 * 
+	 */
 	public static void load() {
 		
 		try {
@@ -22,7 +27,7 @@ public class CardMaster {
 			
 			while ((line = reader.readLine()) != null) {
 				
-
+				//TODO load data
 				
 			}
 			
@@ -33,6 +38,15 @@ public class CardMaster {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	/**
+	 * 
+	 * get card raw data by id
+	 * 
+	 */
+	public CardData getCardData(int id) {
+		return cards[id];
 	}
 	
 }

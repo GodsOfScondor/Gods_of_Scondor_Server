@@ -1,10 +1,10 @@
 package scondor.deck.card;
 
-public abstract class Card {
+public abstract class CardData {
 	
 	private int mana_cost;
 
-	public Card(int mana_cost){
+	public CardData(int mana_cost){
 		
 		
 		

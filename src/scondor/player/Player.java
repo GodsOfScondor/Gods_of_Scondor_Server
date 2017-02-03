@@ -3,22 +3,22 @@ package scondor.player;
 import java.util.ArrayList;
 import java.util.List;
 
-import scondor.deck.Deck;
-import scondor.deck.card.Card;
+import scondor.deck.DeckData;
+import scondor.deck.card.CardData;
 
 public class Player {
-	private Deck player_deck;
-	private List<Card> card_list=new ArrayList<>();
+	private DeckData player_deck;
+	private List<CardData> card_list=new ArrayList<>();
 	
 	public Player(){
-		this.setPlayer_deck(new Deck(card_list));
+		this.setPlayer_deck(new DeckData(card_list));
 	}
 
-	public Deck getPlayer_deck() {
+	public DeckData getPlayer_deck() {
 		return player_deck;
 	}
 
-	public void setPlayer_deck(Deck player_deck) {
+	public void setPlayer_deck(DeckData player_deck) {
 		this.player_deck = player_deck;
 	}
 	

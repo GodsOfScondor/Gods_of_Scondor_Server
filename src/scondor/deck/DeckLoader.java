@@ -2,7 +2,7 @@ package scondor.deck;
 
 public class DeckLoader {
 	
-	public static Deck loadDeck() {
+	public static DeckData loadDeck() {
 		// TODO load up deck
 		return null;
 	}

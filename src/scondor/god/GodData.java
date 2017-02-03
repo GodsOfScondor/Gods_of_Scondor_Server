@@ -2,7 +2,7 @@ package scondor.god;
 
 import scondor.mana.ManaType;
 
-public class God {
+public class GodData {
 	
 	private ManaType manatype1;
 	private ManaType manatype2;
@@ -12,7 +12,7 @@ public class God {
 	private int manatype2_amount;
 	private int universal_mana_amount;
 
-	public God(int level, int exp, ManaType manatype1, ManaType manatype2, int manatype1_amount, int manatype2_amount, int universal_mana_amount){
+	public GodData(int level, int exp, ManaType manatype1, ManaType manatype2, int manatype1_amount, int manatype2_amount, int universal_mana_amount){
 		this.level=level;
 		this.exp=exp;
 		this.manatype1=manatype1;
