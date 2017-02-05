@@ -25,6 +25,8 @@ public class GodsOfScondor {
 		server.start();
 		server.addEventListener(new Server());
 		
+		
+		
 		ContentLoader.load();
 		
 	}
