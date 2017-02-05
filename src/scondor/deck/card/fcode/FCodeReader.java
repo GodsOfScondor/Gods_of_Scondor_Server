@@ -25,6 +25,7 @@ public class FCodeReader {
 	public static void load(){
 		filepaths=new File(folder).listFiles();
 		try {
+<<<<<<< HEAD
 			while(filecounter<filepaths.length&&filepaths[filecounter].isFile()){
 				fr=new BufferedReader(new InputStreamReader(new FileInputStream(filepaths[filecounter])));
 				fcodes.add(new String[1024]);
@@ -49,6 +50,28 @@ public class FCodeReader {
 						fcodes.get(filecounter)[counter]=line.split(" ")[1];
 						break;
 					}
+=======
+			fr=new BufferedReader(new InputStreamReader(new FileInputStream(new File(fcode_file))));
+			
+			//no if for # cause its supposed to be ignored
+			while((line=fr.readLine())!=null){
+				if(line.startsWith("- ")){
+					fcodes.add(new ArrayList<>());
+					counter++;
+					fcodes.get(counter).add(line.split(" ")[1]);
+				}else if(line.startsWith("> msg")){
+					fcodes.get(counter).add(line.split(" ")[1]);
+				}else if(line.startsWith("> var")){
+					fcodes.get(counter).add(line.substring(1, line.length()));
+				}else if(line.startsWith("> getEnemyAttack")){
+					fcodes.get(counter).add(line.split(" ")[1]);
+				}else if(line.startsWith("> getEnemyAttack")){
+					fcodes.get(counter).add(line.split(" ")[1]);
+				}else if(line.startsWith("> editEnemyAttack")){
+					fcodes.get(counter).add(line.split(" ")[1]);
+				}else if(line.startsWith("> if")){
+					fcodes.get(counter).add(line.split(" ")[1]);
+>>>>>>> branch 'master' of https://github.com/GodsOfScondor/Gods_of_Scondor_Server.git
 				}
 				counter=0;
 				filecounter++;
@@ -60,8 +83,15 @@ public class FCodeReader {
 		}
 	}
 	
+<<<<<<< HEAD
 	public String[] getFCodeByID(int id){
 			return fcodes.get(id);
 	}
 			
+=======
+	public ArrayList<String> getFCodeByID(int id){
+		return fcodes.get(id);
+	}
+	
+>>>>>>> branch 'master' of https://github.com/GodsOfScondor/Gods_of_Scondor_Server.git
 }
