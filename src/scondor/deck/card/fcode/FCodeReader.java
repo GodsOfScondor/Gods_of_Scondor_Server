@@ -31,7 +31,17 @@ public class FCodeReader {
 					fcodes.add(new ArrayList<>());
 					counter++;
 					fcodes.get(counter).add(line.split(" ")[1]);
+				}else if(line.startsWith("> msg")){
+					fcodes.get(counter).add(line.split(" ")[1]);
+				}else if(line.startsWith("> var")){
+					fcodes.get(counter).add(line.substring(1, line.length()));
 				}else if(line.startsWith("> getEnemyAttack")){
+					fcodes.get(counter).add(line.split(" ")[1]);
+				}else if(line.startsWith("> getEnemyAttack")){
+					fcodes.get(counter).add(line.split(" ")[1]);
+				}else if(line.startsWith("> editEnemyAttack")){
+					fcodes.get(counter).add(line.split(" ")[1]);
+				}else if(line.startsWith("> if")){
 					fcodes.get(counter).add(line.split(" ")[1]);
 				}
 			}
@@ -43,5 +53,8 @@ public class FCodeReader {
 		}
 	}
 	
+	public ArrayList<String> getFCodeByID(int id){
+		return fcodes.get(id);
+	}
 	
 }
