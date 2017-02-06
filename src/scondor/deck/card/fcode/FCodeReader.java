@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 public class FCodeReader {
 	
+	private static final int FCODESIZE=64;
+	
 	private static String folder="/data/code";
 	public static BufferedReader fr;
 	public static ArrayList<String[]> fcodes=new ArrayList<>();
@@ -27,28 +29,14 @@ public class FCodeReader {
 		try {
 			while(filecounter<filepaths.length&&filepaths[filecounter].isFile()){
 				fr=new BufferedReader(new InputStreamReader(new FileInputStream(filepaths[filecounter])));
-				fcodes.add(new String[1024]);
+				fcodes.add(new String[FCODESIZE]);
 				while((line=fr.readLine())!=null){
 					if(line.startsWith("- ")){
 						fcodes.get(filecounter)[counter]=line;
-					}else if(line.startsWith("> msg")){
-						fcodes.get(filecounter)[counter]=line.split(" ")[1];
-					}else if(line.startsWith("> var")){
-						fcodes.get(filecounter)[counter]=line.substring(1, line.length());
-					}else if(line.startsWith("> getEnemyAttack")){
-						fcodes.get(filecounter)[counter]=line.split(" ")[1];
-					}else if(line.startsWith("> getEnemyAttack")){
-						fcodes.get(filecounter)[counter]=line.split(" ")[1];
-					}else if(line.startsWith("> editEnemyAttack")){
-						fcodes.get(filecounter)[counter]=line.split(" ")[1];
-					}else if(line.startsWith("> if")){
-						fcodes.get(filecounter)[counter]=line.split(" ")[1];
-					}else if(line.startsWith("> jump")){
-						fcodes.get(filecounter)[counter]=line.split(" ")[1];
-					}else if(line.startsWith("> end")){
-						fcodes.get(filecounter)[counter]=line.split(" ")[1];
-						break;
+					}else if(line.startsWith("> ")){
+						fcodes.get(filecounter)[counter]=line.substring(2);
 					}
+					counter++;
 				}
 				counter=0;
 				filecounter++;
@@ -60,7 +48,7 @@ public class FCodeReader {
 		}
 	}
 	
-	public String[] getFCodeByID(int id){
+	public static String[] getFCodeByID(int id){
 			return fcodes.get(id);
 	}
 			
