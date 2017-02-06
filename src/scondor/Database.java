@@ -1,5 +1,11 @@
 package scondor;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -9,14 +15,52 @@ import scondor.color.CMDTool;
 
 public class Database {
 	
-	private static String username = "root";
-	private static String password = "N3U3S_PASSWORT";
-	private static String database = "Gods_of_Scondor";
-	private static String host = "localhost";
-	private static int port = 3306;
+	private static String username;
+	private static String password;
+	private static String database;
+	private static String host;
+	private static int port;
 	private static Connection con;
 	
+	private static BufferedReader reader;
+	private static String line;
+	
 	public static void setup() {
+		/*
+		 * 
+		 */
+		try {
+			reader = new BufferedReader(new InputStreamReader(new FileInputStream("data/sql.dat"), "UTF-8"));
+			
+			while ((line=reader.readLine())!=null) {
+				if(line.startsWith("name")) {
+					username = line.split("=")[1];
+				}
+				if(line.startsWith("password")) {
+					password = line.split("=")[1];
+				}
+				if(line.startsWith("database")) {
+					database = line.split("=")[1];
+				}
+				if(line.startsWith("host")) {
+					host = line.split("=")[1];
+				}
+				if(line.startsWith("port")) {
+					port = Integer.parseInt(line.split("=")[1]);
+				}
+			}
+
+			reader.close();
+			
+		} catch (UnsupportedEncodingException | FileNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		/*
+		 * 
+		 */
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
