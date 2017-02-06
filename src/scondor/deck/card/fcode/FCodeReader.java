@@ -40,6 +40,7 @@ public class FCodeReader {
 				}
 				counter=0;
 				filecounter++;
+				fr.close();
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
