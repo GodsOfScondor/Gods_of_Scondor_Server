@@ -1,6 +1,6 @@
 package scondor.color;
 
-public class Color {
+public class CMDTool {
 	
 	public static final String BOLD = "\u001B[1m";
 	public static final String RESET = "\u001B[0m";
@@ -16,5 +16,6 @@ public class Color {
 	public static final String SEPERATOR = "|";
 	
 	public static final String INFO = RESET+GREEN+"[INFO] " + RESET;
+	public static final String ERROR = RESET+RED+"[ERROR] " + RESET;
 	
 }

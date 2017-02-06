@@ -1,6 +1,6 @@
 package scondor;
 
-import scondor.color.Color;
+import scondor.color.CMDTool;
 import scondor.deck.card.CardMaster;
 
 public class ContentLoader {
@@ -8,7 +8,7 @@ public class ContentLoader {
 	public static void load() {
 		
 		CardMaster.load();
-		System.out.println(Color.INFO + "Loaded card lib!");
+		System.out.println(CMDTool.INFO + "Loaded card lib!");
 		
 	}
 	

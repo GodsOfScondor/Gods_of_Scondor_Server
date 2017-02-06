@@ -3,7 +3,7 @@ package scondor;
 
 import org.gnet.server.GNetServer;
 
-import scondor.color.Color;
+import scondor.color.CMDTool;
 
 public class GodsOfScondor {
 	
@@ -17,15 +17,15 @@ public class GodsOfScondor {
 	 */
 	public static void main(String[] args) {
 		
-		System.out.println(Color.GREEN + " - Gods of Scondor | Server - ");
+		System.out.println(CMDTool.GREEN + " - Gods of Scondor | Server - ");
 		
 		GNetServer server = new GNetServer(IP, PORT);
-		System.out.println(Color.INFO + "Trying to start server...");
+		System.out.println(CMDTool.INFO + "Trying to start server...");
 		server.bind();
 		server.start();
 		server.addEventListener(new Server());
 		
-		
+		Database.setup();
 		
 		ContentLoader.load();
 		
