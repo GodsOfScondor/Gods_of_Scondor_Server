@@ -2,7 +2,7 @@ package scondor.deck.card;
 
 import scondor.mana.ManaType;
 
-public abstract class Card {
+public abstract class Card implements Attackable {
 	
 	private int mana_cost;
 	private ManaType mana_type;
