@@ -1,25 +1,23 @@
 package scondor.player;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import scondor.deck.DeckData;
-import scondor.deck.card.Card;
+import org.gnet.server.ClientModel;
 
 public class Player {
-	private DeckData player_deck;
-	private List<Card> card_list=new ArrayList<>();
 	
-	public Player(){
-		this.setPlayer_deck(new DeckData(card_list));
+	private ClientModel client;
+	private PlayerData data;
+	
+	public Player(ClientModel client, PlayerData data) {
+		this.client = client;
+		this.data = data;
 	}
 
-	public DeckData getPlayer_deck() {
-		return player_deck;
+	public ClientModel getClient() {
+		return client;
 	}
 
-	public void setPlayer_deck(DeckData player_deck) {
-		this.player_deck = player_deck;
+	public PlayerData getData() {
+		return data;
 	}
 	
 }

@@ -11,8 +11,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import scondor.color.CMDTool;
-
 public class Database {
 	
 	private static String username;
@@ -74,8 +72,8 @@ public class Database {
 				System.out.println(CMDTool.ERROR + "Failed to connect to database!");
 			}
 			System.out.println(CMDTool.INFO + "Succesfully connected to database!");
-			createTable("USER", "LICENSE VARCHAR(24)", "NAME VARCHAR(10)", "PASSWORD VARCHAR(30)", "LEVEL INT(100)");
-			createTable("PLAYER", "XP INT(100)");
+			createTable("USER", "ID INT NOT NULL PRIMARY KEY", "LICENSE VARCHAR(24)", "NAME VARCHAR(10)", "PASSWORD VARCHAR(30)");
+//			createTable("PLAYER", "ID INT","LEVEL INT(100)", "XP INT(100)");
 		}
 	}
 	

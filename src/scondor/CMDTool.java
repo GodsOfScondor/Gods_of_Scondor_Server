@@ -1,4 +1,4 @@
-package scondor.color;
+package scondor;
 
 public class CMDTool {
 	
@@ -17,5 +17,6 @@ public class CMDTool {
 	
 	public static final String INFO = RESET+GREEN+"[INFO] " + RESET;
 	public static final String ERROR = RESET+RED+"[ERROR] " + RESET;
+	public static final String WARN = RESET+YELLOW+"[WARN] " + RESET;
 	
 }

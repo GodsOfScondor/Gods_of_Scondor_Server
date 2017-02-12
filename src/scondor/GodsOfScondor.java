@@ -3,7 +3,7 @@ package scondor;
 
 import org.gnet.server.GNetServer;
 
-import scondor.color.CMDTool;
+import scondor.session.SessionMaster;
 
 public class GodsOfScondor {
 	
@@ -28,6 +28,8 @@ public class GodsOfScondor {
 		Database.setup();
 		
 		ContentLoader.load();
+		
+		SessionMaster.init();
 		
 	}
 	
