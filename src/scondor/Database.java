@@ -72,8 +72,8 @@ public class Database {
 				System.out.println(CMDTool.ERROR + "Failed to connect to database!");
 			}
 			System.out.println(CMDTool.INFO + "Succesfully connected to database!");
-			createTable("USER", "ID INT NOT NULL PRIMARY KEY", "LICENSE VARCHAR(24)", "NAME VARCHAR(10)", "PASSWORD VARCHAR(30)");
-//			createTable("PLAYER", "ID INT","LEVEL INT(100)", "XP INT(100)");
+			createTable("USER", "ID INT AUTO_INCREMENT", "LICENSE VARCHAR(24)", "NAME VARCHAR(10)", "PASSWORD VARCHAR(30)", "PRIMARY KEY (ID)");
+			createTable("PLAYER", "ID INT AUTO_INCREMENT", "LEVEL INT(100)", "XP INT(100)", "PRIMARY KEY (ID)");
 		}
 	}
 	

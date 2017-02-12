@@ -66,7 +66,9 @@ public class Server extends ServerEventListener {
 		 * player registers to server
 		 */
 		else if (packet instanceof Verification) {
-			
+			//only if license is right:
+			Database.execute("INSERT INTO `Gods_of_Scondor`.`GOS_PLAYER` (`ID`, `LEVEL`, `XP`) VALUES (NULL, '1', '0');");
+			Database.execute("INSERT INTO `Gods_of_Scondor`.`GOS_USER` (`ID`, `LICENSE`, `NAME`, `PASSWORD`) VALUES (NULL, '0000-0000-0000-0000-0000', 'Björnsen', 'ZuVielSwagAmBeen');");
 		}
 		
 		/*
