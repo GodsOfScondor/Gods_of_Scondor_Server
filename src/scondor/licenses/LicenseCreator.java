@@ -28,6 +28,7 @@ public class LicenseCreator {
 			}
 			license = license.substring(0, license.length() - 1);
 			Database.execute("INSERT INTO GOS_FREELICENSES (LICENSE) VALUES (" + license + ");");
+			//KEINE DUPLIKATE!!!
 		}
 	}
 }

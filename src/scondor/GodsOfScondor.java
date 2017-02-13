@@ -44,8 +44,8 @@ public class GodsOfScondor {
 		
 		while ((line = s.next())!=null) {
 			System.out.println("WROTE: "+line);
-			if(line.startsWith("create licenses ")){
-				parts=line.split(" ");
+			if(line.startsWith("create_licenses_")){
+				parts=line.split("_");
 				LicenseCreator.generateLicenses(Integer.parseInt(parts[2]));
 			}
 		}
