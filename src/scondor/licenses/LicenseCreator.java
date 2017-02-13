@@ -41,6 +41,7 @@ public class LicenseCreator {
 			}
 			
 			if (unique) Database.execute("INSERT INTO GOS_FREELICENSES (LICENSE) VALUES ('" + license + "');");
+
 		}
 		System.out.println(CMDTool.INFO + "Created " + anzahl + " new licenses!");
 	}
