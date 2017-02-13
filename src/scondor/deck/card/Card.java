@@ -1,15 +1,19 @@
 package scondor.deck.card;
 
+import scondor.deck.card.fcode.FCodeInterpreter;
+import scondor.deck.card.fcode.Target;
 import scondor.mana.ManaType;
 
-public abstract class Card implements Attackable {
+public abstract class Card implements Compilable {
 	
 	private int mana_cost;
 	private ManaType mana_type;
+	private FCodeInterpreter fcip;
 	
-	public Card(int mana_cost,ManaType mana_type){
+	public Card(int mana_cost,ManaType mana_type,int fcode){
 		this.mana_type = mana_type;
 		this.mana_cost = mana_cost;
+		fcip=new FCodeInterpreter(fcode);
 	}
 
 	public int getManaCost(){
@@ -26,6 +30,10 @@ public abstract class Card implements Attackable {
 
 	public void setManatype(ManaType manatype) {
 		this.mana_type = manatype;
+	}
+	
+	public void triggerFCode(Target t){
+		fcip.triger(t);
 	}
 	
 }

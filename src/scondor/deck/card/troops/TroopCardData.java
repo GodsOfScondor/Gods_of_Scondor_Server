@@ -7,13 +7,11 @@ public abstract class TroopCardData extends Card {
 
 	private int attack;
 	private int live;
-	private int fcode;
 
 	public TroopCardData(int mana_cost, int attack, int live, ManaType mana_type, int fcode) {
-		super(mana_cost, mana_type);
+		super(mana_cost, mana_type,fcode);
 		this.attack = attack;
 		this.live = live;
-		this.fcode = fcode;
 	}
 
 	public int getAttack() {
@@ -30,10 +28,6 @@ public abstract class TroopCardData extends Card {
 
 	public void setLive(int defense) {
 		this.live = defense;
-	}
-
-	public int getFCode() {
-		return fcode;
 	}
 	
 }

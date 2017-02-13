@@ -6,12 +6,12 @@ import scondor.mana.ManaType;
 
 public class FieldCard extends Card {
 
-	public FieldCard(int mana_cost, ManaType mana_type) {
-		super(mana_cost, mana_type);
+	public FieldCard(int mana_cost, ManaType mana_type,int fcode) {
+		super(mana_cost, mana_type, fcode);
 	}
 
 	@Override
-	public void attack(Target t) {
+	public void compile(String cmd, Target target) {
 		// TODO Auto-generated method stub
 		
 	}

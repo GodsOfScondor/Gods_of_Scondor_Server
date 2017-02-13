@@ -2,8 +2,8 @@ package scondor.deck.card;
 
 import scondor.deck.card.fcode.Target;
 
-public interface Attackable {
+public interface Compilable {
 	
-	public void attack(Target t);
+	public void compile(String cmd, Target target);
 	
 }

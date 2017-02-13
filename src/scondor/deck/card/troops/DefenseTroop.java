@@ -10,7 +10,7 @@ public class DefenseTroop extends TroopCardData{
 	}
 
 	@Override
-	public void attack(Target t) {
+	public void compile(String cmd, Target target) {
 		// TODO Auto-generated method stub
 		
 	}
