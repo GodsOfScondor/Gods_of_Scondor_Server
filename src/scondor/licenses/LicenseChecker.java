@@ -1,4 +1,6 @@
-package scondor.player;
+package scondor.licenses;
+
+import scondor.player.PlayerData;
 
 public class LicenseChecker {
 	

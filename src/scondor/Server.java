@@ -4,10 +4,10 @@ import org.gnet.packet.Packet;
 import org.gnet.server.ClientModel;
 import org.gnet.server.ServerEventListener;
 
+import scondor.licenses.LicenseChecker;
 import scondor.packets.Authentication;
 import scondor.packets.Message;
 import scondor.packets.Verification;
-import scondor.player.LicenseChecker;
 import scondor.player.Player;
 import scondor.player.PlayerData;
 import scondor.player.PlayerMaster;
