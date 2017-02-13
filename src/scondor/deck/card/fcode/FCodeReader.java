@@ -12,7 +12,7 @@ public class FCodeReader {
 	
 	private static final int FCODESIZE=64;
 	
-	private static String folder="/data/code";
+	private static String folder="data/code/";
 	public static BufferedReader fr;
 	public static ArrayList<String[]> fcodes=new ArrayList<>();
 	public static File[] filepaths;
@@ -50,7 +50,7 @@ public class FCodeReader {
 	}
 	
 	public static String[] getFCodeByID(int id){
-			return fcodes.get(id);
+		return fcodes.get(id);
 	}
 			
 }

@@ -16,31 +16,58 @@ public class FCodeInterpreter {
 
 		this.id = id;
 		fcodeline = FCodeReader.getFCodeByID(this.id);
-
 	}
 
 	public void triger(Target t) {
-		for (counter = 0; !(fcodeline[counter].isEmpty()); counter++) {
-			// Label
+
+		for (counter = 0;fcodeline[counter]!=null; counter++) {
+				/*
+				 *  Label
+				 */
 			if (fcodeline[counter].startsWith("- ")) {
 				labels.add(new Label(fcodeline[counter].substring(2), counter));
-				// Variable declaration
-			} else if (fcodeline[counter].startsWith("var")) {
+			} 
+				/*
+				 *  Variable declaration
+				 */
+			else if (fcodeline[counter].startsWith("var")) {
 				bufferarray = fcodeline[counter].split(" ");
 				vars.add(new Variable(bufferarray[1], Integer.parseInt(bufferarray[2])));
-				// Variable edit using offset value
-			} else if (fcodeline[counter].startsWith("editvar")) {
+				
+			} 
+				/*
+				 * Variable edit using offset value
+				 */
+			else if (fcodeline[counter].startsWith("editvar")) {
 				bufferarray = fcodeline[counter].split("(")[1].split(")")[0].split(",");
 				getVar(bufferarray[0]).editValue(Integer.parseInt(bufferarray[1]));
-				// Variable edit using absolute value
-			} else if (fcodeline[counter].startsWith("setvar")) {
+				
+			}
+				/*
+				 *  Variable edit using absolute value
+				 */
+			else if (fcodeline[counter].startsWith("setvar")) {
 				bufferarray = fcodeline[counter].split("(")[1].split(")")[0].split(",");
 				getVar(bufferarray[0]).setValue(Integer.parseInt(bufferarray[1]));
-				// Jump command
-			} else if (fcodeline[counter].startsWith("jump")) {
+				
+			}
+				/*
+				 *  Jump command
+				 */
+				else if (fcodeline[counter].startsWith("jump")) {
 				counter = getLabel(fcodeline[counter].split(" ")[1]).getValue();
-				// if query
-			} else if (fcodeline[counter].startsWith("if")) {
+				
+			}
+				/*
+				 * msg 
+				 */
+			else if(fcodeline[counter].startsWith("msg")){
+				System.out.println(fcodeline[counter].substring(5, fcodeline[counter].length()-2));
+			}
+				/*
+				 * if query
+				 */
+			else if (fcodeline[counter].startsWith("if")) {
 				bufferarray = fcodeline[counter].split("(")[1].split(")")[0].split(",")[0].split("==");
 				if (getVar(bufferarray[0]).getValue() == Integer.parseInt(bufferarray[1])) {
 					counter = Integer.parseInt(fcodeline[counter].split("(")[1].split(")")[0].split(",")[1]);
