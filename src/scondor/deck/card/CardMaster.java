@@ -85,7 +85,7 @@ public class CardMaster {
 	 * get card raw data by id
 	 * 
 	 */
-	public Card getCardData(int id) {
+	public static Card getCardData(int id) {
 		return cards[id];
 	}
 

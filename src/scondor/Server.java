@@ -53,11 +53,13 @@ public class Server extends ServerEventListener {
 			// add player to others...
 			if (data!=null) {
 				PlayerMaster.add(new Player(client, data));
+				System.out.println(CMDTool.INFO + client.getUuid() + ": " + (String) packet.getEntry("USERNAME") + " has succesfully logged in.");
+				client.sendPacket(new Message("msg:0,1,0:0:Succesfully logged in!"));
 			}
 			// send player login failed msg
 			else {
-				System.out.println(CMDTool.WARN + client.getUuid() + ": " + (String)packet.getEntry("USERNAME") + "failed to login.");
-				// TODO inform client
+				System.out.println(CMDTool.WARN + client.getUuid() + ": " + (String)packet.getEntry("USERNAME") + " failed to login.");
+				client.sendPacket(new Message("msg:1,0,0:Failed to login!"));
 			}
 		}
 		
@@ -65,9 +67,14 @@ public class Server extends ServerEventListener {
 		 * player registers to server
 		 */
 		else if (packet instanceof Verification) {
-			//only if license is right:
-			Database.execute("INSERT INTO `Gods_of_Scondor`.`GOS_PLAYER` (`ID`, `LEVEL`, `XP`) VALUES (NULL, '1', '0');");
-			Database.execute("INSERT INTO `Gods_of_Scondor`.`GOS_USER` (`ID`, `LICENSE`, `NAME`, `PASSWORD`) VALUES (NULL, '0000-0000-0000-0000-0000', 'Björnsen', 'ZuVielSwagAmBeen');");
+			if (!LicenseChecker.register(
+					(String)packet.getEntry("USERNAME"),
+					(String) packet.getEntry("PASSWORD"),
+					(String) packet.getEntry("LICENSE")
+				)) {
+				System.out.println(CMDTool.WARN + client.getUuid() + ": " + (String)packet.getEntry("USERNAME") + " failed to register.");
+				client.sendPacket(new Message("msg:1,0,0:Invalid license!"));
+			}
 		}
 		
 		/*
