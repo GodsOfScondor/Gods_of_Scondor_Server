@@ -3,8 +3,7 @@ package scondor;
 
 import java.util.Scanner;
 
-import org.gnet.server.GNetServer;
-
+import scondor.gnet.server.GNetServer;
 import scondor.licenses.LicenseCreator;
 import scondor.session.SessionMaster;
 

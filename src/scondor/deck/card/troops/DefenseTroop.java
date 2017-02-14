@@ -1,5 +1,6 @@
 package scondor.deck.card.troops;
 
+import scondor.deck.card.fcode.FCode;
 import scondor.deck.card.fcode.Target;
 import scondor.mana.ManaType;
 
@@ -10,7 +11,7 @@ public class DefenseTroop extends TroopCardData{
 	}
 
 	@Override
-	public void compile(String cmd, Target target) {
+	public void compile(FCode fc, String cmd, Target target) {
 		// TODO Auto-generated method stub
 		
 	}

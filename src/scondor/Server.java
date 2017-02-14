@@ -1,9 +1,8 @@
 package scondor;
 
-import org.gnet.packet.Packet;
-import org.gnet.server.ClientModel;
-import org.gnet.server.ServerEventListener;
-
+import scondor.gnet.packet.Packet;
+import scondor.gnet.server.ClientModel;
+import scondor.gnet.server.ServerEventListener;
 import scondor.licenses.LicenseChecker;
 import scondor.packets.Authentication;
 import scondor.packets.Message;

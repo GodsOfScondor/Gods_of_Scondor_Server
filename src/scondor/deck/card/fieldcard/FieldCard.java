@@ -1,6 +1,7 @@
 package scondor.deck.card.fieldcard;
 
 import scondor.deck.card.Card;
+import scondor.deck.card.fcode.FCode;
 import scondor.deck.card.fcode.Target;
 import scondor.mana.ManaType;
 
@@ -11,7 +12,7 @@ public class FieldCard extends Card {
 	}
 
 	@Override
-	public void compile(String cmd, Target target) {
+	public void compile(FCode fc, String cmd, Target target) {
 		// TODO Auto-generated method stub
 		
 	}

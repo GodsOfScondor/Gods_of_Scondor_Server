@@ -1,6 +1,6 @@
 package scondor.player;
 
-import org.gnet.server.ClientModel;
+import scondor.gnet.server.ClientModel;
 
 public class Player {
 	
