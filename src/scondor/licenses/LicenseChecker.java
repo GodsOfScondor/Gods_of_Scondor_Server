@@ -29,7 +29,7 @@ public class LicenseChecker {
 				
 				// user already logged in
 				System.out.println(CMDTool.WARN + client.getUUID() + ": " + username + " failed to login. (user already logged in: "+username+")");
-				client.sendPacket(new Message("msg:1,0,0:Failed to login!"));
+				client.sendPacket(new Message("0"));
 				
 			}
 			
@@ -37,7 +37,7 @@ public class LicenseChecker {
 				
 				// wrong pwd username combo
 				System.out.println(CMDTool.WARN + client.getUUID() + ": " + username + " failed to login. (wrong password: "+password+")");
-				client.sendPacket(new Message("msg:1,0,0:Failed to login!"));
+				client.sendPacket(new Message("1"));
 				
 			} else {
 				
@@ -47,7 +47,7 @@ public class LicenseChecker {
 				// add player to others...
 				PlayerMaster.add(new Player(client, data));
 				System.out.println(CMDTool.INFO + client.getUUID() + ": " + username + " has succesfully logged in.");
-				client.sendPacket(new Message("msg:0,1,0:2:Succesfully logged in!"));
+				client.sendPacket(new Message("2"));
 				
 			}
 			
@@ -67,7 +67,7 @@ public class LicenseChecker {
 			
 			if (!result.next()) {
 				//
-				client.sendPacket(new Message("msg:1,0,0:Wrong License!"));
+				client.sendPacket(new Message("3"));
 				System.out.println(CMDTool.WARN + client.getUUID() + ": " +username + " failed to register. (wrong license: "+license+")");
 			} else {
 				
@@ -76,7 +76,7 @@ public class LicenseChecker {
 				while (names.next()) {
 					if (names.getString("NAME").equals(username)) {
 						//
-						client.sendPacket(new Message("msg:1,0,0:Username already exists!"));
+						client.sendPacket(new Message("4"));
 						System.out.println(CMDTool.WARN + client.getUUID() + ": " +username + " failed to register. (username already exists: "+username+")");
 					}
 				}
