@@ -7,20 +7,19 @@ import scondor.licenses.LicenseChecker;
 import scondor.packets.Authentication;
 import scondor.packets.Message;
 import scondor.packets.Verification;
-import scondor.player.Player;
-import scondor.player.PlayerData;
 import scondor.player.PlayerMaster;
 
 public class Server extends ServerEventListener {
 
 	@Override
 	protected void clientConnected(ClientModel client) {
-		System.out.println(CMDTool.INFO + " " + client.getUuid() + " has connected!");
+		System.out.println(CMDTool.INFO + " " + client.getUUID() + " has connected!");
 	}
 
 	@Override
 	protected void clientDisconnected(ClientModel client) {
-		System.out.println(CMDTool.INFO + " " + client.getUuid() + " has disconnected!");
+		System.out.println(CMDTool.INFO + " " + client.getUUID() + " has disconnected!");
+		PlayerMaster.remove(PlayerMaster.getPlayer(client.getUUID()));
 	}
 
 	@Override
@@ -46,35 +45,23 @@ public class Server extends ServerEventListener {
 		 */
 		if (packet instanceof Authentication) {
 			// check players authentication
-			PlayerData data = LicenseChecker.login(
+			LicenseChecker.login(
+					client,
 					(String)packet.getEntry("USERNAME"),
 					(String) packet.getEntry("PASSWORD")
 				);
-			// add player to others...
-			if (data!=null) {
-				PlayerMaster.add(new Player(client, data));
-				System.out.println(CMDTool.INFO + client.getUuid() + ": " + (String) packet.getEntry("USERNAME") + " has succesfully logged in.");
-				client.sendPacket(new Message("msg:0,1,0:0:Succesfully logged in!"));
-			}
-			// send player login failed msg
-			else {
-				System.out.println(CMDTool.WARN + client.getUuid() + ": " + (String)packet.getEntry("USERNAME") + " failed to login.");
-				client.sendPacket(new Message("msg:1,0,0:Failed to login!"));
-			}
 		}
 		
 		/*
 		 * player registers to server
 		 */
 		else if (packet instanceof Verification) {
-			if (!LicenseChecker.register(
+			LicenseChecker.register(
+					client,
 					(String)packet.getEntry("USERNAME"),
 					(String) packet.getEntry("PASSWORD"),
 					(String) packet.getEntry("LICENSE")
-				)) {
-				System.out.println(CMDTool.WARN + client.getUuid() + ": " + (String)packet.getEntry("USERNAME") + " failed to register.");
-				client.sendPacket(new Message("msg:1,0,0:Invalid license!"));
-			}
+				);
 		}
 		
 		/*

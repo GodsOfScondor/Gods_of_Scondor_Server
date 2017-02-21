@@ -19,35 +19,34 @@ public class DeckLoader {
 	private static int counter=0;
 	private static int id;
 	private static String[] cards=new String[60];
-	static BufferedReader br;
+	private static BufferedReader br;
 	
 	private static List<DeckData> decks = new ArrayList<>();
 	
 	public static void load() {
-		files=new File(path).listFiles();
-		
-		while(files.length>counter){
-			file=files[counter];
-			try {
-				br=new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-				id=Integer.parseInt(file.getName().substring(1,file.getName().length()-5));
-				decks.add(new DeckData(id));
-				cards=br.readLine().split(",");
-				
-				for(String s: cards){
-					decks.get(counter).addCard(CardMaster.getCardData(Integer.parseInt(s)));
-				}
-				
-				br.close();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}catch (IOException e) {
-				e.printStackTrace();
-			}
-			counter++;
-			System.out.println(counter);
-		}
-		
+//		files=new File(path).listFiles();
+//		
+//		while(files.length>counter){
+//			file=files[counter];
+//			try {
+//				br=new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+//				id=Integer.parseInt(file.getName().substring(1,file.getName().length()-5));
+//				decks.add(new DeckData(id));
+//				cards=br.readLine().split(",");
+//				
+//				for(String s: cards){
+//					cards.addCard(CardMaster.getCardData(Integer.parseInt(s)));
+//				}
+//				
+//				br.close();
+//			} catch (FileNotFoundException e) {
+//				e.printStackTrace();
+//			}catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//			counter++;
+//			System.out.println(counter);
+//		}
 		
 	}
 	

@@ -48,7 +48,7 @@ public class ClientModel implements Runnable {
 						if (p.getPacketName().equals("ShuttingDown")) {
 							server.recievedPackets++;
 							server.debug("Received ShuttingDown packet from: "
-									+ getUuid());
+									+ getUUID());
 							cleanUp();
 							continue;
 						} else {
@@ -141,7 +141,7 @@ public class ClientModel implements Runnable {
 		}
 	}
 
-	public int getUuid() {
+	public int getUUID() {
 		return uuid;
 	}
 

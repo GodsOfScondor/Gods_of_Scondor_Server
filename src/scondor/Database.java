@@ -73,7 +73,7 @@ public class Database {
 			}
 			System.out.println(CMDTool.INFO + "Succesfully connected to database!");
 			createTable("USER", "ID INT AUTO_INCREMENT", "LICENSE VARCHAR(24)", "NAME VARCHAR(10)", "PASSWORD VARCHAR(30)", "PRIMARY KEY (ID)");
-			createTable("PLAYER", "ID INT AUTO_INCREMENT", "LEVEL INT(100)", "XP INT(100)", "PRIMARY KEY (ID)");
+			createTable("PLAYER", "ID INT AUTO_INCREMENT", "LEVEL INT(100)", "XP INT(100)", "MONEY INT(100)", "PRIMARY KEY (ID)");
 			createTable("FREELICENSES", "LICENSE VARCHAR(24)");
 		}
 	}

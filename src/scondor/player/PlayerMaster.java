@@ -11,8 +11,17 @@ public class PlayerMaster {
 		players.add(player);
 	}
 	
+	public static void remove(Player player) {
+		players.remove(player);
+	}
+	
 	public static Player getPlayer(String username) {
 		for (Player player : players) if (player.getData().getUsername().equals(username)) return player;
+		return null;
+	}
+	
+	public static Player getPlayer(int uuid) {
+		for (Player player : players) if (player.getClient().getUUID()==uuid) return player;
 		return null;
 	}
 	

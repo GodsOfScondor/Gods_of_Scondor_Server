@@ -6,12 +6,14 @@ public class PlayerData {
 	private String password;
 	private String license;
 	private int level;
+	private int money;
 	
-	public PlayerData(String username, String password, String license, int level) {
+	public PlayerData(String username, String password, String license, int level, int money) {
 		this.username = username;
 		this.password = password;
 		this.license = license;
 		this.level = level;
+		this.money = money;
 	}
 
 	public String getUsername() {
@@ -28,6 +30,10 @@ public class PlayerData {
 
 	public int getLevel() {
 		return level;
+	}
+	
+	public int getMoney() {
+		return money;
 	}
 	
 }

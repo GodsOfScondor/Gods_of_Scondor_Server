@@ -43,6 +43,13 @@ public class GodsOfScondor {
 		
 		while ((line = s.next())!=null) {
 			System.out.println("WROTE: "+line);
+			
+			if(line.equals("help")){
+				System.out.println(CMDTool.INFO + "Server-Commands:");
+				System.out.println("help                      :Shows all available Commands");
+				System.out.println("create_licenses_x         :Automatically generates x licenses");
+			}
+			
 			if(line.startsWith("create_licenses_")){
 				parts=line.split("_");
 				LicenseCreator.generateLicenses(Integer.parseInt(parts[2]));
@@ -50,5 +57,6 @@ public class GodsOfScondor {
 		}
 		s.close();
 	}
+	
 	
 }

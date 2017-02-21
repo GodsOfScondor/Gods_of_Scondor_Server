@@ -22,6 +22,16 @@ public class GodData {
 		this.universal_mana_amount=universal_mana_amount;
 	}
 	
+	public GodData(GodData goddata){
+		this.level=goddata.getLevel();
+		this.exp=goddata.getEXP();
+		this.manatype1=goddata.getManatype1();
+		this.manatype2=goddata.getManatype2();
+		this.manatype1_amount=goddata.getManatype1_amount();
+		this.manatype2_amount=goddata.getManatype2_amount();
+		this.universal_mana_amount=goddata.getUniversal_mana_amount();
+	}
+	
 	public ManaType getManatype1() {
 		return manatype1;
 	}
