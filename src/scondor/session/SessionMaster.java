@@ -11,7 +11,10 @@ public class SessionMaster {
 		
 	}
 	
-	protected static void add(Session session) {
+	/*
+	 * TODO MAKE SESSION CREATOR
+	 */
+	protected static void createSession(Session session) {
 		sessions.add(session);
 	}
 	

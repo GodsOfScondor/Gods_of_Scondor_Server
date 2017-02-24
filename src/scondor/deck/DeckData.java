@@ -12,14 +12,18 @@ public class DeckData {
 	private GodData god;
 	private int id;
 	
-	public DeckData(int id, List<Card> cards, GodData god) {
+	public DeckData(int id, GodData god) {
 		this.id=id;
-		this.cards = new ArrayList<>(cards);
+		this.cards = new ArrayList<>();
 		this.god = god;
 	}
 	
 	public List<Card> getCards() {
 		return cards;
+	}
+	
+	public void addCard(Card c){
+		cards.add(c);
 	}
 
 	public int getID() {
