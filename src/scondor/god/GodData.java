@@ -12,15 +12,15 @@ public class GodData {
 	private int manatype2_amount;
 	private int universal_mana_amount;
 
-	public GodData(int level, int exp, ManaType manatype1, ManaType manatype2, int manatype1_amount, int manatype2_amount, int universal_mana_amount){
+	public GodData(int level, int exp, ManaType manatype1, ManaType manatype2/*, int manatype1_amount, int manatype2_amount, int universal_mana_amount*/){
 		this.level=level;
 		this.exp=exp;
 		this.manatype1=manatype1;
 		this.manatype2=manatype2;
-		this.manatype1_amount=manatype1_amount;
+		/*this.manatype1_amount=manatype1_amount;
 		this.manatype2_amount=manatype2_amount;
 		this.universal_mana_amount=universal_mana_amount;
-	}
+	*/}
 	
 	public GodData(GodData goddata){
 		this.level=goddata.getLevel();
