@@ -9,9 +9,11 @@ import scondor.deck.card.fieldcard.FieldCard;
 import scondor.deck.card.troops.AttackTroop;
 import scondor.deck.card.troops.DefenseTroop;
 import scondor.god.GodData;
+import scondor.player.Player;
 
 public class GamePlayer {
 	
+	private Player player;
 	private DeckData deck;
 	private List<Card> graveyard;
 	private List<Card> stack;
@@ -21,7 +23,8 @@ public class GamePlayer {
 	private DefenseTroop[] defenders;
 	private GodData goddata;
 	
-	public GamePlayer(DeckData deck) {
+	public GamePlayer(Player player, DeckData deck) {
+		this.player = player;
 		this.deck = deck;
 		this.graveyard = new ArrayList<>();
 		this.hand = new ArrayList<>();
@@ -96,6 +99,10 @@ public class GamePlayer {
 
 	public void setGoddata(GodData goddata) {
 		this.goddata = goddata;
+	}
+	
+	public Player getPlayer() {
+		return player;
 	}
 	
 }

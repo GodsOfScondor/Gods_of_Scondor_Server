@@ -3,7 +3,7 @@ package scondor.licenses;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import scondor.CMDTool;
+import scondor.Console;
 import scondor.Database;
 import scondor.gnet.server.ClientModel;
 import scondor.packets.Message;
@@ -28,7 +28,7 @@ public class LicenseChecker {
 			if (PlayerMaster.getPlayer(username)!=null) {
 				
 				// user already logged in
-				System.out.println(CMDTool.WARN + client.getUUID() + ": " + username + " failed to login. (user already logged in: "+username+")");
+				Console.info(client.getUUID() + ": " + username + " failed to login. (user already logged in: "+username+")");
 				client.sendPacket(new Message("0"));
 				
 			}
@@ -36,17 +36,17 @@ public class LicenseChecker {
 			else if (!result.next()) {
 				
 				// wrong pwd username combo
-				System.out.println(CMDTool.WARN + client.getUUID() + ": " + username + " failed to login. (wrong password: "+password+")");
+				Console.warn(client.getUUID() + ": " + username + " failed to login. (wrong password: "+password+")");
 				client.sendPacket(new Message("1"));
 				
 			} else {
 				
 				// create player data
-				PlayerData data = new PlayerData(username, password, result.getString("LICENSE"), result.getInt("LEVEL"), result.getInt("MONEY"));
+				PlayerData data = new PlayerData(username, password, result.getString("LICENSE"), result.getInt("LEVEL"), result.getInt("MONEY"), result.getInt("ELO"), result.getInt("XP"));
 				
 				// add player to others...
 				PlayerMaster.add(new Player(client, data));
-				System.out.println(CMDTool.INFO + client.getUUID() + ": " + username + " has succesfully logged in.");
+				Console.info( + client.getUUID() + ": " + username + " has succesfully logged in.");
 				client.sendPacket(new Message("2"));
 				
 			}
@@ -68,7 +68,7 @@ public class LicenseChecker {
 			if (!result.next()) {
 				//
 				client.sendPacket(new Message("3"));
-				System.out.println(CMDTool.WARN + client.getUUID() + ": " +username + " failed to register. (wrong license: "+license+")");
+				Console.warn(client.getUUID() + ": " +username + " failed to register. (wrong license: "+license+")");
 			} else {
 				
 				ResultSet names = Database.query("SELECT NAME FROM GOS_USER");
@@ -77,7 +77,7 @@ public class LicenseChecker {
 					if (names.getString("NAME").equals(username)) {
 						//
 						client.sendPacket(new Message("4"));
-						System.out.println(CMDTool.WARN + client.getUUID() + ": " +username + " failed to register. (username already exists: "+username+")");
+						Console.warn(client.getUUID() + ": " +username + " failed to register. (username already exists: "+username+")");
 					}
 				}
 				

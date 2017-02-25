@@ -71,9 +71,9 @@ public class Database {
 				e.printStackTrace();
 				System.out.println(CMDTool.ERROR + "Failed to connect to database!");
 			}
-			System.out.println(CMDTool.INFO + "Succesfully connected to database!");
+			Console.info("Succesfully connected to database!");
 			createTable("USER", "ID INT AUTO_INCREMENT", "LICENSE VARCHAR(24)", "NAME VARCHAR(10)", "PASSWORD VARCHAR(30)", "PRIMARY KEY (ID)");
-			createTable("PLAYER", "ID INT AUTO_INCREMENT", "LEVEL INT(100)", "XP INT(100)", "MONEY INT(100)", "PRIMARY KEY (ID)");
+			createTable("PLAYER", "ID INT AUTO_INCREMENT", "LEVEL INT(100)", "XP INT(100)", "MONEY INT(100)", "ELO INT(100)", "PRIMARY KEY (ID)");
 			createTable("FREELICENSES", "LICENSE VARCHAR(24)");
 		}
 	}
@@ -130,9 +130,9 @@ public class Database {
 			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println(CMDTool.ERROR+"Failed to close connection to database!");
+			Console.error("Failed to close connection to database!");
 		}
-		System.out.println(CMDTool.INFO+"Closed connection to database!");
+		Console.info("Closed connection to database!");
 	}
 	
 }

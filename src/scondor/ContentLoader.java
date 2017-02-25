@@ -10,11 +10,11 @@ public class ContentLoader {
 		
 		
 		FCodeReader.load();
-		System.out.println(CMDTool.INFO + "Loaded FCodes!");
+		Console.info("Loaded FCodes!");
 		CardMaster.load();
-		System.out.println(CMDTool.INFO + "Loaded cards!");
+		Console.info("Loaded cards!");
 		DeckLoader.load();
-		System.out.println(CMDTool.INFO + "Loaded decks!");
+		Console.info("Loaded decks!");
 		
 		/*
 		 *Testcode 

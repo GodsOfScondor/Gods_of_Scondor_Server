@@ -9,8 +9,8 @@ public class Session {
 	private SessionState current;
 	private GameType type;
 	
-	public Session() {
-		
+	public Session(SessionState start) {
+		this.current = start;	
 	}
 	
 	public SessionState getSession() {

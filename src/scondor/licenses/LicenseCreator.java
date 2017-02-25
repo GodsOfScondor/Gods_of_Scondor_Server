@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Random;
 
-import scondor.CMDTool;
+import scondor.Console;
 import scondor.Database;
 
 public class LicenseCreator {
@@ -43,6 +43,6 @@ public class LicenseCreator {
 			if (unique) Database.execute("INSERT INTO GOS_FREELICENSES (LICENSE) VALUES ('" + license + "');");
 
 		}
-		System.out.println(CMDTool.INFO + "Created " + anzahl + " new licenses!");
+		Console.info("Created " + anzahl + " new licenses!");
 	}
 }

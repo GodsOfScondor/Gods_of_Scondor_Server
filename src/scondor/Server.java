@@ -13,12 +13,12 @@ public class Server extends ServerEventListener {
 
 	@Override
 	protected void clientConnected(ClientModel client) {
-		System.out.println(CMDTool.INFO + " " + client.getUUID() + " has connected!");
+		Console.info(client.getUUID() + " has connected!");
 	}
 
 	@Override
 	protected void clientDisconnected(ClientModel client) {
-		System.out.println(CMDTool.INFO + " " + client.getUUID() + " has disconnected!");
+		Console.info(client.getUUID() + " has disconnected!");
 		PlayerMaster.remove(PlayerMaster.getPlayer(client.getUUID()));
 	}
 
@@ -68,7 +68,7 @@ public class Server extends ServerEventListener {
 		 * player registers to server
 		 */
 		else if (packet instanceof Message) {
-			System.out.println(CMDTool.INFO + (String) packet.getEntry("MESSAGE"));
+			Console.info((String) packet.getEntry("MESSAGE"));
 		}
 		
 	}

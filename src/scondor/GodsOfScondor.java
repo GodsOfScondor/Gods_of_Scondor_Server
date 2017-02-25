@@ -22,7 +22,7 @@ public class GodsOfScondor {
 		System.out.println(CMDTool.GREEN + " - Gods of Scondor | Server - ");
 		
 		GNetServer server = new GNetServer(IP, PORT);
-		System.out.println(CMDTool.INFO + "Trying to start server...");
+		Console.info("Trying to start server...");
 		server.bind();
 		server.start();
 		server.addEventListener(new Server());
@@ -45,9 +45,9 @@ public class GodsOfScondor {
 			System.out.println("WROTE: "+line);
 			
 			if(line.equals("help")){
-				System.out.println(CMDTool.INFO + "Server-Commands:");
-				System.out.println("help                      :Shows all available Commands");
-				System.out.println("create_licenses_x         :Automatically generates x licenses");
+				Console.info("Server-Commands:\n");
+				System.out.println("help                      | Shows all available Commands");
+				System.out.println("create_licenses_n         | Automatically generates n licenses\n");
 			}
 			
 			if(line.startsWith("create_licenses_")){

@@ -12,7 +12,7 @@ public class MultiTargetSpell extends SpellData {
 
 	@Override
 	public void compile(FCode fc, String cmd, Target target) {
-		// TODO Auto-generated method stub
+		// TODO Langs du bist dick
 		
 	}
 
