@@ -27,9 +27,8 @@ public class FCodeReader {
 		try {
 			while (filecounter < filepaths.length && filepaths[filecounter].isFile()) {
 
-				fr = new BufferedReader(new InputStreamReader(new FileInputStream(filepaths[filecounter])));
-				fcodes.add(new FCode(new String[FCODESIZE],
-						Integer.parseInt(filepaths[filecounter].getName().substring(2).split(".code")[0])));
+				fr = new BufferedReader(new InputStreamReader(new FileInputStream(filepaths[filecounter]), "UTF-8"));
+				fcodes.add(new FCode(new String[FCODESIZE], Integer.parseInt(filepaths[filecounter].getName().substring(2).split(".code")[0])));
 
 				counter = 0;
 

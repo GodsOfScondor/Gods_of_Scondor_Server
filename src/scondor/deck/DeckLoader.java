@@ -6,9 +6,12 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import scondor.Database;
 import scondor.deck.card.CardMaster;
 import scondor.god.GodData;
 import scondor.mana.ManaType;
@@ -32,7 +35,7 @@ public class DeckLoader {
 		while(files.length>counter){
 			file=files[counter];
 			try {
-				br=new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+				br=new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
 				id=Integer.parseInt(file.getName().substring(1,file.getName().length()-5));
 				
 				cards=br.readLine().split(",");
@@ -52,12 +55,30 @@ public class DeckLoader {
 				e.printStackTrace();
 			}
 			counter++;
-			System.out.println(counter);
 		}
 		
 	}
 	
-	public static DeckData getDeck() {
+	public static List<DeckData> getDecks(int id) {
+		
+		List<DeckData> player_decks = new ArrayList<>();
+		
+		ResultSet result = Database.query("SELECT DECK_ID FROM GOS_DECKS WHERE ID="+id+"");
+		
+		try {
+			while(result.next()) {
+				player_decks.add(getDeck(result.getInt("DECK_ID")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return player_decks;
+		
+	}
+	
+	private static DeckData getDeck(int id) {
+		for (DeckData deck : decks) if (deck.getID()==id) return deck;
 		return null;
 	}
 	

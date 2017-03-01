@@ -1,20 +1,19 @@
 package scondor.deck.card.fieldcard;
 
 import scondor.deck.card.Card;
+import scondor.deck.card.fcode.CompileData;
 import scondor.deck.card.fcode.FCode;
-import scondor.deck.card.fcode.Target;
-import scondor.mana.ManaType;
+import scondor.deck.card.fcode.Vars;
 
-public class FieldCard extends Card {
+public class FieldCard extends Card<FieldCardData> {
 
-	public FieldCard(int mana_cost, ManaType mana_type,int fcode) {
-		super(mana_cost, mana_type, fcode);
+	public FieldCard(FieldCardData data, FCode fcode) {
+		super(data, fcode);
 	}
 
 	@Override
-	public void compile(FCode fc, String cmd, Target target) {
-		// TODO Auto-generated method stub
+	public void compile(Vars vars, String cmd, CompileData data) {
 		
 	}
-
+	
 }

@@ -3,7 +3,7 @@ package scondor;
 public class Console {
 	
 	public static void info(String msg) {
-		Console.info(CMDTool.INFO + msg);
+		System.out.println(CMDTool.INFO + msg);
 	}
 	
 	public static void warn(String msg) {

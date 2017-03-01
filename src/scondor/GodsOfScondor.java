@@ -1,8 +1,11 @@
 package scondor;
 
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Scanner;
 
+import scondor.deck.card.fcode.FCodeReader;
 import scondor.gnet.server.GNetServer;
 import scondor.licenses.LicenseCreator;
 import scondor.session.SessionMaster;
@@ -19,7 +22,7 @@ public class GodsOfScondor {
 	 */
 	public static void main(String[] args) {
 		
-		System.out.println(CMDTool.GREEN + " - Gods of Scondor | Server - ");
+		System.out.println(CMDTool.GREEN + "\n\n - Gods of Scondor | Server - \n\n");
 		
 		GNetServer server = new GNetServer(IP, PORT);
 		Console.info("Trying to start server...");
@@ -42,17 +45,31 @@ public class GodsOfScondor {
 		String[] parts;
 		
 		while ((line = s.next())!=null) {
-			System.out.println("WROTE: "+line);
 			
 			if(line.equals("help")){
 				Console.info("Server-Commands:\n");
 				System.out.println("help                      | Shows all available Commands");
-				System.out.println("create_licenses_n         | Automatically generates n licenses\n");
+				System.out.println("create_licenses_n         | Automatically generates n licenses");
+				System.out.println("delete_name               | Deletes user from database.\n");
 			}
 			
 			if(line.startsWith("create_licenses_")){
 				parts=line.split("_");
 				LicenseCreator.generateLicenses(Integer.parseInt(parts[2]));
+			} else if(line.startsWith("execute_")){
+				parts=line.split("_");
+				FCodeReader.getFCode(Integer.parseInt(parts[1])).execute(null, null);
+			} else if(line.startsWith("delete_")){
+				parts=line.split("_");
+				ResultSet result = Database.query("SELECT ID FROM GOS_USER WHERE NAME='"+parts[1]+"'");
+				int id = -1;
+				try { while (result.next()) id = result.getInt("id");}
+				catch (SQLException e) { e.printStackTrace(); }
+				System.out.println(id);
+				Database.execute("DELETE FROM `GOS_USER` WHERE ID='"+id+"'");
+				Database.execute("DELETE FROM `GOS_PLAYER` WHERE ID='"+id+"'");
+				Database.execute("DELETE FROM `GOS_DECKS` WHERE ID='"+id+"'");
+				Database.execute("DELETE FROM `GOS_STATS` WHERE ID='"+id+"'");
 			}
 		}
 		s.close();

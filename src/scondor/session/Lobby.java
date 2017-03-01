@@ -15,14 +15,9 @@ public class Lobby {
 	private static List<Player> players;
 	private static TimerTask task;
 	
-	public static void search(Player player, GameType type) {
+	public static void search(final Player player, final GameType type) {
 		
-		players = null;
-		switch(type) {
-		case CUSTOM: players = custom; break;
-		case ONLINE: players = online; break;
-		case RANKED: players = ranked; break;
-		}
+		players = getPlayers(type);
 		
 		if (players.size() == 0) {
 			players.add(player);
@@ -46,6 +41,15 @@ public class Lobby {
 		}
 	}
 	
+	private static List<Player> getPlayers(GameType type) {
+		switch(type) {
+		case CUSTOM: return custom;
+		case ONLINE: return online;
+		case RANKED: return ranked;
+		}
+		return  null;
+	}
+
 	private static void schedule(TimerTask task) {
 		
 		new Timer().schedule(task, 30000);
@@ -56,12 +60,7 @@ public class Lobby {
 		
 		Player enemy = null;
 		
-		players = null;
-		switch(type) {
-		case CUSTOM: players = custom; break;
-		case ONLINE: players = online; break;
-		case RANKED: players = ranked; break;
-		}
+		players = getPlayers(type);
 		
 		for (Player p : players) {
 			
