@@ -8,8 +8,8 @@ public class FieldCardData extends CardData {
 	private static final long serialVersionUID = -1992636925239749138L;
 	private int linger;
 	
-	public FieldCardData(String name, String description, int mana_cost, ManaType mana_type, int linger) {
-		super(name, description, mana_cost, mana_type);
+	public FieldCardData(int id, String name, String description, int mana_cost, ManaType mana_type, int linger) {
+		super(id, name, description, mana_cost, mana_type);
 		this.linger = linger;
 	}
 	

@@ -72,12 +72,12 @@ public class CardMaster {
 							live = Integer.parseInt(buffer[2]);
 							countdown=Integer.parseInt(buffer[3]);
 							fcode=Integer.parseInt(buffer[4]);
-							cards[id] = new AttackTroopCard(new TroopCardData(name, description, mana_cost, mana_type, attack, live, countdown), FCodeReader.getFCode(fcode));
+							cards[id] = new AttackTroopCard(new TroopCardData(id, name, description, mana_cost, mana_type, attack, live, countdown), FCodeReader.getFCode(fcode));
 						}else if(buffer[0].startsWith("dtroop")){
 							attack = Integer.parseInt(buffer[1]);
 							live = Integer.parseInt(buffer[2]);
 							fcode=Integer.parseInt(buffer[3]);
-							cards[id] = new DefenseTroopCard(new TroopCardData(name, description, mana_cost, mana_type, attack, live, countdown), FCodeReader.getFCode(fcode));
+							cards[id] = new DefenseTroopCard(new TroopCardData(id, name, description, mana_cost, mana_type, attack, live, countdown), FCodeReader.getFCode(fcode));
 						}
 						
 					}

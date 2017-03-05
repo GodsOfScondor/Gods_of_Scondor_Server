@@ -24,14 +24,16 @@ public class DeckData {
 	
 	public void addCard(Card<?> c){
 		cards.add(c);
+		DeckLoader.reload(this);
+	}
+	
+	public void removeCard(Card<?> c){
+		cards.remove(c);
+		DeckLoader.reload(this);
 	}
 
 	public int getID() {
 		return id;
-	}
-
-	public void setID(int id) {
-		this.id = id;
 	}
 	
 	public GodData getGod() {

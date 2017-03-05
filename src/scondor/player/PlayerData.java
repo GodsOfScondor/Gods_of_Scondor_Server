@@ -18,6 +18,7 @@ public class PlayerData {
 	private int xp;
 	
 	private List<DeckData> decks;
+	private Cards cards;
 	
 	public PlayerData(int id, String username, String password, String license, int level, int money, int elo, int xp) {
 		
@@ -32,6 +33,7 @@ public class PlayerData {
 		this.xp = xp;
 		
 		decks = DeckLoader.getDecks(id);
+		cards = new Cards(id);
 	}
 	
 	public int getPlayerID() {
@@ -73,6 +75,10 @@ public class PlayerData {
 	
 	public List<DeckData> getDecks() {
 		return decks;
+	}
+	
+	public Cards getCards() {
+		return cards;
 	}
 	
 }
