@@ -3,6 +3,8 @@ package scondor.deck.card.fcode;
 import java.util.ArrayList;
 import java.util.List;
 
+import scondor.deck.card.Compilable;
+
 
 public class FCode {
 
@@ -12,13 +14,15 @@ public class FCode {
 	private String[] buffer=new String[5];
 	private int counter = 0;
 	private int id;
+	private Vars variablehandler;
 
 	public FCode(String[] lines, int id) {
 		this.id = id;
 		this.lines = lines;
+		this.variablehandler = new Vars(this);
 	}
 
-	public void trigger(Target attacker, Target target) {
+	public void execute(CompileData data, Compilable compiler) {
 		
 		for (counter = 0;lines[counter]!=null; counter++) {
 				/*
@@ -71,20 +75,22 @@ public class FCode {
 				if (getVar(buffer[0]).getValue() == Integer.parseInt(buffer[1])) {
 					counter = getLabel(lines[counter].substring(3, lines[counter].length()-1).split(",")[1]).getValue();
 				}
-			}else{
-				attacker.getCard().compile(this,lines[counter], target);
+			} else {
+				
+				compiler.compile(variablehandler, lines[counter], data);
+				
 			}
 		}
 	}
 
-	public Variable getVar(String name) {
+	protected Variable getVar(String name) {
 		for (Variable var : vars)
 			if (var.getName().equalsIgnoreCase(name))
 				return var;
 		return null;
 	}
 
-	private Label getLabel(String name) {
+	protected Label getLabel(String name) {
 		for (Label lab : labels)
 			if (lab.getName().equalsIgnoreCase(name))
 				return lab;

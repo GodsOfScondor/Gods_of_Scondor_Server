@@ -8,7 +8,7 @@ import scondor.god.GodData;
 
 public class DeckData {
 	
-	private List<Card> cards = new ArrayList<>();
+	private List<Card<?>> cards = new ArrayList<>();
 	private GodData god;
 	private int id;
 	
@@ -18,11 +18,11 @@ public class DeckData {
 		this.god = god;
 	}
 	
-	public List<Card> getCards() {
+	public List<Card<?>> getCards() {
 		return cards;
 	}
 	
-	public void addCard(Card c){
+	public void addCard(Card<?> c){
 		cards.add(c);
 	}
 

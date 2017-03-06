@@ -6,8 +6,8 @@ import java.util.List;
 import scondor.deck.DeckData;
 import scondor.deck.card.Card;
 import scondor.deck.card.fieldcard.FieldCard;
-import scondor.deck.card.troops.AttackTroop;
-import scondor.deck.card.troops.DefenseTroop;
+import scondor.deck.card.troops.AttackTroopCard;
+import scondor.deck.card.troops.DefenseTroopCard;
 import scondor.god.GodData;
 import scondor.player.Player;
 
@@ -15,12 +15,13 @@ public class GamePlayer {
 	
 	private Player player;
 	private DeckData deck;
-	private List<Card> graveyard;
-	private List<Card> stack;
-	private List<Card> hand;
+	
+	private List<Card<?>> graveyard;
+	private List<Card<?>> stack;
+	private List<Card<?>> hand;
 	private FieldCard fieldcard;
-	private AttackTroop[] attackers;
-	private DefenseTroop[] defenders;
+	private AttackTroopCard[] attackers;
+	private DefenseTroopCard[] defenders;
 	private GodData goddata;
 	
 	public GamePlayer(Player player, DeckData deck) {
@@ -29,9 +30,9 @@ public class GamePlayer {
 		this.graveyard = new ArrayList<>();
 		this.hand = new ArrayList<>();
 		this.fieldcard = null;
-		this.attackers = new AttackTroop[5];
-		this.defenders = new DefenseTroop[5];
-		this.goddata = new GodData(deck.getGod());
+		this.attackers = new AttackTroopCard[5];
+		this.defenders = new DefenseTroopCard[5];
+		this.goddata = deck.getGod().cloneGod();
 	}
 
 	/**
@@ -45,27 +46,27 @@ public class GamePlayer {
 		this.deck = deck;
 	}
 
-	public List<Card> getGraveyard() {
+	public List<Card<?>> getGraveyard() {
 		return graveyard;
 	}
 
-	public void setGraveyard(List<Card> graveyard) {
+	public void setGraveyard(List<Card<?>> graveyard) {
 		this.graveyard = graveyard;
 	}
 
-	public List<Card> getStack() {
+	public List<Card<?>> getStack() {
 		return stack;
 	}
 
-	public void setStack(List<Card> stack) {
+	public void setStack(List<Card<?>> stack) {
 		this.stack = stack;
 	}
 
-	public List<Card> getHand() {
+	public List<Card<?>> getHand() {
 		return hand;
 	}
 
-	public void setHand(List<Card> hand) {
+	public void setHand(List<Card<?>> hand) {
 		this.hand = hand;
 	}
 
@@ -77,19 +78,19 @@ public class GamePlayer {
 		this.fieldcard = fieldcard;
 	}
 
-	public AttackTroop[] getAttackers() {
+	public AttackTroopCard[] getAttackers() {
 		return attackers;
 	}
 
-	public void setAttackers(AttackTroop[] attackers) {
+	public void setAttackers(AttackTroopCard[] attackers) {
 		this.attackers = attackers;
 	}
 
-	public DefenseTroop[] getDefenders() {
+	public DefenseTroopCard[] getDefenders() {
 		return defenders;
 	}
 
-	public void setDefenders(DefenseTroop[] defenders) {
+	public void setDefenders(DefenseTroopCard[] defenders) {
 		this.defenders = defenders;
 	}
 

@@ -1,10 +1,10 @@
 package scondor.deck.card;
 
-import scondor.deck.card.fcode.FCode;
-import scondor.deck.card.fcode.Target;
+import scondor.deck.card.fcode.CompileData;
+import scondor.deck.card.fcode.Vars;
 
 public interface Compilable {
 	
-	public void compile(FCode fc,String cmd, Target target);
+	public void compile(Vars vars, String cmd, CompileData data);
 	
 }

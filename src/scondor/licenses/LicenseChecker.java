@@ -42,7 +42,7 @@ public class LicenseChecker {
 			} else {
 				
 				// create player data
-				PlayerData data = new PlayerData(username, password, result.getString("LICENSE"), result.getInt("LEVEL"), result.getInt("MONEY"), result.getInt("ELO"), result.getInt("XP"));
+				PlayerData data = new PlayerData(result.getInt("ID"), username, password, result.getString("LICENSE"), result.getInt("LEVEL"), result.getInt("MONEY"), result.getInt("ELO"), result.getInt("XP"));
 				
 				// add player to others...
 				PlayerMaster.add(new Player(client, data));
@@ -66,7 +66,6 @@ public class LicenseChecker {
 					+ "WHERE LICENSE='"+license+"'");
 			
 			if (!result.next()) {
-				//
 				client.sendPacket(new Message("3"));
 				Console.warn(client.getUUID() + ": " +username + " failed to register. (wrong license: "+license+")");
 			} else {
@@ -81,9 +80,16 @@ public class LicenseChecker {
 					}
 				}
 				
-				Database.execute("DELETE FROM GOS_FREELICENSES WHERE LICENSE='"+license+"'");
-				Database.execute("INSERT INTO GOS_PLAYER (`ID`, `LEVEL`, `XP`, `MONEY`) VALUES (NULL, '1', '0', '500')");
 				Database.execute("INSERT INTO GOS_USER (`ID`, `LICENSE`, `NAME`, `PASSWORD`) VALUES (NULL, '"+license+"', '"+username+"', '"+password+"')");
+				Database.execute("DELETE FROM GOS_FREELICENSES WHERE LICENSE='"+license+"'");
+				
+				int id = -1;
+				ResultSet id_result = Database.query("SELECT DISTINCT ID FROM GOS_USER WHERE NAME='"+username+"'");
+				while (id_result.next()) id = id_result.getInt("ID");
+				
+				Database.execute("INSERT INTO GOS_PLAYER (`ID`, `LEVEL`, `XP`, `MONEY`) VALUES ('"+id+"', '1', '0', '500')");
+				Database.execute("INSERT INTO GOS_DECKS (`DECK_ID`, `ID`, `NAME`) VALUES ('0','"+id+"', 'Starterdeck')");
+				Database.execute("INSERT INTO GOS_STATS (`ID`, `WINS`, `LOSES`, `DRAWS`) VALUES ('"+id+"', '0', '0', '0')");
 				
 				login(client, username, password);
 			}

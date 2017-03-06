@@ -1,7 +1,14 @@
 package scondor.player;
 
+import java.util.List;
+
+import scondor.deck.DeckData;
+import scondor.deck.DeckLoader;
+
 public class PlayerData {
 	
+	private int id;
+
 	private String username;
 	private String password;
 	private String license;
@@ -10,7 +17,12 @@ public class PlayerData {
 	private int elo;
 	private int xp;
 	
-	public PlayerData(String username, String password, String license, int level, int money, int elo, int xp) {
+	private List<DeckData> decks;
+	
+	public PlayerData(int id, String username, String password, String license, int level, int money, int elo, int xp) {
+		
+		this.id = id;
+		
 		this.username = username;
 		this.password = password;
 		this.license = license;
@@ -18,8 +30,14 @@ public class PlayerData {
 		this.money = money;
 		this.elo = elo;
 		this.xp = xp;
+		
+		decks = DeckLoader.getDecks(id);
 	}
-
+	
+	public int getPlayerID() {
+		return id;
+	}
+	
 	public String getUsername() {
 		return username;
 	}
@@ -46,6 +64,15 @@ public class PlayerData {
 	
 	public int getXP() {
 		return xp;
+	}
+	
+	public DeckData getDeck(int id) {
+		for (DeckData deck : decks) if (deck.getID()==id) return deck;
+		return null;
+	}
+	
+	public List<DeckData> getDecks() {
+		return decks;
 	}
 	
 }

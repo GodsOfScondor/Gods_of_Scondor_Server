@@ -1,9 +1,12 @@
 package scondor.god;
 
+import java.io.Serializable;
+
 import scondor.mana.ManaType;
 
-public class GodData {
+public class GodData implements Serializable {
 	
+	private static final long serialVersionUID = 3231458288499536154L;
 	private ManaType manatype1;
 	private ManaType manatype2;
 	private int level;
@@ -12,24 +15,17 @@ public class GodData {
 	private int manatype2_amount;
 	private int universal_mana_amount;
 
-	public GodData(int level, int exp, ManaType manatype1, ManaType manatype2/*, int manatype1_amount, int manatype2_amount, int universal_mana_amount*/){
+	public GodData(int level, int exp, ManaType manatype1, ManaType manatype2){
 		this.level=level;
 		this.exp=exp;
 		this.manatype1=manatype1;
 		this.manatype2=manatype2;
-		/*this.manatype1_amount=manatype1_amount;
-		this.manatype2_amount=manatype2_amount;
-		this.universal_mana_amount=universal_mana_amount;
-	*/}
+	}
 	
-	public GodData(GodData goddata){
-		this.level=goddata.getLevel();
-		this.exp=goddata.getEXP();
-		this.manatype1=goddata.getManatype1();
-		this.manatype2=goddata.getManatype2();
-		this.manatype1_amount=goddata.getManatype1_amount();
-		this.manatype2_amount=goddata.getManatype2_amount();
-		this.universal_mana_amount=goddata.getUniversal_mana_amount();
+	public GodData cloneGod() {
+		try { return (GodData) this.clone(); }
+		catch (CloneNotSupportedException e) { e.printStackTrace(); }
+		return null;
 	}
 	
 	public ManaType getManatype1() {
@@ -64,27 +60,27 @@ public class GodData {
 		this.exp = exp;
 	}
 
-	public int getManatype1_amount() {
+	public int getMana1() {
 		return manatype1_amount;
 	}
 
-	public void setManatype1_amount(int manatype1_amount) {
+	public void setMana1(int manatype1_amount) {
 		this.manatype1_amount = manatype1_amount;
 	}
 
-	public int getManatype2_amount() {
+	public int getMana2() {
 		return manatype2_amount;
 	}
 
-	public void setManatype2_amount(int manatype2_amount) {
+	public void setMana2(int manatype2_amount) {
 		this.manatype2_amount = manatype2_amount;
 	}
 
-	public int getUniversal_mana_amount() {
+	public int getUniversalMana() {
 		return universal_mana_amount;
 	}
 
-	public void setUniversal_mana_amount(int universal_mana_amount) {
+	public void setUniversalMana(int universal_mana_amount) {
 		this.universal_mana_amount = universal_mana_amount;
 	}
 	

@@ -1,13 +1,13 @@
-package scondor.deck.card.spell;
+package scondor.deck.card.troops;
 
 import scondor.deck.card.Card;
 import scondor.deck.card.fcode.CompileData;
 import scondor.deck.card.fcode.FCode;
 import scondor.deck.card.fcode.Vars;
 
-public class MultiTargetSpell extends Card<SpellCardData> {
-
-	public MultiTargetSpell(SpellCardData data, FCode fcode) {
+public class DefenseTroopCard extends Card<TroopCardData> {
+	
+	public DefenseTroopCard(TroopCardData data, FCode fcode) {
 		super(data, fcode);
 	}
 
@@ -17,6 +17,5 @@ public class MultiTargetSpell extends Card<SpellCardData> {
 		
 		
 	}
-
 
 }
