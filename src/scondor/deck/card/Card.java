@@ -3,12 +3,12 @@ package scondor.deck.card;
 import scondor.deck.card.fcode.CompileData;
 import scondor.deck.card.fcode.FCode;
 
-public abstract class Card<TYPE extends CardData> implements Compilable {
+public abstract class Card<CARDDATA extends CardData> implements Compilable {
 
-	private TYPE data;
+	private CARDDATA data;
 	private FCode fcode;
 
-	public Card(TYPE data, FCode fcode) {
+	public Card(CARDDATA data, FCode fcode) {
 		this.data = data;
 		this.fcode = fcode;
 	}
@@ -18,13 +18,13 @@ public abstract class Card<TYPE extends CardData> implements Compilable {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public Card<TYPE> cloneCard() {
-		try { return (Card<TYPE>) this.clone(); } 
+	public Card<CARDDATA> cloneCard() {
+		try { return (Card<CARDDATA>) this.clone(); } 
 		catch (CloneNotSupportedException e) { e.printStackTrace(); }
 		return null;
 	}
 
-	public TYPE getData() {
+	public CARDDATA getData() {
 		return data;
 	}
 	

@@ -5,9 +5,9 @@ import scondor.deck.card.fcode.CompileData;
 import scondor.deck.card.fcode.FCode;
 import scondor.deck.card.fcode.Vars;
 
-public class AttackTroopCard extends Card<TroopCardData> {
+public class ATCard extends Card<TroopCardData> {
 
-	public AttackTroopCard(TroopCardData data, FCode fcode) {
+	public ATCard(TroopCardData data, FCode fcode) {
 		super(data, fcode);
 	}
 	

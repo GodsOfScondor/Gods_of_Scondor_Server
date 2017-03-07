@@ -15,7 +15,7 @@ import scondor.deck.card.troops.DTCard;
 import scondor.deck.card.troops.TroopCardData;
 import scondor.mana.ManaType;
 
-public class CardMaster {
+public class CardLoader {
 
 	private static Card<?>[] cards = new Card[1024];
 	private static final String PATH = "data/cards.dat";

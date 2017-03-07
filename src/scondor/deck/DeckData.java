@@ -3,39 +3,22 @@ package scondor.deck;
 import java.util.ArrayList;
 import java.util.List;
 
-import scondor.deck.card.Card;
 import scondor.god.GodData;
 
 public class DeckData {
 	
-	private List<Card<?>> cards = new ArrayList<>();
+	private List<Integer> deck = new ArrayList<>();
 	private GodData god;
-	private int id;
 	
-	public DeckData(int id, GodData god) {
-		this.id=id;
-		this.cards = new ArrayList<>();
-		this.god = god;
+	public DeckData(List<Integer> deck, GodData data) {
+		this.deck = deck;
 	}
 	
-	public List<Card<?>> getCards() {
-		return cards;
-	}
-	
-	public void addCard(Card<?> c){
-		cards.add(c);
-	}
-
-	public int getID() {
-		return id;
-	}
-
-	public void setID(int id) {
-		this.id = id;
+	public List<Integer> getDeck() {
+		return deck;
 	}
 	
 	public GodData getGod() {
 		return god;
 	}
-
 }

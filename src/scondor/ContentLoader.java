@@ -1,7 +1,7 @@
 package scondor;
 
 import scondor.deck.DeckLoader;
-import scondor.deck.card.CardMaster;
+import scondor.deck.card.CardLoader;
 import scondor.deck.card.fcode.FCodeReader;
 
 public class ContentLoader {
@@ -11,7 +11,7 @@ public class ContentLoader {
 		
 		FCodeReader.load();
 		Console.info("Loaded FCodes!");
-		CardMaster.load();
+		CardLoader.load();
 		Console.info("Loaded cards!");
 		DeckLoader.load();
 		Console.info("Loaded decks!");
