@@ -9,6 +9,7 @@ import scondor.player.Player;
 
 public class Lobby {
 	
+	// Lists zu hashmaps (deck dazua dor)
 	private static List<Player> ranked = new ArrayList<>();
 	private static List<Player> online = new ArrayList<>();
 	private static List<Player> custom = new ArrayList<>();
@@ -30,7 +31,7 @@ public class Lobby {
 					else {
 						Player enemy =  getEnemy(player, type);
 						
-						new Session(new SessionState(new GamePlayer(player, null), new GamePlayer(enemy, null)));
+						SessionMaster.createSession(new PlayerSide(player, null), new PlayerSide(enemy, null));
 						
 					}
 					

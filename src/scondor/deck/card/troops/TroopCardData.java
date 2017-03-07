@@ -8,8 +8,8 @@ public class TroopCardData extends CardData {
 	private static final long serialVersionUID = -1758970014931750800L;
 	private int attack, live, countdown;
 	
-	public TroopCardData(String name, String description, int mana_cost, ManaType mana_type, int attack, int live, int countdown) {
-		super(name, description, mana_cost, mana_type);
+	public TroopCardData(int id, String name, String description, int mana_cost, ManaType mana_type, int attack, int live, int countdown) {
+		super(id, name, description, mana_cost, mana_type);
 		this.attack = attack;
 		this.live = live;
 		this.countdown = countdown;

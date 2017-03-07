@@ -74,7 +74,7 @@ public class Database {
 			Console.info("Succesfully connected to database!");
 			createTable("USER", "ID INT AUTO_INCREMENT", "LICENSE VARCHAR(24)", "NAME VARCHAR(10)", "PASSWORD VARCHAR(30)", "PRIMARY KEY (ID)");
 			createTable("PLAYER", "ID INT", "LEVEL INT(100)", "XP INT(100)", "MONEY INT(100)", "ELO INT(100)", "PRIMARY KEY (ID)");
-			createTable("DECKS", "DECK_ID INT", "ID INT(100)", "NAME VARCHAR(20)", "PRIMARY KEY (DECK_ID)");
+			createTable("DECKS", "DECK_ID INT AUTO_INCREMENT", "ID INT(100)", "NAME VARCHAR(20)", "PRIMARY KEY (DECK_ID)");
 			createTable("STATS", "ID INT", "WINS INT(100)", "LOSES INT(100)", "DRAWS INT(100)", "PRIMARY KEY (ID)");
 			createTable("FREELICENSES", "LICENSE VARCHAR(24)");
 		}

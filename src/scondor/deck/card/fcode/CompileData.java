@@ -1,26 +1,26 @@
 package scondor.deck.card.fcode;
 
-import scondor.session.GamePlayer;
+import scondor.session.PlayerSide;
 
 public class CompileData {
 	
-	private GamePlayer player;
-	private GamePlayer enemy;
+	private PlayerSide player;
+	private PlayerSide enemy;
 	private int target;
 	private TargetType type;
 	
-	public CompileData(GamePlayer player, GamePlayer enemy, int target, TargetType type) {
+	public CompileData(PlayerSide player, PlayerSide enemy, int target, TargetType type) {
 		this.player = player;
 		this.enemy = enemy;
 		this.target = target;
 		this.type = type;
 	}
 
-	public GamePlayer getPlayer() {
+	public PlayerSide getPlayer() {
 		return player;
 	}
 
-	public GamePlayer getEnemy() {
+	public PlayerSide getEnemy() {
 		return enemy;
 	}
 

@@ -97,4 +97,12 @@ public class Cards {
 		reload();
 	}
 	
+	public boolean hasCard(int id) {
+		return cards.contains(id);
+	}
+	
+	public List<Integer> getCards() {
+		return cards;
+	}
+	
 }

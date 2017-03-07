@@ -8,7 +8,15 @@ import scondor.deck.card.fieldcard.FieldCardData;
 import scondor.deck.card.troops.TroopCardData;
 import scondor.god.GodData;
 
-public class StateData implements Serializable {
+/**
+ * 
+ * @author Bernhard Scharrer
+ * 
+ * represents the whole data from one playersie.
+ * this class is used for data transfer to the clients.
+ *
+ */
+public class PlayerSideData implements Serializable {
 	
 	private static final long serialVersionUID = -793364126185832628L;
 
@@ -23,7 +31,7 @@ public class StateData implements Serializable {
 	
 	private GodData god;
 
-	public StateData(FieldCardData fieldcard, List<CardData> hand, List<CardData> stack, List<CardData> graveyard, TroopCardData[] attackers, TroopCardData[] defenders, GodData god) {
+	public PlayerSideData(FieldCardData fieldcard, List<CardData> hand, List<CardData> stack, List<CardData> graveyard, TroopCardData[] attackers, TroopCardData[] defenders, GodData god) {
 		this.fieldcard = fieldcard;
 		this.hand = hand;
 		this.stack = stack;
