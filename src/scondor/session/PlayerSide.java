@@ -3,46 +3,53 @@ package scondor.session;
 import java.util.ArrayList;
 import java.util.List;
 
-import scondor.deck.DeckData;
+import scondor.deck.Deck;
 import scondor.deck.card.Card;
 import scondor.deck.card.fieldcard.FieldCard;
-import scondor.deck.card.troops.AttackTroopCard;
-import scondor.deck.card.troops.DefenseTroopCard;
+import scondor.deck.card.troops.ATCard;
+import scondor.deck.card.troops.DTCard;
 import scondor.god.GodData;
 import scondor.player.Player;
 
-public class GamePlayer {
+/**
+ * 
+ * @author Bernhard Scharrer
+ * 
+ * represents all references to data and there functionalities from one side of a game session.
+ *
+ */
+public class PlayerSide {
 	
 	private Player player;
-	private DeckData deck;
+	private Deck deck;
 	
 	private List<Card<?>> graveyard;
 	private List<Card<?>> stack;
 	private List<Card<?>> hand;
 	private FieldCard fieldcard;
-	private AttackTroopCard[] attackers;
-	private DefenseTroopCard[] defenders;
+	private ATCard[] attackers;
+	private DTCard[] defenders;
 	private GodData goddata;
 	
-	public GamePlayer(Player player, DeckData deck) {
+	public PlayerSide(Player player, Deck deck) {
 		this.player = player;
 		this.deck = deck;
 		this.graveyard = new ArrayList<>();
 		this.hand = new ArrayList<>();
 		this.fieldcard = null;
-		this.attackers = new AttackTroopCard[5];
-		this.defenders = new DefenseTroopCard[5];
+		this.attackers = new ATCard[5];
+		this.defenders = new DTCard[5];
 		this.goddata = deck.getGod().cloneGod();
 	}
 
 	/**
 	 * raw data only!
 	 */
-	public DeckData getDeck() {
+	public Deck getDeck() {
 		return deck;
 	}
 
-	public void setDeck(DeckData deck) {
+	public void setDeck(Deck deck) {
 		this.deck = deck;
 	}
 
@@ -78,19 +85,19 @@ public class GamePlayer {
 		this.fieldcard = fieldcard;
 	}
 
-	public AttackTroopCard[] getAttackers() {
+	public ATCard[] getAttackers() {
 		return attackers;
 	}
 
-	public void setAttackers(AttackTroopCard[] attackers) {
+	public void setAttackers(ATCard[] attackers) {
 		this.attackers = attackers;
 	}
 
-	public DefenseTroopCard[] getDefenders() {
+	public DTCard[] getDefenders() {
 		return defenders;
 	}
 
-	public void setDefenders(DefenseTroopCard[] defenders) {
+	public void setDefenders(DTCard[] defenders) {
 		this.defenders = defenders;
 	}
 

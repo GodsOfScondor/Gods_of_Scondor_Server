@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import scondor.deck.card.fcode.FCodeReader;
-import scondor.deck.card.troops.AttackTroopCard;
-import scondor.deck.card.troops.DefenseTroopCard;
+import scondor.deck.card.troops.ATCard;
+import scondor.deck.card.troops.DTCard;
 import scondor.deck.card.troops.TroopCardData;
 import scondor.mana.ManaType;
 
@@ -72,12 +72,12 @@ public class CardMaster {
 							live = Integer.parseInt(buffer[2]);
 							countdown=Integer.parseInt(buffer[3]);
 							fcode=Integer.parseInt(buffer[4]);
-							cards[id] = new AttackTroopCard(new TroopCardData(name, description, mana_cost, mana_type, attack, live, countdown), FCodeReader.getFCode(fcode));
+							cards[id] = new ATCard(new TroopCardData(id, name, description, mana_cost, mana_type, attack, live, countdown), FCodeReader.getFCode(fcode));
 						}else if(buffer[0].startsWith("dtroop")){
 							attack = Integer.parseInt(buffer[1]);
 							live = Integer.parseInt(buffer[2]);
 							fcode=Integer.parseInt(buffer[3]);
-							cards[id] = new DefenseTroopCard(new TroopCardData(name, description, mana_cost, mana_type, attack, live, countdown), FCodeReader.getFCode(fcode));
+							cards[id] = new DTCard(new TroopCardData(id, name, description, mana_cost, mana_type, attack, live, countdown), FCodeReader.getFCode(fcode));
 						}
 						
 					}

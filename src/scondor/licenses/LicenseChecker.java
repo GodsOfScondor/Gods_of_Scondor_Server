@@ -41,8 +41,26 @@ public class LicenseChecker {
 				
 			} else {
 				
+				int id = result.getInt("ID");
+				int level = result.getInt("LEVEL");
+				int money = result.getInt("MONEY");
+				int elo = result.getInt("ELO");
+				int xp = result.getInt("XP");
+				String license = result.getString("LICENSE");
+				
+				// get wins and loses
+				ResultSet stats = Database.query("SELECT DISTINCT * FROM GOS_STATS WHERE ID='"+id+"'");
+				
+				int wins = -1;
+				int loses = -1;
+				
+				while (stats.next()) {
+					wins = stats.getInt("Wins");
+					loses = stats.getInt("Loses");
+				}
+				
 				// create player data
-				PlayerData data = new PlayerData(result.getInt("ID"), username, password, result.getString("LICENSE"), result.getInt("LEVEL"), result.getInt("MONEY"), result.getInt("ELO"), result.getInt("XP"));
+				PlayerData data = new PlayerData(id, username, password, license, level, money, elo, xp, wins, loses);
 				
 				// add player to others...
 				PlayerMaster.add(new Player(client, data));
