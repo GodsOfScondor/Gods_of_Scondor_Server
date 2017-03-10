@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-public class FCodeReader {
+public class FCodeLoader {
 
 	private static final int FCODESIZE = 64;
 

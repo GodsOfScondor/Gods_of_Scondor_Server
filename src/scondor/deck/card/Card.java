@@ -13,10 +13,6 @@ public abstract class Card<CARDDATA extends CardData> implements Compilable {
 		this.fcode = fcode;
 	}
 	
-	public Card(Card<? extends CardData> card) {
-		
-	}
-	
 	@SuppressWarnings("unchecked")
 	public Card<CARDDATA> cloneCard() {
 		try { return (Card<CARDDATA>) this.clone(); } 

@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import scondor.deck.card.fcode.FCodeReader;
+import scondor.deck.card.fcode.FCodeLoader;
 import scondor.gnet.server.GNetServer;
 import scondor.licenses.LicenseCreator;
 import scondor.session.SessionMaster;
@@ -58,7 +58,7 @@ public class GodsOfScondor {
 				LicenseCreator.generateLicenses(Integer.parseInt(parts[2]));
 			} else if(line.startsWith("execute_")){
 				parts=line.split("_");
-				FCodeReader.getFCode(Integer.parseInt(parts[1])).execute(null, null);
+				FCodeLoader.getFCode(Integer.parseInt(parts[1])).execute(null, null);
 			} else if(line.startsWith("delete_")){
 				parts=line.split("_");
 				ResultSet result = Database.query("SELECT ID FROM GOS_USER WHERE NAME='"+parts[1]+"'");

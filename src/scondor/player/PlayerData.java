@@ -2,7 +2,7 @@ package scondor.player;
 
 import java.util.List;
 
-import scondor.deck.Deck;
+import scondor.deck.DeckData;
 import scondor.deck.DeckLoader;
 
 public class PlayerData {
@@ -20,7 +20,7 @@ public class PlayerData {
 	private int wins;
 	private int loses;
 	
-	private List<Deck> decks;
+	private List<DeckData> decks;
 	private Cards cards;
 	
 	public PlayerData(int id, String username, String password, String license, int level, int money, int elo, int xp, int wins, int loses) {
@@ -89,12 +89,12 @@ public class PlayerData {
 		this.loses = loses;
 	}
 	
-	public Deck getDeck(int id) {
-		for (Deck deck : decks) if (deck.getID()==id) return deck;
+	public DeckData getDeck(int id) {
+		for (DeckData deck : decks) if (deck.getID()==id) return deck;
 		return null;
 	}
 	
-	public List<Deck> getDecks() {
+	public List<DeckData> getDecks() {
 		return decks;
 	}
 	

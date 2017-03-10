@@ -2,6 +2,10 @@ package scondor;
 
 public class Console {
 	
+	public static void send(String msg) {
+		System.out.println(msg);
+	}
+	
 	public static void info(String msg) {
 		System.out.println(CMDTool.INFO + msg);
 	}

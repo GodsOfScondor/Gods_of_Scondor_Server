@@ -4,40 +4,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 import scondor.deck.card.Card;
+import scondor.deck.card.CardLoader;
 import scondor.god.God;
+import scondor.player.PlayerData;
 
 public class Deck {
 	
+	private DeckData data;
+	
 	private List<Card<?>> cards = new ArrayList<>();
 	private God god;
-	private int id;
 	
-	public Deck(int id, God god) {
-		this.id=id;
-		this.cards = new ArrayList<>();
-		this.god = god;
+	/**
+	 * 
+	 * only for game sessions
+	 * 
+	 */
+	public Deck(DeckData data, PlayerData player) {
+		this.data = data;
+		for (int id : data.getCards()) cards.add(CardLoader.getCard(id));
+		this.god = new God(data.getGod(), player);
 	}
-	
+
+	public DeckData getData() {
+		return data;
+	}
+
 	public List<Card<?>> getCards() {
 		return cards;
 	}
-	
-	public void addCard(Card<?> c){
-		cards.add(c);
-		DeckLoader.reload(this);
-	}
-	
-	public void removeCard(Card<?> c){
-		cards.remove(c);
-		DeckLoader.reload(this);
-	}
 
-	public int getID() {
-		return id;
-	}
-	
 	public God getGod() {
 		return god;
 	}
-
+	
 }

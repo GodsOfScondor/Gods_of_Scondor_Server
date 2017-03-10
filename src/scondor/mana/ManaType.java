@@ -2,9 +2,9 @@ package scondor.mana;
 
 public enum ManaType {
 	
-	WATER,
-	NATURE,
-	ICE,
-	FIRE;
+	IDKANAME,
+	WILD,
+	PLEASERENAMEME,
+	HAVEANICEDAY;
 	
 }

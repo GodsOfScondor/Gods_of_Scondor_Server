@@ -18,9 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import scondor.Database;
-import scondor.deck.card.Card;
-import scondor.deck.card.CardLoader;
-import scondor.god.GodData;
 import scondor.god.GodLoader;
 
 public class DeckLoader {
@@ -30,33 +27,125 @@ public class DeckLoader {
 	
 	private final static String PATH="data/decks/";
 	
-	private static int counter=0;
+	private static List<DeckData> decks = new ArrayList<>();
+	
 	private static int id;
+	private static List<Integer> card_ids;
+	private static int god_id;
+	private static String name;
 	
-	private static String[] cards=new String[60];
-	private static GodData god;
-	
-	private static List<Deck> decks = new ArrayList<>();
-	
+	/**
+	 * 
+	 * loads all raw decks
+	 * 
+	 */
 	public static void load() {
+		
 		File[] files=new File(PATH).listFiles();
 		
-		counter=0;
-		while(counter<files.length){
-			if (files[counter].isFile()) {
-				load(files[counter]);
-				counter++;
-			} else {
-				files[counter].delete();
+		for (File file : files) {
+			if (file.exists() && file.isFile()) {
+				load(file);
 			}
 		}
 		
 	}
 	
-	public static void reload(Deck deck) {
+	/**
+	 * 
+	 * reloads specific deck
+	 * 
+	 */
+	public static void reload(DeckData deck) {
 		load(save(deck));
 	}
 	
+	/**
+	 * 
+	 * returns all raw decks a player has
+	 * 
+	 */
+	public static List<DeckData> getDecks(int player_id) {
+		
+		List<DeckData> player_decks = new ArrayList<>();
+		
+		ResultSet result = Database.query("SELECT DECK_ID FROM GOS_DECKS WHERE ID="+player_id+"");
+		
+		try {
+			while(result.next()) {
+				player_decks.add(getDeck(result.getInt("DECK_ID")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return player_decks;
+		
+	}
+	
+	/**
+	 * 
+	 * clones a deck and claims it to specific player
+	 * 
+	 */
+	public static int cloneDeck(int deck_id, int player_id, String new_name) {
+		
+		try {
+			/**
+			 * 
+			 * TODO REWORK CODE!!!!!!!!!!
+			 * 
+			 */
+			
+			// target source file
+			File src = new File("data/decks/D"+deck_id+".deck");
+			
+			// deck does not exist
+			if (!src.exists()) return -1;
+			
+			// generate id
+			int id = -1;
+			ResultSet max_id = Database.query("SELECT MAX(ID) FROM GOS_DECKS LIMIT 1");
+			while(max_id.next()) id = max_id.getInt("ID");
+			id++;
+			
+			// error at generating id
+			if (id==0) return -2;
+			
+			// create new file and database insert
+			File dst = new File("data/decks/D"+id+".deck");
+			Database.execute("INSERT INTO GOS_DECKS ('DECK_ID', 'ID', 'NAME)' values (NULL, )");
+			
+			// copy file
+			Files.copy(src.toPath(), dst.toPath(), StandardCopyOption.REPLACE_EXISTING);
+			
+			// return new deck
+			return id;
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return -1;
+		
+	}
+	
+	/**
+	 * 
+	 * returns raw deck data via id
+	 * 
+	 */
+	private static DeckData getDeck(int deck_id) {
+		for (DeckData deck : decks) if (deck.getID()==deck_id) return deck;
+		return null;
+	}
+	
+	/**
+	 * 
+	 * loads one raw deck data
+	 * 
+	 */
 	private static void load(File file) {
 		
 		if (file.exists()) {
@@ -64,16 +153,26 @@ public class DeckLoader {
 				
 				reader=new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
 				
+				// get id from file name
 				id=Integer.parseInt(file.getName().substring(1,file.getName().length()-5));
 				
-				cards=reader.readLine().split(",");
-				god=GodLoader.getGod(Integer.parseInt(reader.readLine()));
+				// recreate card id list
+				card_ids = new ArrayList<>();
 				
-//				decks.add(new Deck(id, god));
+				// read card ids from file
+				for (String number : reader.readLine().split(",")) card_ids.add(Integer.parseInt(number));
 				
-				for(String s: cards){
-					if (!s.equals("END")) decks.get(counter).addCard(CardLoader.getCardData(Integer.parseInt(s)));
-				}
+				// read god id from file
+				god_id = Integer.parseInt(reader.readLine());
+				
+				// get name of deck from DB
+				name = "error while loading";
+				
+				ResultSet names = Database.query("SELECT NAME FROM GOS_DECKS WHERE DECK_ID='"+id+"'");
+				while (names.next()) name = names.getString("NAME");
+				
+				// add raw deck data to list
+				decks.add(new DeckData(id, name, card_ids, GodLoader.getGod(god_id)));
 				
 				reader.close();
 				
@@ -81,12 +180,14 @@ public class DeckLoader {
 				e.printStackTrace();
 			}catch (IOException e) {
 				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 		}
 		
 	}
 	
-	private static File save(Deck deck) {
+	private static File save(DeckData deck) {
 		
 		File file = new File(PATH+"D"+deck.getID()+".deck");
 		
@@ -95,12 +196,20 @@ public class DeckLoader {
 			try {
 				writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));
 				
-				for (Card<?> card : deck.getCards()) {
-					writer.write(card.getData().getID()+",");
+				// writes card ids
+				int n=0;
+				for (int card_id : deck.getCards()) {
+					if (++n!=deck.getCards().size()) {
+						writer.write(card_id+",");
+					} else {
+						writer.write(card_id+"");
+					}
 				}
-				writer.write("END");
+				
+				// writes god id
 				writer.newLine();
-				writer.write(deck.getGod().getData().getID());
+				writer.write("" + deck.getGod().getID());
+				writer.newLine();
 				
 				writer.close();
 			} catch (UnsupportedEncodingException e) {
@@ -119,58 +228,6 @@ public class DeckLoader {
 			
 		}
 		
-	}
-	
-	public static List<Deck> getDecks(int id) {
-		
-		List<Deck> player_decks = new ArrayList<>();
-		
-		ResultSet result = Database.query("SELECT DECK_ID FROM GOS_DECKS WHERE ID="+id+"");
-		
-		try {
-			while(result.next()) {
-				player_decks.add(getDeck(result.getInt("DECK_ID")));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return player_decks;
-		
-	}
-	
-	public static int cloneDeck(int deck_id) {
-		
-		try {
-			
-			File src = new File("data/decks/D"+deck_id+".deck");
-			File dst = new File("data/decks/D"+deck_id+".deck");
-			
-			// deck does not exist
-			if (!src.exists()) return -1;
-			
-			// generate id
-			int id = -1;
-			
-			// error at generating id
-			if (id==-1) return -2;
-			
-			// copy file
-			Files.copy(src.toPath(), dst.toPath(), StandardCopyOption.REPLACE_EXISTING);
-			
-			// return new deck
-			return id;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		return -1;
-		
-	}
-	
-	private static Deck getDeck(int deck_id) {
-		for (Deck deck : decks) if (deck.getID()==deck_id) return deck;
-		return null;
 	}
 	
 }
