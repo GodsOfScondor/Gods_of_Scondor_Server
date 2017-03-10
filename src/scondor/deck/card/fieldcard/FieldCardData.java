@@ -8,8 +8,13 @@ public class FieldCardData extends CardData {
 	private static final long serialVersionUID = -1992636925239749138L;
 	private int linger;
 	
-	public FieldCardData(int id, int fcode, String name, String description, int mana_cost, ManaType mana_type, int linger) {
-		super(id, fcode, name, description, mana_cost, mana_type);
+	/**
+	 *
+	 * repesents raw data of a field card
+	 * 
+	 */
+	public FieldCardData(int id, String name, String description, int mana_cost, ManaType mana_type, int linger) {
+		super(id, name, description, mana_cost, mana_type);
 		this.linger = linger;
 	}
 	
@@ -17,4 +22,8 @@ public class FieldCardData extends CardData {
 		return linger;
 	}
 
+	public void setLinger(int linger) {
+		this.linger = linger;
+	}
+	
 }

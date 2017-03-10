@@ -229,5 +229,9 @@ public class DeckLoader {
 		}
 		
 	}
+
+	public static void saveAll() {
+		for (DeckData data : decks) save(data);
+	}
 	
 }

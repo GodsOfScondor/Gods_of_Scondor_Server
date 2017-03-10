@@ -50,7 +50,8 @@ public class GodsOfScondor {
 				Console.info("Server-Commands:\n");
 				System.out.println("help                      | Shows all available Commands");
 				System.out.println("create_licenses_n         | Automatically generates n licenses");
-				System.out.println("delete_name               | Deletes user from database.\n");
+				System.out.println("delete_name               | Deletes user from database.");
+				System.out.println("save                      | Saves contents.\n\n");
 			}
 			
 			if(line.startsWith("create_licenses_")){
@@ -70,6 +71,8 @@ public class GodsOfScondor {
 				Database.execute("DELETE FROM `GOS_PLAYER` WHERE ID='"+id+"'");
 				Database.execute("DELETE FROM `GOS_DECKS` WHERE ID='"+id+"'");
 				Database.execute("DELETE FROM `GOS_STATS` WHERE ID='"+id+"'");
+			} else if(line.startsWith("save")){
+				ContentLoader.save();
 			}
 		}
 		s.close();

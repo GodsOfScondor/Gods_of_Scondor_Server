@@ -24,5 +24,11 @@ public class PlayerMaster {
 		for (Player player : players) if (player.getClient().getUUID()==uuid) return player;
 		return null;
 	}
+
+	public static void saveAll() {
+		for (Player player : players) {
+			player.getData().getCards().save();
+		}
+	}
 	
 }

@@ -2,6 +2,7 @@ package scondor.player;
 
 import java.util.List;
 
+import scondor.Database;
 import scondor.deck.DeckData;
 import scondor.deck.DeckLoader;
 
@@ -23,6 +24,11 @@ public class PlayerData {
 	private List<DeckData> decks;
 	private Cards cards;
 	
+	/**
+	 * 
+	 * represents whole data of a player
+	 * 
+	 */
 	public PlayerData(int id, String username, String password, String license, int level, int money, int elo, int xp, int wins, int loses) {
 		
 		this.id = id;
@@ -41,6 +47,12 @@ public class PlayerData {
 		cards = new Cards(id);
 	}
 	
+	/**
+	 * 
+	 * user data (id, username, password, license)
+	 * 
+	 */
+	
 	public int getPlayerID() {
 		return id;
 	}
@@ -56,6 +68,12 @@ public class PlayerData {
 	public String getLicense() {
 		return license;
 	}
+	
+	/**
+	 * 
+	 * player data (level, money, elo, xp)
+	 * 
+	 */
 
 	public int getLevel() {
 		return level;
@@ -63,6 +81,16 @@ public class PlayerData {
 	
 	public int getMoney() {
 		return money;
+	}
+	
+	public void editMoney(int money) {
+		this.money+=money;
+		Database.execute("UPDATE GOS_PLAYER SET MONEY="+this.money+" WHERE '"+id+"'");
+	}
+	
+	public void setMoney(int money) {
+		this.money=money;
+		Database.execute("UPDATE GOS_PLAYER SET MONEY="+this.money+" WHERE '"+id+"'");
 	}
 	
 	public int getELO() {
@@ -73,6 +101,12 @@ public class PlayerData {
 		return xp;
 	}
 	
+	/**
+	 * 
+	 * player stats (wins, loses)
+	 * 
+	 */
+	
 	public int getWins() {
 		return wins;
 	}
@@ -81,12 +115,24 @@ public class PlayerData {
 		return loses;
 	}
 	
-	public void setWins(int wins) {
-		this.wins = wins;
+	public void incWins() {
+		this.wins++;
+		Database.execute("UPDATE GOS_PLAYER SET WINS="+this.wins+" WHERE '"+id+"'");
 	}
 	
-	public void setLoses(int loses) {
-		this.loses = loses;
+	public void resetWins() {
+		this.wins=0;
+		Database.execute("UPDATE GOS_PLAYER SET WINS="+this.wins+" WHERE '"+id+"'");
+	}
+	
+	public void incLoses() {
+		this.loses++;
+		Database.execute("UPDATE GOS_PLAYER SET LOSES="+this.loses+" WHERE '"+id+"'");
+	}
+	
+	public void resetLoses() {
+		this.loses=0;
+		Database.execute("UPDATE GOS_PLAYER SET LOSES="+this.loses+" WHERE '"+id+"'");
 	}
 	
 	public DeckData getDeck(int id) {
@@ -94,10 +140,20 @@ public class PlayerData {
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @return raw decks of a player
+	 * 
+	 */
 	public List<DeckData> getDecks() {
 		return decks;
 	}
 	
+	/**
+	 * 
+	 * @return avaible cards of a player
+	 * 
+	 */
 	public Cards getCards() {
 		return cards;
 	}

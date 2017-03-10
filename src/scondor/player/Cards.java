@@ -38,7 +38,7 @@ public class Cards {
 		load();
 	}
 	
-	private void save() {
+	protected void save() {
 		try {
 			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));
 			

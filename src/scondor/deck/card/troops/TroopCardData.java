@@ -8,8 +8,13 @@ public class TroopCardData extends CardData {
 	private static final long serialVersionUID = -1758970014931750800L;
 	private int attack, live, countdown;
 	
-	public TroopCardData(int id, int fcode, String name, String description, int mana_cost, ManaType mana_type, int attack, int live, int countdown) {
-		super(id, fcode , name, description, mana_cost, mana_type);
+	/**
+	 *
+	 * repesents raw data of a troop card
+	 * 
+	 */
+	public TroopCardData(int id, String name, String description, int mana_cost, ManaType mana_type, int attack, int live, int countdown) {
+		super(id, name, description, mana_cost, mana_type);
 		this.attack = attack;
 		this.live = live;
 		this.countdown = countdown;
@@ -27,4 +32,16 @@ public class TroopCardData extends CardData {
 		return countdown;
 	}
 
+	public void setAttack(int attack) {
+		this.attack = attack;
+	}
+
+	public void setLive(int live) {
+		this.live = live;
+	}
+
+	public void setCountdown(int countdown) {
+		this.countdown = countdown;
+	}
+	
 }

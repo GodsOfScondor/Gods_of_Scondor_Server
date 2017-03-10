@@ -26,7 +26,6 @@ public class CardLoader {
 	private static String buffer[];
 
 	private static int id;
-	private static int tex;
 	private static int mana_cost;
 	private static String name;
 	private static String description;
@@ -80,7 +79,7 @@ public class CardLoader {
 							countdown = Integer.parseInt(buffer[3]);
 							fcode = FCodeLoader.getFCode(Integer.parseInt(buffer[4]));
 							
-							cards[id] = new ATCard(new TroopCardData(id, tex, name, description, mana_cost, mana_type,
+							cards[id] = new ATCard(new TroopCardData(id, name, description, mana_cost, mana_type,
 									attack, live, countdown), fcode);
 							
 						} 
@@ -93,7 +92,7 @@ public class CardLoader {
 							live = Integer.parseInt(buffer[2]);
 							fcode = FCodeLoader.getFCode(Integer.parseInt(buffer[3]));
 							
-							cards[id] = new DTCard(new TroopCardData(id, tex, name, description, mana_cost, mana_type,
+							cards[id] = new DTCard(new TroopCardData(id, name, description, mana_cost, mana_type,
 									attack, live, countdown), fcode);
 							
 						}

@@ -8,6 +8,7 @@ import scondor.packets.Authentication;
 import scondor.packets.Message;
 import scondor.packets.Verification;
 import scondor.player.PlayerMaster;
+import scondor.player.Shop;
 
 public class Server extends ServerEventListener {
 
@@ -65,10 +66,26 @@ public class Server extends ServerEventListener {
 		}
 		
 		/*
+		 * ignore if player is not in list
+		 */
+		if (PlayerMaster.getPlayer(client.getUUID())==null) return;
+		
+		/*
 		 * player registers to server
 		 */
 		else if (packet instanceof Message) {
-			Console.info((String) packet.getEntry("MESSAGE"));
+			
+			String msg = (String) packet.getEntry("MESSAGE");
+			String parts[] = msg.split(";");
+			Console.info(msg);
+			
+			/*
+			 * player tries to something
+			 */
+			if (msg.startsWith("buy;")) {
+				Shop.buy(client, PlayerMaster.getPlayer(client.getUUID()).getData(), Integer.parseInt(parts[1]));
+			}
+			
 		}
 		
 	}
