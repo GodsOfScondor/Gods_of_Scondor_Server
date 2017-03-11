@@ -85,12 +85,12 @@ public class PlayerData {
 	
 	public void editMoney(int money) {
 		this.money+=money;
-		Database.execute("UPDATE GOS_PLAYER SET MONEY="+this.money+" WHERE '"+id+"'");
+		Database.execute("UPDATE GOS_PLAYER SET MONEY="+this.money+" WHERE ID='"+id+"'");
 	}
 	
 	public void setMoney(int money) {
 		this.money=money;
-		Database.execute("UPDATE GOS_PLAYER SET MONEY="+this.money+" WHERE '"+id+"'");
+		Database.execute("UPDATE GOS_PLAYER SET MONEY="+this.money+" WHERE ID='"+id+"'");
 	}
 	
 	public int getELO() {
@@ -117,22 +117,22 @@ public class PlayerData {
 	
 	public void incWins() {
 		this.wins++;
-		Database.execute("UPDATE GOS_PLAYER SET WINS="+this.wins+" WHERE '"+id+"'");
+		Database.execute("UPDATE GOS_PLAYER SET WINS="+this.wins+" WHERE ID='"+id+"'");
 	}
 	
 	public void resetWins() {
 		this.wins=0;
-		Database.execute("UPDATE GOS_PLAYER SET WINS="+this.wins+" WHERE '"+id+"'");
+		Database.execute("UPDATE GOS_PLAYER SET WINS="+this.wins+" WHERE ID='"+id+"'");
 	}
 	
 	public void incLoses() {
 		this.loses++;
-		Database.execute("UPDATE GOS_PLAYER SET LOSES="+this.loses+" WHERE '"+id+"'");
+		Database.execute("UPDATE GOS_PLAYER SET LOSES="+this.loses+" WHERE ID='"+id+"'");
 	}
 	
 	public void resetLoses() {
 		this.loses=0;
-		Database.execute("UPDATE GOS_PLAYER SET LOSES="+this.loses+" WHERE '"+id+"'");
+		Database.execute("UPDATE GOS_PLAYER SET LOSES="+this.loses+" WHERE ID='"+id+"'");
 	}
 	
 	public DeckData getDeck(int id) {
@@ -156,6 +156,11 @@ public class PlayerData {
 	 */
 	public Cards getCards() {
 		return cards;
+	}
+
+	public void reload() {
+		decks = DeckLoader.getDecks(id);
+		cards = new Cards(id);
 	}
 	
 }

@@ -19,6 +19,8 @@ import java.util.List;
 
 import scondor.Database;
 import scondor.god.GodLoader;
+import scondor.player.Player;
+import scondor.player.PlayerMaster;
 
 public class DeckLoader {
 	
@@ -85,17 +87,35 @@ public class DeckLoader {
 	
 	/**
 	 * 
+	 * delete a deck and claims it to specific player
+	 * 
+	 */
+	public static int deleteDeck(int deck_id) {
+		
+		// target source file
+		File src = new File("data/decks/D"+deck_id+".deck");
+		
+		// deck does not exist
+		if (!src.exists()) return -1;
+		
+		// delete file
+		if (!src.delete()) return -2;
+		
+		// delete from DB
+		Database.execute("DELETE FROM `GOS_DECKS` WHERE DECK_ID='"+deck_id+"'");
+		
+		return 1;
+		
+	}
+	
+	/**
+	 * 
 	 * clones a deck and claims it to specific player
 	 * 
 	 */
 	public static int cloneDeck(int deck_id, int player_id, String new_name) {
 		
 		try {
-			/**
-			 * 
-			 * TODO REWORK CODE!!!!!!!!!!
-			 * 
-			 */
 			
 			// target source file
 			File src = new File("data/decks/D"+deck_id+".deck");
@@ -105,7 +125,7 @@ public class DeckLoader {
 			
 			// generate id
 			int id = -1;
-			ResultSet max_id = Database.query("SELECT MAX(ID) FROM GOS_DECKS LIMIT 1");
+			ResultSet max_id = Database.query("SELECT MAX(DECK_ID) AS ID FROM GOS_DECKS LIMIT 1");
 			while(max_id.next()) id = max_id.getInt("ID");
 			id++;
 			
@@ -114,10 +134,17 @@ public class DeckLoader {
 			
 			// create new file and database insert
 			File dst = new File("data/decks/D"+id+".deck");
-			Database.execute("INSERT INTO GOS_DECKS ('DECK_ID', 'ID', 'NAME)' values (NULL, )");
+			Database.execute("INSERT INTO `GOS_DECKS`(`DECK_ID`, `ID`, `NAME`) VALUES ('"+id+"','"+player_id+"','"+new_name+"')");
 			
 			// copy file
 			Files.copy(src.toPath(), dst.toPath(), StandardCopyOption.REPLACE_EXISTING);
+			
+			// load new file
+			load(dst);
+			
+			// reload player data
+			Player player = PlayerMaster.getPlayer(player_id);
+			if (player!=null) player.getData().reload();
 			
 			// return new deck
 			return id;
@@ -127,7 +154,7 @@ public class DeckLoader {
 			e.printStackTrace();
 		}
 		
-		return -1;
+		return -3;
 		
 	}
 	

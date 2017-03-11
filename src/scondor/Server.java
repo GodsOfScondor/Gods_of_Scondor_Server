@@ -20,7 +20,7 @@ public class Server extends ServerEventListener {
 	@Override
 	protected void clientDisconnected(ClientModel client) {
 		Console.info(client.getUUID() + " has disconnected!");
-		PlayerMaster.remove(PlayerMaster.getPlayer(client.getUUID()));
+		PlayerMaster.remove(PlayerMaster.getPlayerUUID(client.getUUID()));
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class Server extends ServerEventListener {
 		/*
 		 * ignore if player is not in list
 		 */
-		if (PlayerMaster.getPlayer(client.getUUID())==null) return;
+		if (PlayerMaster.getPlayerUUID(client.getUUID())==null) return;
 		
 		/*
 		 * player registers to server
@@ -83,7 +83,14 @@ public class Server extends ServerEventListener {
 			 * player tries to something
 			 */
 			if (msg.startsWith("buy;")) {
-				Shop.buy(client, PlayerMaster.getPlayer(client.getUUID()).getData(), Integer.parseInt(parts[1]));
+				Shop.buy(client, PlayerMaster.getPlayerUUID(client.getUUID()).getData(), Integer.parseInt(parts[1]));
+			}
+			
+			/*
+			 * player tries to get a starter deck
+			 */
+			else if (msg.startsWith("starter;")) {
+				Shop.buy(client, PlayerMaster.getPlayerUUID(client.getUUID()).getData(), Integer.parseInt(parts[1]));
 			}
 			
 		}

@@ -20,8 +20,13 @@ public class PlayerMaster {
 		return null;
 	}
 	
-	public static Player getPlayer(int uuid) {
+	public static Player getPlayerUUID(int uuid) {
 		for (Player player : players) if (player.getClient().getUUID()==uuid) return player;
+		return null;
+	}
+	
+	public static Player getPlayer(int id) {
+		for (Player player : players) if (player.getData().getPlayerID()==id) return player;
 		return null;
 	}
 
