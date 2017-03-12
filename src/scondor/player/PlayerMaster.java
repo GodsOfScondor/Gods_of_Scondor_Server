@@ -30,6 +30,10 @@ public class PlayerMaster {
 		return null;
 	}
 
+	public static void save(PlayerData data) {
+		data.getCards().save();
+	}
+	
 	public static void saveAll() {
 		for (Player player : players) {
 			player.getData().getCards().save();

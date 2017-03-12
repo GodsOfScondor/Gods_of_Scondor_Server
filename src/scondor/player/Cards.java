@@ -13,6 +13,10 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+import scondor.deck.card.CardData;
+import scondor.deck.card.CardLoader;
+import scondor.packets.CardList;
+
 public class Cards {
 	
 	private List<Integer> cards = new ArrayList<>();
@@ -103,6 +107,15 @@ public class Cards {
 	
 	public List<Integer> getCards() {
 		return cards;
+	}
+	
+	
+	public CardList generateCardList() {
+		List<CardData> c = new ArrayList<>();
+		
+		for (int card : cards) c.add(CardLoader.getCardData(card));
+		
+		return new CardList(c, "avaible cards");
 	}
 	
 }

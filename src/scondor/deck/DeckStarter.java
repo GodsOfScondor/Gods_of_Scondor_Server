@@ -20,9 +20,13 @@ public class DeckStarter {
 		 */
 		if (data.getCards().getCards().size()==0) {
 			
+			System.out.println("here");
 			List<DeckData> starter_decks = DeckLoader.getDecks(1);
 			for (DeckData deckdata : starter_decks) {
 				if (deckdata.getID()==deck) {
+					System.out.println("here");
+					for (int card : deckdata.getCards()) data.getCards().add(card);
+					PlayerMaster.save(data);
 					DeckLoader.cloneDeck(deckdata.getID(), data.getPlayerID(), "Starterdeck");
 				}
 			}

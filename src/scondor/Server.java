@@ -1,5 +1,6 @@
 package scondor;
 
+import scondor.deck.DeckStarter;
 import scondor.gnet.packet.Packet;
 import scondor.gnet.server.ClientModel;
 import scondor.gnet.server.ServerEventListener;
@@ -7,6 +8,7 @@ import scondor.licenses.LicenseChecker;
 import scondor.packets.Authentication;
 import scondor.packets.Message;
 import scondor.packets.Verification;
+import scondor.player.Player;
 import scondor.player.PlayerMaster;
 import scondor.player.Shop;
 
@@ -41,6 +43,8 @@ public class Server extends ServerEventListener {
 	@Override
 	protected void packetReceived(ClientModel client, Packet packet) {
 		
+		Player player = PlayerMaster.getPlayerUUID(client.getUUID());
+		
 		/*
 		 * player logs into server
 		 */
@@ -68,7 +72,7 @@ public class Server extends ServerEventListener {
 		/*
 		 * ignore if player is not in list
 		 */
-		if (PlayerMaster.getPlayerUUID(client.getUUID())==null) return;
+		if (player==null) return;
 		
 		/*
 		 * player registers to server
@@ -83,14 +87,28 @@ public class Server extends ServerEventListener {
 			 * player tries to something
 			 */
 			if (msg.startsWith("buy;")) {
-				Shop.buy(client, PlayerMaster.getPlayerUUID(client.getUUID()).getData(), Integer.parseInt(parts[1]));
+				Shop.buy(client, player.getData(), Integer.parseInt(parts[1]));
 			}
 			
 			/*
 			 * player tries to get a starter deck
 			 */
 			else if (msg.startsWith("starter;")) {
-				Shop.buy(client, PlayerMaster.getPlayerUUID(client.getUUID()).getData(), Integer.parseInt(parts[1]));
+				DeckStarter.give(client, Integer.parseInt(parts[1]));
+			}
+			
+			/*
+			 * player tries to request data
+			 */
+			else if (msg.startsWith("request;")) {
+				System.out.println(1);
+				/*
+				 * player tries to get a list of his/her cards
+				 */
+				if (parts[1].equalsIgnoreCase("cardlist")) {
+					System.out.println(2);
+					client.sendPacket(player.getData().getCards().generateCardList());
+				}
 			}
 			
 		}
