@@ -117,5 +117,10 @@ public class Cards {
 		
 		return new CardList(c, "avaible cards");
 	}
+
+	public void reset() {
+		cards.clear();
+		save();
+	}
 	
 }

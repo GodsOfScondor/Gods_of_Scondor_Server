@@ -2,6 +2,7 @@ package scondor.player;
 
 import java.util.List;
 
+import scondor.Console;
 import scondor.Database;
 import scondor.deck.DeckData;
 import scondor.deck.DeckLoader;
@@ -117,22 +118,22 @@ public class PlayerData {
 	
 	public void incWins() {
 		this.wins++;
-		Database.execute("UPDATE GOS_PLAYER SET WINS="+this.wins+" WHERE ID='"+id+"'");
+		Database.execute("UPDATE GOS_STATS SET WINS="+this.wins+" WHERE ID='"+id+"'");
 	}
 	
 	public void resetWins() {
 		this.wins=0;
-		Database.execute("UPDATE GOS_PLAYER SET WINS="+this.wins+" WHERE ID='"+id+"'");
+		Database.execute("UPDATE GOS_STATS SET WINS="+this.wins+" WHERE ID='"+id+"'");
 	}
 	
 	public void incLoses() {
 		this.loses++;
-		Database.execute("UPDATE GOS_PLAYER SET LOSES="+this.loses+" WHERE ID='"+id+"'");
+		Database.execute("UPDATE GOS_STATS SET LOSES="+this.loses+" WHERE ID='"+id+"'");
 	}
 	
 	public void resetLoses() {
 		this.loses=0;
-		Database.execute("UPDATE GOS_PLAYER SET LOSES="+this.loses+" WHERE ID='"+id+"'");
+		Database.execute("UPDATE GOS_STATS SET LOSES="+this.loses+" WHERE ID='"+id+"'");
 	}
 	
 	public DeckData getDeck(int id) {
@@ -161,6 +162,28 @@ public class PlayerData {
 	public void reload() {
 		decks = DeckLoader.getDecks(id);
 		cards = new Cards(id);
+	}
+
+	public void reset() {
+		// deletes all decks of a player
+		for (DeckData deck : decks) {
+			int result = DeckLoader.deleteDeck(deck.getID());
+			if (result == -1)
+				Console.error("Deck does not exist!");
+			else if (result == -2)
+				Console.error("Could not deleted deck. (ID: " + result + ")");
+			else if (result == 1)
+				Console.info("Succesfully deleted deck. (ID: " + result + ")");
+		}
+		// delete cards of a player
+		getCards().reset();
+		
+		// reset wins and loses
+		resetWins();
+		resetLoses();
+		
+		// try to reload player data
+		reload();
 	}
 	
 }
