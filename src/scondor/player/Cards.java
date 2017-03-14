@@ -110,12 +110,12 @@ public class Cards {
 	}
 	
 	
-	public CardList generateCardList() {
+	public CardList generateCardList(String params) {
 		List<CardData> c = new ArrayList<>();
 		
 		for (int card : cards) c.add(CardLoader.getCardData(card));
 		
-		return new CardList(c, "avaible cards");
+		return new CardList(c, params);
 	}
 
 	public void reset() {

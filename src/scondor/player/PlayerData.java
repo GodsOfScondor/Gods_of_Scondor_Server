@@ -6,6 +6,7 @@ import scondor.Console;
 import scondor.Database;
 import scondor.deck.DeckData;
 import scondor.deck.DeckLoader;
+import scondor.packets.DeckList;
 
 public class PlayerData {
 	
@@ -184,6 +185,12 @@ public class PlayerData {
 		
 		// try to reload player data
 		reload();
+	}
+	
+	public DeckList generateDeckList(String params) {
+		
+		return new DeckList(decks, params);
+		
 	}
 	
 }

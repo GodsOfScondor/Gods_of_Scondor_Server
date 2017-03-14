@@ -101,13 +101,14 @@ public class Server extends ServerEventListener {
 			 * player tries to request data
 			 */
 			else if (msg.startsWith("request;")) {
-				System.out.println(1);
 				/*
 				 * player tries to get a list of his/her cards
 				 */
 				if (parts[1].equalsIgnoreCase("cardlist")) {
-					System.out.println(2);
-					client.sendPacket(player.getData().getCards().generateCardList());
+					client.sendPacket(player.getData().getCards().generateCardList("avaible cards"));
+				}
+				if (parts[1].equalsIgnoreCase("decklist")) {
+					client.sendPacket(player.getData().generateDeckList("avaible cards"));
 				}
 			}
 			
