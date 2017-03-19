@@ -1,7 +1,7 @@
 package scondor.session;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -9,19 +9,30 @@ import scondor.player.Player;
 
 public class Lobby {
 	
-	// Lists zu hashmaps (deck dazua dor)
-	private static List<Player> ranked = new ArrayList<>();
-	private static List<Player> online = new ArrayList<>();
-	private static List<Player> custom = new ArrayList<>();
-	private static List<Player> players;
+	private static Map<Player, Integer> lobby = new HashMap<>();
+	private static Map<Player, Integer> ranked = new HashMap<>();
+	private static Map<Player, Integer> online = new HashMap<>();
+	private static Map<Player, Integer> custom = new HashMap<>();
+	private static Map<Player, Integer> players;
 	private static TimerTask task;
+	
+	public static void join(Player player, int deck) {
+		
+		lobby.put(player, deck);
+		
+	}
 	
 	public static void search(final Player player, final GameType type) {
 		
+		int deck = lobby.get(player);
+		lobby.remove(player);
 		players = getPlayers(type);
+		players.put(player, deck);
 		
 		if (players.size() == 0) {
-			players.add(player);
+			
+			// kana online
+			
 		} else {
 			task = new TimerTask() {
 				@Override
@@ -42,7 +53,7 @@ public class Lobby {
 		}
 	}
 	
-	private static List<Player> getPlayers(GameType type) {
+	private static Map<Player, Integer> getPlayers(GameType type) {
 		switch(type) {
 		case CUSTOM: return custom;
 		case ONLINE: return online;
@@ -63,7 +74,7 @@ public class Lobby {
 		
 		players = getPlayers(type);
 		
-		for (Player p : players) {
+		for (Player p : players.keySet()) {
 			
 			if (!p.getData().getUsername().equals(player.getData().getUsername())) {
 				
@@ -79,11 +90,8 @@ public class Lobby {
 		
 	}
 	
-	public static void searchCustom(Player p) {
-		
-	}
-	
 	public static void leaveQueue(Player p) {
+		lobby.remove(p);
 		ranked.remove(p);
 		online.remove(p);
 		custom.remove(p);
