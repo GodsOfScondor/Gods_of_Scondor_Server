@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import scondor.Console;
 import scondor.Database;
 import scondor.god.GodLoader;
 import scondor.player.Player;
@@ -127,13 +128,13 @@ public class DeckLoader {
 			int id = -1;
 			ResultSet max_id = Database.query("SELECT MAX(DECK_ID) AS ID FROM GOS_DECKS LIMIT 1");
 			while(max_id.next()) id = max_id.getInt("ID");
-			id++;
 			
 			// error at generating id
 			if (id==0) return -2;
 			
 			// create new file and database insert
 			File dst = new File("data/decks/D"+id+".deck");
+			Console.info("clone...");
 			Database.execute("INSERT INTO `GOS_DECKS`(`DECK_ID`, `ID`, `NAME`) VALUES ('"+id+"','"+player_id+"','"+new_name+"')");
 			
 			// copy file

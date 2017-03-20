@@ -11,6 +11,7 @@ import scondor.packets.Verification;
 import scondor.player.Player;
 import scondor.player.PlayerMaster;
 import scondor.player.Shop;
+import scondor.session.GameType;
 import scondor.session.Lobby;
 
 public class Server extends ServerEventListener {
@@ -102,14 +103,18 @@ public class Server extends ServerEventListener {
 			 * player tries to join/exit lobby
 			 */
 			else if (msg.startsWith("lobby;")) {
-				int deck = Integer.parseInt(parts[1]);
-				// join
-				if (deck!=-1) {
+				if (parts.length<2) return;
+				switch (parts[1]) {
+				case "deck":
+					int deck = Integer.parseInt(parts[2]);
 					Lobby.join(player, deck);
-				}
-				// exit
-				else {
+					break;
+				case "session":
+					Lobby.search(player, GameType.valueOf(parts[2].toUpperCase()));
+					break;
+				case "exit":
 					Lobby.leaveQueue(player);
+					break;
 				}
 			}
 			

@@ -30,11 +30,12 @@ public class DeckStarter {
 				}
 			}
 			
-		} else {
+		}
+		/*
+		 * user already has starter deck
+		 */
+		else {
 			
-			/*
-			 * user already has starter deck
-			 */
 			client.sendPacket(new Message(""+ALREADY_HAS_CARDS));
 			
 		}

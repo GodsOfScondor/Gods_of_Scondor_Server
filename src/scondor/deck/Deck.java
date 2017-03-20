@@ -15,13 +15,8 @@ public class Deck {
 	private List<Card<?>> cards = new ArrayList<>();
 	private God god;
 	
-	/**
-	 * 
-	 * only for game sessions
-	 * 
-	 */
-	public Deck(DeckData data, PlayerData player) {
-		this.data = data;
+	public Deck(int deck, PlayerData player) {
+		this.data = player.getDeck(deck);
 		for (int id : data.getCards()) cards.add(CardLoader.getCard(id));
 		this.god = new God(data.getGod(), player);
 	}

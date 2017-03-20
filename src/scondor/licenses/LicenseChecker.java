@@ -28,7 +28,7 @@ public class LicenseChecker {
 			if (PlayerMaster.getPlayer(username)!=null) {
 				
 				// user already logged in
-				Console.info(client.getUUID() + ": " + username + " failed to login. (user already logged in: "+username+")");
+				Console.warn(client.getUUID() + ": " + username + " failed to login. (user already logged in: "+username+")");
 				client.sendPacket(new Message("0"));
 				
 			}
