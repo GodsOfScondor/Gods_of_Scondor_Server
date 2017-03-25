@@ -100,6 +100,7 @@ public class Database {
 	 */
 	public static void execute(String command) {
 		if (isConnected()) try {
+			System.out.println(command);
 			con.createStatement().executeUpdate(command);
 		} catch (SQLException e) {
 			e.printStackTrace();

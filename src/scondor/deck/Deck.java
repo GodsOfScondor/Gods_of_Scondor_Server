@@ -15,8 +15,8 @@ public class Deck {
 	private List<Card<?>> cards = new ArrayList<>();
 	private God god;
 	
-	public Deck(int deck, PlayerData player) {
-		this.data = player.getDeck(deck);
+	public Deck(DeckData data, PlayerData player) {
+		this.data = data;
 		for (int id : data.getCards()) cards.add(CardLoader.getCard(id));
 		this.god = new God(data.getGod(), player);
 	}

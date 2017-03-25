@@ -1,11 +1,14 @@
 package scondor.session;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import scondor.Console;
+import scondor.Database;
 import scondor.deck.Deck;
 import scondor.player.Player;
 
@@ -82,12 +85,28 @@ public class Lobby {
 	 * 
 	 */
 	private static void buildSession(Player player, GameType type) {
+		
+		players = getPlayers(type);
+		
 		Player enemy = getEnemy(player, type);
 
-		Deck player_deck = new Deck(players.get(player), player.getData());
+		if (player.getData().getDecks().size()<players.get(player)
+			&& enemy.getData().getDecks().size()<players.get(enemy)) {
+			
+			leaveQueue(player);
+			leaveQueue(enemy);
+			
+			// TODO throw error to clients
+			Console.error("Invalid session!("+player.getData().getUsername()+"|"+enemy.getData().getUsername()+")");
+			
+			return;
+			
+		}
+		
+		Deck player_deck = new Deck(player.getData().getDecks().get(players.get(player)), player.getData());
 		PlayerSide player_side = new PlayerSide(player, player_deck);
 
-		Deck enemy_deck = new Deck(players.get(enemy), enemy.getData());
+		Deck enemy_deck = new Deck(enemy.getData().getDecks().get(players.get(enemy)), enemy.getData());
 		PlayerSide enemy_side = new PlayerSide(enemy, enemy_deck);
 
 		SessionMaster.createSession(player_side, enemy_side);
@@ -96,6 +115,24 @@ public class Lobby {
 		leaveQueue(enemy);
 		
 		Console.info(player.getData().getUsername() + " started game with " + enemy.getData().getUsername() + "! (" + type.toString().toUpperCase() + ")");
+	}
+	
+	/**
+	 * 
+	 * get deck id origin
+	 * 
+	 */
+	public static int getDeckIDOrigin(Player player) {
+		int min_id = -1;
+		
+		try {
+			ResultSet deck_offset = Database.query("SELECT MIN(DECK_ID) AS ID FROM GOS_DECKS WHERE ID="+player.getData().getPlayerID()+" LIMIT 1");
+			while(deck_offset.next()) min_id = deck_offset.getInt("ID");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return min_id;
 	}
 	
 	/**
