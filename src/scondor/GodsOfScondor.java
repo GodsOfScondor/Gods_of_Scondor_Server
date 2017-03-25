@@ -23,6 +23,7 @@ public class GodsOfScondor {
 		server.bind();
 		server.start();
 		server.addEventListener(new Server());
+		server.setDebugging(false);
 		
 		Database.setup();
 		

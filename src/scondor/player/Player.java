@@ -15,6 +15,10 @@ public class Player {
 	public ClientModel getClient() {
 		return client;
 	}
+	
+	public void updateClient(ClientModel client) {
+		this.client = client;
+	}
 
 	public PlayerData getData() {
 		return data;

@@ -45,8 +45,6 @@ public class Server extends ServerEventListener {
 	@Override
 	protected void packetReceived(ClientModel client, Packet packet) {
 		
-		Player player = PlayerMaster.getPlayerUUID(client.getUUID());
-		
 		/*
 		 * player logs into server
 		 */
@@ -74,6 +72,8 @@ public class Server extends ServerEventListener {
 		/*
 		 * ignore if player is not in list
 		 */
+		Player player = PlayerMaster.getPlayerUUID(client.getUUID());
+		if (player!=null) player.updateClient(client);
 		if (player==null) return;
 		
 		/*
@@ -110,7 +110,7 @@ public class Server extends ServerEventListener {
 					Lobby.join(player, deck);
 					break;
 				case "session":
-					Lobby.search(player, GameType.valueOf(parts[2].toUpperCase()));
+					Lobby.search(client, GameType.valueOf(parts[2].toUpperCase()));
 					break;
 				case "exit":
 					Lobby.leaveQueue(player);

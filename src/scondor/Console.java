@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import scondor.deck.DeckLoader;
 import scondor.deck.card.fcode.FCodeLoader;
+import scondor.licenses.LicenseChecker;
 import scondor.licenses.LicenseCreator;
 import scondor.player.PlayerData;
 import scondor.player.PlayerMaster;
@@ -49,6 +50,7 @@ public class Console {
 				info("Server-Commands:\n");
 				send("help                      | Shows all available Commands");
 				send("create_licenses_a         | Automatically generates a licenses");
+				send("createuser_a_b_c          | a: license b: username c: password");
 				send("deleteuser_n              | Deletes user with name n from database.");
 				send("clone_a_b_c               | a: deck_id, b: player_id, c:deck_name");
 				send("deletedeck_a              | a: deck_id");
@@ -98,6 +100,17 @@ public class Console {
 					error("Unknown error!");
 				else
 					info("Succesfully cloned deck. (new ID: " + result + ")");
+			}
+			// creates user
+			else if (line.startsWith("createuser_")) {
+				String license = parts[1];
+				String name = parts[2];
+				String password = parts[3];
+				
+				// TODO secure double names and license fails
+				
+				LicenseChecker.createUser(license, name, password);
+				Console.info("Succesfully created user " + name + "! ("+license+")");
 			}
 			// deletes deck
 			else if (line.startsWith("deletedeck_")) {

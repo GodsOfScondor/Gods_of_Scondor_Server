@@ -36,6 +36,7 @@ public class PlayerSide {
 		this.deck = deck;
 		this.graveyard = new ArrayList<>();
 		this.hand = new ArrayList<>();
+		this.stack = new ArrayList<>();
 		this.fieldcard = null;
 		this.attackers = new ATCard[5];
 		this.defenders = new DTCard[5];

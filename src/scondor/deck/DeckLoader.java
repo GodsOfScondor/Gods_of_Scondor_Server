@@ -128,6 +128,7 @@ public class DeckLoader {
 			int id = -1;
 			ResultSet max_id = Database.query("SELECT MAX(DECK_ID) AS ID FROM GOS_DECKS LIMIT 1");
 			while(max_id.next()) id = max_id.getInt("ID");
+			id++;
 			
 			// error at generating id
 			if (id==0) return -2;
