@@ -2,6 +2,7 @@ package scondor.deck.card;
 
 import scondor.deck.card.fcode.CompileData;
 import scondor.deck.card.fcode.FCode;
+import scondor.deck.card.fcode.Vars;
 
 public abstract class Card<CARDDATA extends CardData> implements Compilable {
 
@@ -13,11 +14,16 @@ public abstract class Card<CARDDATA extends CardData> implements Compilable {
 		this.fcode = fcode;
 	}
 	
-	@SuppressWarnings("unchecked")
-	public Card<CARDDATA> cloneCard() {
-		try { return (Card<CARDDATA>) this.clone(); } 
-		catch (CloneNotSupportedException e) { e.printStackTrace(); }
-		return null;
+	public Card<?> cloneCard() {
+		return new Card<CardData>(data.cloneCard(), fcode) {
+
+			@Override
+			public void compile(Vars vars, String cmd, CompileData data) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		};
 	}
 
 	public CARDDATA getData() {

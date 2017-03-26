@@ -37,9 +37,11 @@ public class SessionMaster {
 				break;
 			}
 		}
-		if (remove!=null) sessions.remove(remove);
-		if (remove.getPlayer().getClient().getUUID()!=uuid) remove.getSession().getPlayer().send(new Message("fight;exit"));
-		if (remove.getEnemy().getClient().getUUID()!=uuid) remove.getSession().getEnemy().send(new Message("fight;exit"));
+		if (remove!=null) {
+			sessions.remove(remove);
+			if (remove.getPlayer().getClient().getUUID()!=uuid) remove.getSession().getPlayer().send(new Message("fight;exit"));
+			if (remove.getEnemy().getClient().getUUID()!=uuid) remove.getSession().getEnemy().send(new Message("fight;exit"));
+		}
 	}
 	
 }
