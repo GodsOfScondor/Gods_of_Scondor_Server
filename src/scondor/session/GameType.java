@@ -1,6 +1,8 @@
 package scondor.session;
 
-public enum GameType {
+import java.io.Serializable;
+
+public enum GameType implements Serializable {
 	
 	RANKED,
 	ONLINE,

@@ -14,17 +14,20 @@ public class SessionMaster {
 	}
 	
 	/*
-	 * TODO MAKE SESSION CREATOR
+	 * sends player and enemy init informations
 	 */
 	protected static void createSession(PlayerSide ps1, PlayerSide ps2, GameType type) {
 		Session session = new Session(0,ps1, ps2);
-		ps1.getPlayer().getClient().sendPacket(new Message("fight;" + type.toString().toLowerCase() + ";PS1;" + ps2.getPlayer().getData().getUsername()));
-		ps2.getPlayer().getClient().sendPacket(new Message("fight;" + type.toString().toLowerCase() + ";PS2;" + ps1.getPlayer().getData().getUsername()));
-		ps1.getPlayer().getClient().sendPacket((session.createState("start state")));
-		ps2.getPlayer().getClient().sendPacket((session.createState("start state")));
+		ps1.send(new Message("fight;start;" + type.toString().toLowerCase() + ";" + ps2.getPlayer().getData().getUsername()));
+		ps2.send(new Message("fight;start;" + type.toString().toLowerCase() + ";" + ps1.getPlayer().getData().getUsername()));
+		ps1.send((session.createState("start state")));
+		ps2.send((session.createState("start state")));
 		sessions.add(new SessionHistory(session, type));
 	}
 	
+	/*
+	 * closes a session
+	 */
 	public static void closeSession(int uuid) {
 		SessionHistory remove = null;
 		for (SessionHistory session : sessions) {
@@ -35,8 +38,8 @@ public class SessionMaster {
 			}
 		}
 		if (remove!=null) sessions.remove(remove);
-		remove.getSession().getPlayer().getPlayer().getClient().sendPacket(new Message("fight;exit"));
-		remove.getSession().getEnemy().getPlayer().getClient().sendPacket(new Message("fight;exit"));
+		if (remove.getPlayer().getClient().getUUID()!=uuid) remove.getSession().getPlayer().send(new Message("fight;exit"));
+		if (remove.getEnemy().getClient().getUUID()!=uuid) remove.getSession().getEnemy().send(new Message("fight;exit"));
 	}
 	
 }

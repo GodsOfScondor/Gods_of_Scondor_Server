@@ -8,6 +8,7 @@ import scondor.deck.card.Card;
 import scondor.deck.card.fieldcard.FieldCard;
 import scondor.deck.card.troops.ATCard;
 import scondor.deck.card.troops.DTCard;
+import scondor.gnet.packet.Packet;
 import scondor.god.GodData;
 import scondor.player.Player;
 
@@ -42,7 +43,11 @@ public class PlayerSide {
 		this.defenders = new DTCard[5];
 		this.goddata = deck.getGod().getData();
 	}
-
+	
+	public void send(Packet packet) {
+		player.getClient().sendPacket(packet);
+	}
+	
 	/**
 	 * raw data only!
 	 */

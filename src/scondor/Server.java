@@ -13,6 +13,7 @@ import scondor.player.PlayerMaster;
 import scondor.player.Shop;
 import scondor.session.GameType;
 import scondor.session.Lobby;
+import scondor.session.SessionMaster;
 
 public class Server extends ServerEventListener {
 
@@ -24,6 +25,7 @@ public class Server extends ServerEventListener {
 	@Override
 	protected void clientDisconnected(ClientModel client) {
 		Console.info(client.getUUID() + " has disconnected!");
+		SessionMaster.closeSession(client.getUUID());
 		PlayerMaster.remove(PlayerMaster.getPlayerUUID(client.getUUID()));
 	}
 

@@ -3,6 +3,8 @@ package scondor.session;
 import java.util.ArrayList;
 import java.util.List;
 
+import scondor.player.Player;
+
 public class SessionHistory {
 	
 	private static int count = 0;
@@ -29,6 +31,14 @@ public class SessionHistory {
 	
 	public Session getSession() {
 		return current;
+	}
+	
+	public Player getPlayer() {
+		return current.getPlayer().getPlayer();
+	}
+	
+	public Player getEnemy() {
+		return current.getEnemy().getPlayer();
 	}
 	
 	public GameType getGameType() {
