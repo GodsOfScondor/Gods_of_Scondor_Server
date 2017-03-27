@@ -7,6 +7,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
 
+import scondor.CMDTool;
 import scondor.gnet.packet.Packet;
 
 public class ClientModel implements Runnable {
@@ -55,10 +56,8 @@ public class ClientModel implements Runnable {
 							server.recievedPackets++;
 							server.getServerEventListener().packetReceived(
 									this, p);
-							server.debug("Incoming packet ("
-									+ p.getPacketName() + ", "
-									+ p.getAllottedSlots() + ") from client: "
-									+ uuid);
+							server.debug(CMDTool.GNET + "<----  ["+uuid+"] ("
+									+ p.getPacketName() + ")");
 							continue;
 						}
 					} else {
@@ -116,8 +115,8 @@ public class ClientModel implements Runnable {
 			} catch (final IOException e1) {
 				e1.printStackTrace();
 			}
-			server.debug("A client [" + uuid + "] has disconnected! (online: "
-					+ server.onlineClients + ")");
+			server.debug(CMDTool.GNET + "<[-]> [" + uuid
+					+ "] (" + server.onlineClients + ")");
 			server.getServerEventListener().clientDisconnected(this);
 
 		}
@@ -129,9 +128,8 @@ public class ClientModel implements Runnable {
 			try {
 				oos.writeObject(packet);
 				oos.flush();
-				server.debug("Packet (" + packet.getPacketName() + ", "
-						+ packet.getAllottedSlots() + ") sent to client: "
-						+ uuid);
+				server.debug(CMDTool.GNET + "---->  ["+uuid+"] ("
+						+ packet.getPacketName() + ")");
 				server.sentPackets++;
 			} catch (final IOException e) {
 				// TODO Auto-generated catch block

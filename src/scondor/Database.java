@@ -100,7 +100,7 @@ public class Database {
 	 */
 	public static void execute(String command) {
 		if (isConnected()) try {
-			System.out.println(command);
+			System.out.println(CMDTool.SQL + command);
 			con.createStatement().executeUpdate(command);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -113,8 +113,8 @@ public class Database {
 	 * 
 	 */
 	public static ResultSet query(String command) {
-		if (isConnected())
-		try {
+		if (isConnected()) try {
+			System.out.println(CMDTool.SQL + command);
 			return con.createStatement().executeQuery(command);
 		} catch (SQLException e) {
 			e.printStackTrace();

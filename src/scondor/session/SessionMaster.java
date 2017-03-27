@@ -3,6 +3,7 @@ package scondor.session;
 import java.util.ArrayList;
 import java.util.List;
 
+import scondor.Console;
 import scondor.packets.Message;
 
 public class SessionMaster {
@@ -38,6 +39,7 @@ public class SessionMaster {
 			}
 		}
 		if (remove!=null) {
+			Console.warn("Session closed suddenly. ("+remove.getPlayer().getData().getUsername()+"|"+remove.getEnemy().getData().getUsername()+"|"+remove.getID()+"|"+remove.getGameType().toString().toUpperCase()+")");
 			sessions.remove(remove);
 			if (remove.getPlayer().getClient().getUUID()!=uuid) remove.getSession().getPlayer().send(new Message("fight;exit"));
 			if (remove.getEnemy().getClient().getUUID()!=uuid) remove.getSession().getEnemy().send(new Message("fight;exit"));

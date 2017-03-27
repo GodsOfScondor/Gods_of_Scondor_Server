@@ -18,5 +18,7 @@ public class CMDTool {
 	public static final String INFO = RESET+GREEN+"[INFO] " + RESET;
 	public static final String ERROR = RESET+RED+"[ERROR] " + RESET;
 	public static final String WARN = RESET+YELLOW+"[WARN] " + RESET;
+	public static final String GNET = RESET+BLUE+"[Server] " + RESET;
+	public static final String SQL = RESET+CYAN+"[SQL] " + RESET;
 	
 }

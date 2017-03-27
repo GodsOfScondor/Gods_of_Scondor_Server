@@ -8,6 +8,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
+import scondor.CMDTool;
 import scondor.gnet.packet.ClientShutdownPacket;
 import scondor.gnet.packet.Packet;
 import scondor.gnet.util.UIDGenerator;
@@ -175,8 +176,8 @@ public class GNetServer {
 			onlineClients++;
 
 			// debug some info.
-			debug("A client [" + clientModel.uuid
-					+ "] has connected! (online: " + onlineClients + ")");
+			debug(CMDTool.GNET + "<[+]> [" + clientModel.uuid
+					+ "] (" + onlineClients + ")");
 
 			// notify user about clientConnected.
 			serverEventListener.clientConnected(clientModel);
