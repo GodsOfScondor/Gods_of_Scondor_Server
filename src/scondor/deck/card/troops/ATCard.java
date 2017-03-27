@@ -40,4 +40,9 @@ public class ATCard extends Card<TroopCardData> {
 		
 	}
 
+	@Override
+	public Card<?> cloneCard() {
+		return new ATCard((TroopCardData) data.cloneCard(), fcode);
+	}
+
 }

@@ -18,4 +18,9 @@ public class DTCard extends Card<TroopCardData> {
 		
 	}
 
+	@Override
+	public Card<?> cloneCard() {
+		return new DTCard((TroopCardData) data.cloneCard(), fcode);
+	}
+
 }

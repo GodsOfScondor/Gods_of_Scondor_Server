@@ -15,5 +15,10 @@ public class FieldCard extends Card<FieldCardData> {
 	public void compile(Vars vars, String cmd, CompileData data) {
 		
 	}
+
+	@Override
+	public Card<?> cloneCard() {
+		return new FieldCard((FieldCardData) data.cloneCard(), fcode);
+	}
 	
 }
