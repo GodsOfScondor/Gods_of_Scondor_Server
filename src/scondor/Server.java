@@ -10,10 +10,10 @@ import scondor.packets.Message;
 import scondor.packets.Verification;
 import scondor.player.Player;
 import scondor.player.PlayerMaster;
-import scondor.player.Shop;
 import scondor.session.GameType;
 import scondor.session.Lobby;
 import scondor.session.SessionMaster;
+import scondor.shop.Shop;
 
 public class Server extends ServerEventListener {
 
@@ -91,7 +91,7 @@ public class Server extends ServerEventListener {
 			 * player tries to something
 			 */
 			if (msg.startsWith("buy;")) {
-				Shop.buy(client, player.getData(), Integer.parseInt(parts[1]));
+				Shop.buy(client, player.getData(), parts[1]);
 			}
 			
 			/*
