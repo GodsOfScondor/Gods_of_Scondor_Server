@@ -3,12 +3,14 @@ package scondor.session;
 import java.util.ArrayList;
 import java.util.List;
 
+import scondor.packets.State;
 import scondor.player.Player;
 
 public class SessionHistory {
 	
 	private static int count = 0;
 	private int id;
+	private int updates;
 	private List<Session> old_states = new ArrayList<>();
 	private Session current;
 	private GameType type;
@@ -25,8 +27,16 @@ public class SessionHistory {
 	}
 	
 	public void update() {
+		
+		State state1 = current.createState("update;"+updates, GameState.PLAYER1);
+		State state2 = current.createState("update;"+updates, GameState.PLAYER2);
+		
+		current.getMaster().send(state1);
+		current.getSlave().send(state2);
+		
 		current.switchPlayers();
 		old_states.add(current.cloneSession());
+		updates++;
 	}
 	
 	public Session getSession() {

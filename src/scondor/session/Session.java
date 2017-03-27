@@ -7,6 +7,7 @@ import scondor.deck.card.Card;
 import scondor.deck.card.CardData;
 import scondor.deck.card.fieldcard.FieldCardData;
 import scondor.deck.card.troops.TroopCardData;
+import scondor.mana.ManaType;
 import scondor.packets.State;
 
 public class Session {
@@ -14,6 +15,8 @@ public class Session {
 	private int id;
 	private PlayerSide p1, p2;
 	private GameState state;
+	
+	private static final TroopCardData DUMMY = new TroopCardData(-1, "", "", 0, ManaType.NONE, 0, 0, 0);
 	
 	public Session(int id, PlayerSide p1, PlayerSide p2) {
 		this.id = id;
@@ -40,24 +43,33 @@ public class Session {
 		else return p1;
 	}
 	
+	public PlayerSide getMaster() {
+		return p1;
+	}
+	
+	public PlayerSide getSlave() {
+		return p2;
+	}
+	
 	public Session cloneSession() {
 		return new Session(id+1, p1, p2);
 	}
 	
-	public State createState(String params) {
-		return new State(generate(p1), generate(p2), params);
+	public State createState(String params, GameState state) {
+		return new State(generate(p1, state==GameState.PLAYER2), generate(p2, state==GameState.PLAYER1), params);
 	}
 	
-	private PlayerSideData generate(PlayerSide player) {
+	private PlayerSideData generate(PlayerSide player, boolean hide) {
 		
 		List<CardData> hand = new ArrayList<>();
-		for (Card<?> card : player.getHand()) hand.add(card.getData());
+		if (!hide) for (Card<?> card : player.getHand()) hand.add(card.getData());
+		else for (int n=0;n<player.getHand().size();n++) hand.add(DUMMY);
 		
 		List<CardData> stack = new ArrayList<>();
-		for (Card<?> card : player.getStack()) stack.add(card.getData());
+		if (!hide) for (Card<?> card : player.getStack()) stack.add(card.getData());
 		
 		List<CardData> graveyard = new ArrayList<>();
-		for (Card<?> card : player.getGraveyard()) graveyard.add(card.getData());
+		if (!hide) for (Card<?> card : player.getGraveyard()) graveyard.add(card.getData());
 		
 		TroopCardData[] attackers = new TroopCardData[player.getAttackers().length];
 		for (int n = 0;n<player.getAttackers().length;n++) {

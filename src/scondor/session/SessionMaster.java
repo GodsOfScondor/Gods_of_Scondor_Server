@@ -21,8 +21,8 @@ public class SessionMaster {
 		Session session = new Session(0,ps1, ps2);
 		ps1.send(new Message("fight;start;" + type.toString().toLowerCase() + ";" + ps2.getPlayer().getData().getUsername()));
 		ps2.send(new Message("fight;start;" + type.toString().toLowerCase() + ";" + ps1.getPlayer().getData().getUsername()));
-		ps1.send((session.createState("start state")));
-		ps2.send((session.createState("start state")));
+		ps1.send((session.createState("start state", GameState.PLAYER1)));
+		ps2.send((session.createState("start state", GameState.PLAYER2)));
 		sessions.add(new SessionHistory(session, type));
 	}
 	
