@@ -14,7 +14,7 @@ public class Shop {
 		int cost = getCosts(PackType.valueOf(stuff.toUpperCase()));
 		
 		if (data.getMoney()>=cost) {
-			data.editMoney(-cost);
+			data.editMoney(-cost, client);
 			client.sendPacket(new Message(""+SHOP_SUCCES));
 			return true;
 		} else {

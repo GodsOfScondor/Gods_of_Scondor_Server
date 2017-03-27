@@ -6,7 +6,9 @@ import scondor.Console;
 import scondor.Database;
 import scondor.deck.DeckData;
 import scondor.deck.DeckLoader;
+import scondor.gnet.server.ClientModel;
 import scondor.packets.DeckList;
+import scondor.packets.Message;
 
 public class PlayerData {
 	
@@ -85,14 +87,16 @@ public class PlayerData {
 		return money;
 	}
 	
-	public void editMoney(int money) {
+	public void editMoney(int money, ClientModel model) {
 		this.money+=money;
 		Database.execute("UPDATE GOS_PLAYER SET MONEY="+this.money+" WHERE ID='"+id+"'");
+		model.sendPacket(new Message("money;"+money));
 	}
 	
-	public void setMoney(int money) {
+	public void setMoney(int money, ClientModel model) {
 		this.money=money;
 		Database.execute("UPDATE GOS_PLAYER SET MONEY="+this.money+" WHERE ID='"+id+"'");
+		model.sendPacket(new Message("money;"+money));
 	}
 	
 	public int getELO() {

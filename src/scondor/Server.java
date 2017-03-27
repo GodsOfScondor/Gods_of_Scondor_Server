@@ -102,6 +102,13 @@ public class Server extends ServerEventListener {
 			}
 			
 			/*
+			 * player tries to get a starter deck
+			 */
+			else if (msg.startsWith("starter;")) {
+				DeckStarter.give(client, Integer.parseInt(parts[1]));
+			}
+			
+			/*
 			 * player tries to join/exit lobby
 			 */
 			else if (msg.startsWith("lobby;")) {
@@ -118,6 +125,13 @@ public class Server extends ServerEventListener {
 					Lobby.leaveQueue(player);
 					break;
 				}
+			}
+			
+			/*
+			 * player requests his/her money
+			 */
+			else if (msg.startsWith("money")){
+				client.sendPacket(new Message("money;"+player.getData().getMoney()));
 			}
 			
 			/*
