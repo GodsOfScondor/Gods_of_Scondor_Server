@@ -12,6 +12,7 @@ import scondor.player.Player;
 import scondor.player.PlayerMaster;
 import scondor.session.GameType;
 import scondor.session.Lobby;
+import scondor.session.SessionController;
 import scondor.session.SessionMaster;
 import scondor.shop.Shop;
 
@@ -106,6 +107,49 @@ public class Server extends ServerEventListener {
 			 */
 			else if (msg.startsWith("starter;")) {
 				DeckStarter.give(client, Integer.parseInt(parts[1]));
+			}
+			
+			/*
+			 * player tries to make a fight action
+			 */
+			else if (msg.startsWith("fight;")) {
+				
+				if (parts.length<3) {
+					Console.error("Too less agruments. ("+msg+")");
+					return;
+				}
+				
+				if (parts[1].equalsIgnoreCase("action")) {
+					SessionController controller = SessionMaster.getSession(player.getData().getUsername());
+					
+					if (controller!=null) {
+						
+						if (controller.getPlayer().getData().getUsername().equals(player.getData().getUsername())) {
+							
+							/*
+							 * player triggers action
+							 */
+							
+							if (parts.length==3) {
+								
+								/*
+								 * switches players
+								 */
+								if (parts[3].equalsIgnoreCase("switch")) {
+									controller.update("player switch");
+								}
+								
+							}
+							
+						} else {
+							Console.error("Enemy is on turn! ("+msg+")");
+						}
+						
+					} else {
+						Console.error("No session found! ("+msg+")");
+					}
+					
+				}
 			}
 			
 			/*

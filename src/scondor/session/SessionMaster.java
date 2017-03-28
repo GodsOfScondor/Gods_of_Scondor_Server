@@ -8,7 +8,7 @@ import scondor.packets.Message;
 
 public class SessionMaster {
 	
-	private static List<SessionHistory> sessions = new ArrayList<>();
+	private static List<SessionController> sessions = new ArrayList<>();
 	
 	public static void init() {
 		
@@ -19,19 +19,23 @@ public class SessionMaster {
 	 */
 	protected static void createSession(PlayerSide ps1, PlayerSide ps2, GameType type) {
 		Session session = new Session(0,ps1, ps2);
+		
 		ps1.send(new Message("fight;start;" + type.toString().toLowerCase() + ";" + ps2.getPlayer().getData().getUsername()));
 		ps2.send(new Message("fight;start;" + type.toString().toLowerCase() + ";" + ps1.getPlayer().getData().getUsername()));
-		ps1.send((session.createState("start state", GameState.PLAYER1)));
-		ps2.send((session.createState("start state", GameState.PLAYER2)));
-		sessions.add(new SessionHistory(session, type));
+		
+		SessionController controller = new SessionController(session, type);
+		
+		sessions.add(controller);
+		
+		controller.send("start state");
 	}
 	
 	/*
 	 * closes a session
 	 */
 	public static void closeSession(int uuid) {
-		SessionHistory remove = null;
-		for (SessionHistory session : sessions) {
+		SessionController remove = null;
+		for (SessionController session : sessions) {
 			if (session.getSession().getPlayer().getPlayer().getClient().getUUID()==uuid
 					|| session.getSession().getEnemy().getPlayer().getClient().getUUID()==uuid) {
 				remove = session;
@@ -44,6 +48,18 @@ public class SessionMaster {
 			if (remove.getPlayer().getClient().getUUID()!=uuid) remove.getSession().getPlayer().send(new Message("fight;exit"));
 			if (remove.getEnemy().getClient().getUUID()!=uuid) remove.getSession().getEnemy().send(new Message("fight;exit"));
 		}
+	}
+
+	public static SessionController getSession(String player) {
+		for (SessionController controller : sessions) {
+			if (controller.getPlayer().getData().getUsername().equals(player)
+					|| controller.getEnemy().getData().getUsername().equals(player)) {
+				
+				return controller;
+				
+			}
+		}
+		return null;
 	}
 	
 }

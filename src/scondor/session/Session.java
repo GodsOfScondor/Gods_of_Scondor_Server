@@ -8,6 +8,7 @@ import scondor.deck.card.CardData;
 import scondor.deck.card.fieldcard.FieldCardData;
 import scondor.deck.card.troops.TroopCardData;
 import scondor.mana.ManaType;
+import scondor.packets.Message;
 import scondor.packets.State;
 
 public class Session {
@@ -31,6 +32,8 @@ public class Session {
 	
 	public void switchPlayers() {
 		state = state == GameState.PLAYER1 ? GameState.PLAYER2 : GameState.PLAYER1;
+		getPlayer().send(new Message("fight;action;turn"));
+		getEnemy().send(new Message("fight;action;wait"));
 	}
 	
 	public PlayerSide getPlayer() {
@@ -55,8 +58,11 @@ public class Session {
 		return new Session(id+1, p1, p2);
 	}
 	
-	public State createState(String params, GameState state) {
-		return new State(generate(p1, state==GameState.PLAYER2), generate(p2, state==GameState.PLAYER1), params);
+	public State createState(String params, GameState player) {
+		return new State(
+				generate(player==GameState.PLAYER1 ? getMaster() : getSlave(), false),
+				generate(player==GameState.PLAYER2 ? getMaster() : getSlave(), true),
+				params);
 	}
 	
 	private PlayerSideData generate(PlayerSide player, boolean hide) {

@@ -69,7 +69,7 @@ public class Database {
 				con = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database, username, password);
 			} catch (SQLException e) {
 				e.printStackTrace();
-				System.out.println(CMDTool.ERROR + "Failed to connect to database!");
+				Console.error("Failed to connect to database!");
 			}
 			Console.info("Succesfully connected to database!");
 			createTable("USER", "ID INT AUTO_INCREMENT", "LICENSE VARCHAR(24)", "NAME VARCHAR(10)", "PASSWORD VARCHAR(30)", "PRIMARY KEY (ID)");

@@ -42,7 +42,12 @@ public class Lobby {
 	public static void search(ClientModel client, GameType type) {
 		
 		Player player = PlayerMaster.getPlayerUUID(client.getUUID());
-
+		
+		if (lobby.get(player) == null) {
+			Console.warn("Player has already chosen game type. (" + client.getUUID() + ")");
+			return;
+		}
+		
 		if (player == null) {
 			Console.error("Player is not online. (" + client.getUUID() + ")");
 			return;
@@ -117,7 +122,7 @@ public class Lobby {
 
 		Deck enemy_deck = new Deck(enemy.getData().getDecks().get(players.get(enemy)), enemy.getData());
 		PlayerSide enemy_side = new PlayerSide(enemy, enemy_deck);
-
+		
 		SessionMaster.createSession(player_side, enemy_side, type);
 		
 		leaveQueue(player);

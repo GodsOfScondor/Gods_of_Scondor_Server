@@ -46,7 +46,7 @@ public class TroopCardData extends CardData {
 
 	@Override
 	public CardData cloneCard() {
-		return new TroopCardData(attack, name, description, attack, mana_type, attack, live, countdown);
+		return new TroopCardData(id, name, description, attack, mana_type, attack, live, countdown);
 	}
 	
 }

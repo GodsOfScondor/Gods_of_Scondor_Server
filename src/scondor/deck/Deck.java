@@ -17,7 +17,9 @@ public class Deck {
 	
 	public Deck(DeckData data, PlayerData player) {
 		this.data = data;
-		for (int id : data.getCards()) cards.add(CardLoader.getCard(id));
+		for (int id : data.getCards()) {
+			cards.add(CardLoader.getCard(id));
+		}
 		this.god = new God(data.getGod(), player);
 	}
 
