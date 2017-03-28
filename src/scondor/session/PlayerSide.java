@@ -22,7 +22,7 @@ import scondor.player.Player;
  */
 public class PlayerSide {
 	
-	private static final int START_AMOUNT = 5;
+	private static final int START_AMOUNT = 7;
 	
 	private Player player;
 	private Deck deck;
