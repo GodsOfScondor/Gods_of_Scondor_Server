@@ -6,6 +6,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import scondor.Console;
+import scondor.event.EventMaster;
 import scondor.packets.State;
 import scondor.player.Player;
 
@@ -54,7 +55,10 @@ public class SessionController {
 		
 		send(params);
 		
+		getSession().getPlayer().attack();
 		current.switchPlayers();
+		EventMaster.triggerCardEffects(this, current.getState());
+		
 		old_states.add(current.cloneSession());
 		updates++;
 		

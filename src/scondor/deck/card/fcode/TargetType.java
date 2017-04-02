@@ -4,6 +4,7 @@ public enum TargetType {
 	
 	ATTACK,
 	DEFENSE,
-	GOD;
+	GOD,
+	CARDEFFECT;
 	
 }

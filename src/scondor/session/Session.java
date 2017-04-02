@@ -95,5 +95,9 @@ public class Session {
 		return new PlayerSideData(fielddata, hand, stack, graveyard, attackers, defenders, null /*player.getGoddata()*/);
 		
 	}
+
+	public GameState getState() {
+		return state;
+	}
 	
 }
