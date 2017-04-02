@@ -11,7 +11,7 @@ import scondor.player.Player;
 
 public class SessionController {
 	
-	private static final int ROUND_TIME = 5000;
+	private static final int ROUND_TIME = 30000;
 	private static int count = 0;
 	private int id;
 	private int updates;
@@ -61,7 +61,14 @@ public class SessionController {
 		if (!params.equalsIgnoreCase("time is out")) timer.cancel();
 		timer.schedule(generateTask(), ROUND_TIME);
 		
-		Console.info("Session updated: " + updates + "(" + current.getMaster().getPlayer().getData().getUsername());
+		Console.info("Session updated: " + updates + "(" + 
+		current.getMaster().getPlayer().getData().getUsername() + " vs " +
+		current.getSlave().getPlayer().getData().getUsername() + ")"
+		);
+	}
+	
+	public void close() {
+		timer.cancel();
 	}
 	
 	public Session getSession() {

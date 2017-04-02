@@ -23,6 +23,9 @@ public class SessionMaster {
 		ps1.send(new Message("fight;start;" + type.toString().toLowerCase() + ";" + ps2.getPlayer().getData().getUsername()));
 		ps2.send(new Message("fight;start;" + type.toString().toLowerCase() + ";" + ps1.getPlayer().getData().getUsername()));
 		
+		ps1.send(new Message("fight;action;turn"));
+		ps2.send(new Message("fight;action;wait"));
+		
 		SessionController controller = new SessionController(session, type);
 		
 		sessions.add(controller);
@@ -45,6 +48,7 @@ public class SessionMaster {
 		if (remove!=null) {
 			Console.warn("Session closed suddenly. ("+remove.getPlayer().getData().getUsername()+"|"+remove.getEnemy().getData().getUsername()+"|"+remove.getID()+"|"+remove.getGameType().toString().toUpperCase()+")");
 			sessions.remove(remove);
+			remove.close();
 			if (remove.getPlayer().getClient().getUUID()!=uuid) remove.getSession().getPlayer().send(new Message("fight;exit"));
 			if (remove.getEnemy().getClient().getUUID()!=uuid) remove.getSession().getEnemy().send(new Message("fight;exit"));
 		}

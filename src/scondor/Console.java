@@ -1,5 +1,6 @@
 package scondor;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -137,11 +138,32 @@ public class Console {
 				data.reset();
 				
 			}
+			// restarts server
+			else if (line.startsWith("restart")) {
+				execute("/home/Gods_of_Scondor/restart.sh");
+			}
+			// restarts server
+			else if (line.startsWith("stop")) {
+				execute("/home/Gods_of_Scondor/stop.sh");
+			}
 			send("");
 		}
 
 		s.close();
 
+	}
+	
+	/*
+	 * executes shell cmds
+	 */
+	private static void execute(String shellfile) {
+		try {
+			ProcessBuilder pb = new ProcessBuilder(shellfile);
+			pb.start();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -135,7 +135,7 @@ public class Server extends ServerEventListener {
 								/*
 								 * switches players
 								 */
-								if (parts[3].equalsIgnoreCase("switch")) {
+								if (parts[2].equalsIgnoreCase("switch")) {
 									controller.update("player switch");
 								}
 								
