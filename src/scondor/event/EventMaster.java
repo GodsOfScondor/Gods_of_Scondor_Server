@@ -29,5 +29,23 @@ public class EventMaster {
 		}
 		
 	}
+
+	public static void triggerATAttack() {
+		
+		// TODO
+		
+	}
+	
+	public static void triggerDTAttack() {
+		
+		// TODO
+		
+	}
+
+	public static void triggerGodAttack() {
+		
+		// TODO
+		
+	}
 	
 }

@@ -10,6 +10,7 @@ import scondor.deck.card.fieldcard.FieldCard;
 import scondor.deck.card.troops.ATCard;
 import scondor.deck.card.troops.DTCard;
 import scondor.deck.card.troops.TroopCardData;
+import scondor.event.EventMaster;
 import scondor.gnet.packet.Packet;
 import scondor.god.GodData;
 import scondor.player.Player;
@@ -165,23 +166,52 @@ public class PlayerSide {
 		
 		if (hand.contains(card)) {
 			if (card instanceof ATCard) {
-				if (attackers[slot]==null) {
-					attackers[slot] = (ATCard) card.cloneCard();
-					attackers_data[slot] = (TroopCardData) attackers[slot].getData().cloneCard();
+				if (defenders[slot]==null) {
+					defenders[slot] = (DTCard) card.cloneCard();
+					defenders_data[slot] = (TroopCardData) attackers[slot].getData().cloneCard();
 				}
 			}
 		}
 		
 	}
 	
-	public void attack() {
+	public void attack(PlayerSide enemy) {
 		
 		for (int n = 0;n<MAX_ROWS;n++) {
 			if (attackers[n]!=null) {
 				if (attackers[n].getData().getCountdown()==0) {
 					
+					/*
+					 * attack defender
+					 */
+					if (enemy.getDefenders()[n]!=null) {
+						/*
+						 * trigger troop attack events
+						 */
+						EventMaster.triggerDTAttack();
+					}
+					/*
+					 * attack attacker
+					 */
+					else if (enemy.getAttackers()[n]!=null) {
+						/*
+						 * trigger troop attack events
+						 */
+						EventMaster.triggerATAttack();
+					}
+					/*
+					 * attack god
+					 */
+					else {
+						/*
+						 * trigger troop attack events
+						 */
+						EventMaster.triggerGodAttack();
+					}
 					
 					
+					
+					attackers[n].getData().setCountdown(attackers_data[n].getCountdown());
 				}
 			}
 		}

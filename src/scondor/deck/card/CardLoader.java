@@ -37,6 +37,7 @@ public class CardLoader {
 
 	private static List<String> raw_data = new ArrayList<>();
 	private static FCode fcode;
+	private static int count;
 
 	/**
 	 * 
@@ -56,6 +57,7 @@ public class CardLoader {
 
 					if (line.startsWith("[")) {
 						id = Integer.parseInt(line.substring(1, line.length() - 1));
+						count++;
 					} else if (line.startsWith("name=")) {
 						name = (line.split("=")[1]);
 					} else if (line.startsWith("description=")) {
@@ -110,6 +112,15 @@ public class CardLoader {
 			e.printStackTrace();
 		}
 
+	}
+	
+	/**
+	 * 
+	 * get amount of available cards
+	 * 
+	 */
+	public static int getSize() {
+		return count;
 	}
 
 	/**

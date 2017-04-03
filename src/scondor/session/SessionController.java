@@ -55,7 +55,7 @@ public class SessionController {
 		
 		send(params);
 		
-		getSession().getPlayer().attack();
+		getSession().getPlayer().attack(getSession().getEnemy());
 		current.switchPlayers();
 		EventMaster.triggerCardEffects(this, current.getState());
 		
