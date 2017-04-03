@@ -51,7 +51,7 @@ public class Shop {
 			break;
 		}
 		System.out.println("Gesendetes Packet: shop;"+packType);
-		client.sendPacket(new CardList(products, "shop;" + packType)); //bekommt man auf der client wieder zurück
+		client.sendPacket(new CardList(products, "shop;" + packType));
 	}
 	
 	private static int getCosts(PackType type) {
