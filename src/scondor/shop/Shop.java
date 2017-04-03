@@ -47,10 +47,10 @@ public class Shop {
 		case "X_CLOSED":
 			for(int i = 0; i<10; i++) {
 			products.add(CardLoader.getCardData(rand.nextInt(cardAmount)));
-			client.sendPacket(new CardList(products, "")); //bekommt man auf der client wieder zurück
 			}
 			break;
 		}
+		client.sendPacket(new CardList(products, "shop;" + packType));
 	}
 	
 	private static int getCosts(PackType type) {
