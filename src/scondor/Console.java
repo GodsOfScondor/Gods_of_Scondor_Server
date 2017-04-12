@@ -87,7 +87,7 @@ public class Console {
 				ContentLoader.save();
 			}
 			// clones deck
-			else if (line.startsWith("clonedeck_")) {
+			else if (line.startsWith("clone_")) {
 				if (parts.length != 4) {
 					error("Syntax error!");
 					continue;

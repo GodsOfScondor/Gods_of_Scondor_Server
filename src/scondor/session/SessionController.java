@@ -12,7 +12,7 @@ import scondor.player.Player;
 
 public class SessionController {
 	
-	private static final int ROUND_TIME = 30000;
+	private static final int ROUND_TIME = 10000;
 	private static int count = 0;
 	private int id;
 	private int updates;
