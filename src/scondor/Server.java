@@ -189,7 +189,7 @@ public class Server extends ServerEventListener {
 					client.sendPacket(player.getData().getCards().generateCardList("avaible cards"));
 				}
 				if (parts[1].equalsIgnoreCase("decklist")) {
-					client.sendPacket(player.getData().generateDeckList("avaible cards"));
+					client.sendPacket(player.getData().generateDeckList("avaible decks"));
 				}
 			}
 			
