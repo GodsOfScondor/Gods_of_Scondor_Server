@@ -208,6 +208,7 @@ public class Lobby {
 	 * 
 	 */
 	public static void leaveQueue(Player p) {
+		if (p==null) return;
 		Console.info(p.getData().getUsername()+" has left the lobby!");
 		lobby.remove(p);
 		ranked.remove(p);
