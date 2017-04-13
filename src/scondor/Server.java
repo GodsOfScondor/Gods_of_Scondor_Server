@@ -27,7 +27,9 @@ public class Server extends ServerEventListener {
 	protected void clientDisconnected(ClientModel client) {
 		Console.info(client.getUUID() + " has disconnected!");
 		SessionMaster.closeSession(client.getUUID());
-		PlayerMaster.remove(PlayerMaster.getPlayerUUID(client.getUUID()));
+		Player player = PlayerMaster.getPlayerUUID(client.getUUID());
+		Lobby.leaveQueue(player);
+		PlayerMaster.remove(player);
 	}
 
 	@Override
