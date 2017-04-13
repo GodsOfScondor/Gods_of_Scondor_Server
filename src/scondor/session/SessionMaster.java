@@ -49,8 +49,9 @@ public class SessionMaster {
 			Console.warn("Session closed suddenly. ("+remove.getPlayer().getData().getUsername()+"|"+remove.getEnemy().getData().getUsername()+"|"+remove.getID()+"|"+remove.getGameType().toString().toUpperCase()+")");
 			sessions.remove(remove);
 			remove.close();
-			if (remove.getPlayer().getClient().getUUID()!=uuid) remove.getSession().getPlayer().send(new Message("fight;exit"));
-			if (remove.getEnemy().getClient().getUUID()!=uuid) remove.getSession().getEnemy().send(new Message("fight;exit"));
+			Message msg = new Message("fight;exit;"+EndOfGameType.QUIT.toString().toUpperCase());
+			if (remove.getPlayer().getClient().getUUID()!=uuid) remove.getSession().getPlayer().send(msg);
+			if (remove.getEnemy().getClient().getUUID()!=uuid) remove.getSession().getEnemy().send(msg);
 		}
 	}
 
