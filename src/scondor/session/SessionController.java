@@ -63,6 +63,7 @@ public class SessionController {
 		updates++;
 		
 		if (!params.equalsIgnoreCase("time is out")) timer.cancel();
+		timer = new Timer();
 		timer.schedule(generateTask(), ROUND_TIME);
 		
 		Console.info("Session updated: " + updates + "(" + 
