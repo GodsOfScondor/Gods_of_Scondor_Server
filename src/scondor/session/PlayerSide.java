@@ -9,7 +9,7 @@ import scondor.deck.card.Card;
 import scondor.deck.card.fieldcard.FieldCard;
 import scondor.deck.card.troops.ATCard;
 import scondor.deck.card.troops.DTCard;
-import scondor.deck.card.troops.TroopCardData;
+import scondor.deck.card.troops.ATCardData;
 import scondor.event.EventMaster;
 import scondor.gnet.packet.Packet;
 import scondor.god.GodData;
@@ -35,9 +35,9 @@ public class PlayerSide {
 	private List<Card<?>> hand;
 	private FieldCard fieldcard;
 	private ATCard[] attackers;
-	private TroopCardData[] attackers_data;
+	private ATCardData[] attackers_data;
 	private DTCard[] defenders;
-	private TroopCardData[] defenders_data;
+	private ATCardData[] defenders_data;
 	private GodData goddata;
 	
 	public PlayerSide(Player player, Deck deck) {
@@ -56,8 +56,8 @@ public class PlayerSide {
 		this.fieldcard = null;
 		this.attackers = new ATCard[MAX_ROWS];
 		this.defenders = new DTCard[MAX_ROWS];
-		this.attackers_data = new TroopCardData[MAX_ROWS];
-		this.defenders_data = new TroopCardData[MAX_ROWS];
+		this.attackers_data = new ATCardData[MAX_ROWS];
+		this.defenders_data = new ATCardData[MAX_ROWS];
 		this.goddata = deck.getGod().getData();
 	}
 	
@@ -155,7 +155,7 @@ public class PlayerSide {
 			if (card instanceof ATCard) {
 				if (attackers[slot]==null) {
 					attackers[slot] = (ATCard) card.cloneCard();
-					attackers_data[slot] = (TroopCardData) attackers[slot].getData().cloneCard();
+					attackers_data[slot] = (ATCardData) attackers[slot].getData().cloneCard();
 				}
 			}
 		}
@@ -168,7 +168,7 @@ public class PlayerSide {
 			if (card instanceof ATCard) {
 				if (defenders[slot]==null) {
 					defenders[slot] = (DTCard) card.cloneCard();
-					defenders_data[slot] = (TroopCardData) attackers[slot].getData().cloneCard();
+					defenders_data[slot] = (ATCardData) attackers[slot].getData().cloneCard();
 				}
 			}
 		}

@@ -13,7 +13,8 @@ import scondor.deck.card.fcode.FCode;
 import scondor.deck.card.fcode.FCodeLoader;
 import scondor.deck.card.troops.ATCard;
 import scondor.deck.card.troops.DTCard;
-import scondor.deck.card.troops.TroopCardData;
+import scondor.deck.card.troops.DTCardData;
+import scondor.deck.card.troops.ATCardData;
 import scondor.mana.ManaType;
 
 public class CardLoader {
@@ -81,7 +82,7 @@ public class CardLoader {
 							countdown = Integer.parseInt(buffer[3]);
 							fcode = FCodeLoader.getFCode(Integer.parseInt(buffer[4]));
 							
-							cards[id] = new ATCard(new TroopCardData(id, name, description, mana_cost, mana_type,
+							cards[id] = new ATCard(new ATCardData(id, name, description, mana_cost, mana_type,
 									attack, live, countdown), fcode);
 							
 						} 
@@ -94,8 +95,8 @@ public class CardLoader {
 							live = Integer.parseInt(buffer[2]);
 							fcode = FCodeLoader.getFCode(Integer.parseInt(buffer[3]));
 							
-							cards[id] = new DTCard(new TroopCardData(id, name, description, mana_cost, mana_type,
-									attack, live, countdown), fcode);
+							cards[id] = new DTCard(new DTCardData(id, name, description, mana_cost, mana_type,
+									attack, live), fcode);
 							
 						}
 
