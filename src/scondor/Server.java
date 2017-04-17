@@ -10,6 +10,7 @@ import scondor.packets.Message;
 import scondor.packets.Verification;
 import scondor.player.Player;
 import scondor.player.PlayerMaster;
+import scondor.session.EndOfGameType;
 import scondor.session.GameType;
 import scondor.session.Lobby;
 import scondor.session.SessionController;
@@ -139,6 +140,13 @@ public class Server extends ServerEventListener {
 								 */
 								if (parts[2].equalsIgnoreCase("switch")) {
 									controller.update("player switch");
+								}
+								
+								/*
+								 * player surrenders
+								 */
+								if (parts[2].equalsIgnoreCase("surrender")) {
+									controller.getEnemy().getClient().sendPacket(new Message("fight;exit;"+EndOfGameType.SURRENDER_WIN.toString().toUpperCase()));
 								}
 								
 							}
