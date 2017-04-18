@@ -27,7 +27,7 @@ public class Server extends ServerEventListener {
 	@Override
 	protected void clientDisconnected(ClientModel client) {
 		Console.info(client.getUUID() + " has disconnected!");
-		SessionMaster.closeSession(client.getUUID());
+		SessionMaster.sendEnemyQuitMSG(client.getUUID(), SessionMaster.closeSession(client.getUUID()));
 		Player player = PlayerMaster.getPlayerUUID(client.getUUID());
 		Lobby.leaveQueue(player);
 		PlayerMaster.remove(player);
@@ -117,15 +117,17 @@ public class Server extends ServerEventListener {
 			 */
 			else if (msg.startsWith("fight;")) {
 				
-				if (parts.length<3) {
-					Console.error("Too less agruments. ("+msg+")");
-					return;
-				}
-				
 				SessionController controller = SessionMaster.getSession(player.getData().getUsername());
 				
 				if (parts[1].equalsIgnoreCase("surrender")) {
-					controller.getEnemy().getClient().sendPacket(new Message("fight;exit;"+EndOfGameType.SURRENDER_WIN.toString().toUpperCase()));
+					controller.getOpponent(player).getClient().sendPacket(new Message("fight;exit;"+EndOfGameType.SURRENDER_WIN.toString().toUpperCase()));
+					SessionMaster.closeSession(player.getClient().getUUID());
+					return;
+				}
+				
+				if (parts.length<3) {
+					Console.error("Too less agruments for action cmd. ("+msg+")");
+					return;
 				}
 				
 				if (parts[1].equalsIgnoreCase("action")) {

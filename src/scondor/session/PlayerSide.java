@@ -28,11 +28,12 @@ public class PlayerSide {
 	private static final int MAX_ROWS = 4;
 	
 	private Player player;
-	private Deck deck;
 	
+	private Deck deck;
 	private List<Card<?>> graveyard;
 	private List<Card<?>> stack;
 	private List<Card<?>> hand;
+	
 	private FieldCard fieldcard;
 	private ATCard[] attackers;
 	private ATCardData[] attackers_data;
