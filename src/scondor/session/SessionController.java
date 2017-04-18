@@ -88,6 +88,10 @@ public class SessionController {
 		return current.getEnemy().getPlayer();
 	}
 	
+	public Player getOpponent(Player p) {
+		return ((current.getPlayer().getPlayer().getData().getUsername().equalsIgnoreCase(p.getData().getUsername())) ? current.getEnemy().getPlayer() : current.getPlayer().getPlayer());
+	}
+	
 	public GameType getGameType() {
 		return type;
 	}

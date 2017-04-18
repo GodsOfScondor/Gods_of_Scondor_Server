@@ -5,6 +5,7 @@ import java.util.List;
 
 import scondor.Console;
 import scondor.packets.Message;
+import scondor.player.PlayerMaster;
 
 public class SessionMaster {
 	
@@ -36,7 +37,7 @@ public class SessionMaster {
 	/*
 	 * closes a session
 	 */
-	public static void closeSession(int uuid) {
+	public static SessionController closeSession(int uuid) {
 		SessionController remove = null;
 		for (SessionController session : sessions) {
 			if (session.getSession().getPlayer().getPlayer().getClient().getUUID()==uuid
@@ -49,9 +50,17 @@ public class SessionMaster {
 			Console.warn("Session closed suddenly. ("+remove.getPlayer().getData().getUsername()+"|"+remove.getEnemy().getData().getUsername()+"|"+remove.getID()+"|"+remove.getGameType().toString().toUpperCase()+")");
 			sessions.remove(remove);
 			remove.close();
+		}
+		return remove;
+	}
+	
+	/*
+	 * send enemy player disconnect msg
+	 */
+	public static void sendEnemyQuitMSG(int uuid, SessionController controller) {
+		if (controller!=null) {
 			Message msg = new Message("fight;exit;"+EndOfGameType.QUIT.toString().toUpperCase());
-			if (remove.getPlayer().getClient().getUUID()!=uuid) remove.getSession().getPlayer().send(msg);
-			if (remove.getEnemy().getClient().getUUID()!=uuid) remove.getSession().getEnemy().send(msg);
+			controller.getOpponent(PlayerMaster.getPlayerUUID(uuid)).getClient().sendPacket(msg);
 		}
 	}
 
