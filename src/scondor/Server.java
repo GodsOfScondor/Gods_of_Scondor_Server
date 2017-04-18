@@ -122,8 +122,13 @@ public class Server extends ServerEventListener {
 					return;
 				}
 				
+				SessionController controller = SessionMaster.getSession(player.getData().getUsername());
+				
+				if (parts[1].equalsIgnoreCase("surrender")) {
+					controller.getEnemy().getClient().sendPacket(new Message("fight;exit;"+EndOfGameType.SURRENDER_WIN.toString().toUpperCase()));
+				}
+				
 				if (parts[1].equalsIgnoreCase("action")) {
-					SessionController controller = SessionMaster.getSession(player.getData().getUsername());
 					
 					if (controller!=null) {
 						
@@ -145,14 +150,11 @@ public class Server extends ServerEventListener {
 								/*
 								 * player surrenders
 								 */
-								if (parts[2].equalsIgnoreCase("surrender")) {
-									controller.getEnemy().getClient().sendPacket(new Message("fight;exit;"+EndOfGameType.SURRENDER_WIN.toString().toUpperCase()));
-								}
 								
 							}
 							
 						} else {
-							Console.error("Enemy is on turn! ("+msg+")");
+							Console.warn("Enemy is on turn! ("+msg+")");
 						}
 						
 					} else {
