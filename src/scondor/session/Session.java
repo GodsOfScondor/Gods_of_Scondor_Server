@@ -6,7 +6,8 @@ import java.util.List;
 import scondor.deck.card.Card;
 import scondor.deck.card.CardData;
 import scondor.deck.card.fieldcard.FieldCardData;
-import scondor.deck.card.troops.TroopCardData;
+import scondor.deck.card.troops.ATCardData;
+import scondor.deck.card.troops.DTCardData;
 import scondor.mana.ManaType;
 import scondor.packets.Message;
 import scondor.packets.State;
@@ -17,7 +18,7 @@ public class Session {
 	private PlayerSide p1, p2;
 	private GameState state;
 	
-	private static final TroopCardData DUMMY = new TroopCardData(-1, "", "", 0, ManaType.NONE, 0, 0, 0);
+	private static final ATCardData DUMMY = new ATCardData(-1, "", "", 0, ManaType.NONE, 0, 0, 0);
 	
 	public Session(int id, PlayerSide p1, PlayerSide p2) {
 		this.id = id;
@@ -77,13 +78,13 @@ public class Session {
 		List<CardData> graveyard = new ArrayList<>();
 		if (!hide) for (Card<?> card : player.getGraveyard()) graveyard.add(card.getData());
 		
-		TroopCardData[] attackers = new TroopCardData[player.getAttackers().length];
+		ATCardData[] attackers = new ATCardData[player.getAttackers().length];
 		for (int n = 0;n<player.getAttackers().length;n++) {
 			if (player.getAttackers()[n] == null) attackers[n] = null;
 			else attackers[n]= player.getAttackers()[n].getData();
 		}
 		
-		TroopCardData[] defenders = new TroopCardData[player.getDefenders().length];
+		DTCardData[] defenders = new DTCardData[player.getDefenders().length];
 		for (int n = 0;n<player.getDefenders().length;n++) {
 			if (player.getDefenders()[n] == null) defenders[n] = null;
 			else defenders[n]= player.getDefenders()[n].getData();

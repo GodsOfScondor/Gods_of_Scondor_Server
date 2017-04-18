@@ -5,9 +5,9 @@ import scondor.deck.card.fcode.CompileData;
 import scondor.deck.card.fcode.FCode;
 import scondor.deck.card.fcode.Vars;
 
-public class ATCard extends Card<TroopCardData> {
+public class ATCard extends Card<ATCardData> {
 
-	public ATCard(TroopCardData data, FCode fcode) {
+	public ATCard(ATCardData data, FCode fcode) {
 		super(data, fcode);
 	}
 	
@@ -42,7 +42,7 @@ public class ATCard extends Card<TroopCardData> {
 
 	@Override
 	public Card<?> cloneCard() {
-		return new ATCard((TroopCardData) data.cloneCard(), fcode);
+		return new ATCard((ATCardData) data.cloneCard(), fcode);
 	}
 
 }
