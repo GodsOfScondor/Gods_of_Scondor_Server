@@ -5,13 +5,13 @@ import java.util.List;
 
 import scondor.deck.card.fcode.CompileData;
 import scondor.deck.card.fcode.FCode;
-import scondor.event.Effect;
+import scondor.event.Event;
 
 public abstract class Card<CARDDATA extends CardData> implements Compilable {
 
 	protected CARDDATA data;
 	protected FCode fcode;
-	protected List<Effect> effects;
+	protected List<Event> effects;
 
 	public Card(CARDDATA data, FCode fcode) {
 		this.data = data;
@@ -19,11 +19,11 @@ public abstract class Card<CARDDATA extends CardData> implements Compilable {
 		this.effects = new ArrayList<>();
 	}
 	
-	public void addEffect(Effect effect) {
+	public void addEffect(Event effect) {
 		this.effects.add(effect);
 	}
 	
-	public List<Effect> getEffects() {
+	public List<Event> getEffects() {
 		return effects;
 	}
 	

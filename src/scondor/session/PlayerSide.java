@@ -8,9 +8,8 @@ import scondor.deck.Deck;
 import scondor.deck.card.Card;
 import scondor.deck.card.fieldcard.FieldCard;
 import scondor.deck.card.troops.ATCard;
-import scondor.deck.card.troops.DTCard;
 import scondor.deck.card.troops.ATCardData;
-import scondor.event.EventMaster;
+import scondor.deck.card.troops.DTCard;
 import scondor.gnet.packet.Packet;
 import scondor.god.GodData;
 import scondor.mana.ManaData;
@@ -192,7 +191,7 @@ public class PlayerSide {
 						/*
 						 * trigger troop attack events
 						 */
-						EventMaster.triggerDTAttack();
+//						EventMaster.triggerDTAttack();
 					}
 					/*
 					 * attack attacker
@@ -201,7 +200,7 @@ public class PlayerSide {
 						/*
 						 * trigger troop attack events
 						 */
-						EventMaster.triggerATAttack();
+//						EventMaster.triggerATAttack();
 					}
 					/*
 					 * attack god
@@ -210,7 +209,7 @@ public class PlayerSide {
 						/*
 						 * trigger troop attack events
 						 */
-						EventMaster.triggerGodAttack();
+//						EventMaster.triggerGodAttack();
 					}
 					
 					

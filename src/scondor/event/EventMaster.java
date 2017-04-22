@@ -8,10 +8,12 @@ import scondor.session.SessionController;
 
 public class EventMaster {
 	
+	protected Events<CardEvent> cardevents = new Events<>();
+	
 	public static void triggerCardEffects(SessionController controller, GameState state) {
 		
 		if (state==GameState.PLAYER1) for (Card<?> card : controller.getSession().getPlayer().getDeck().getCards()) {
-			for (Effect effect : card.getEffects()) effect.trigger(
+			for (Event effect : card.getEffects()) effect.trigger(
 					new CompileData(
 					controller.getSession().getPlayer(),
 					controller.getSession().getEnemy(),
@@ -20,31 +22,13 @@ public class EventMaster {
 		}
 		
 		if (state==GameState.PLAYER2) for (Card<?> card : controller.getSession().getEnemy().getDeck().getCards()) {
-			for (Effect effect : card.getEffects()) effect.trigger(
+			for (Event effect : card.getEffects()) effect.trigger(
 					new CompileData(
 					controller.getSession().getEnemy(),
 					controller.getSession().getPlayer(),
 					-1,
 					TargetType.CARDEFFECT));
 		}
-		
-	}
-
-	public static void triggerATAttack() {
-		
-		// TODO
-		
-	}
-	
-	public static void triggerDTAttack() {
-		
-		// TODO
-		
-	}
-
-	public static void triggerGodAttack() {
-		
-		// TODO
 		
 	}
 	
