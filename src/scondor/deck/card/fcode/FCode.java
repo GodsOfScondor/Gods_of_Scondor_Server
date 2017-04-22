@@ -3,8 +3,6 @@ package scondor.deck.card.fcode;
 import java.util.ArrayList;
 import java.util.List;
 
-import scondor.deck.card.Compilable;
-
 
 public class FCode {
 
@@ -22,7 +20,7 @@ public class FCode {
 		this.variablehandler = new Vars(this);
 	}
 
-	public void execute(CompileData data, Compilable compiler) {
+	public <DATA extends CompileData> void execute(DATA data, Compilable<DATA> compiler) {
 		
 		for (counter = 0;lines[counter]!=null; counter++) {
 				/*

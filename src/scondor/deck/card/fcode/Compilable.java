@@ -1,7 +1,4 @@
-package scondor.deck.card;
-
-import scondor.deck.card.fcode.CompileData;
-import scondor.deck.card.fcode.Vars;
+package scondor.deck.card.fcode;
 
 public interface Compilable<DATA extends CompileData> {
 	

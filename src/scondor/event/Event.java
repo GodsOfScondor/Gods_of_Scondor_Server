@@ -1,6 +1,6 @@
 package scondor.event;
 
-import scondor.deck.card.Compilable;
+import scondor.deck.card.fcode.Compilable;
 import scondor.deck.card.fcode.CompileData;
 import scondor.deck.card.fcode.FCode;
 import scondor.deck.card.fcode.FCodeLoader;
