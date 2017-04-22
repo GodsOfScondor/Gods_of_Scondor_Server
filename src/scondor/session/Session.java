@@ -93,7 +93,7 @@ public class Session {
 		FieldCardData fielddata = null;
 		if (player.getFieldcard()!=null) player.getFieldcard().getData();
 		
-		return new PlayerSideData(fielddata, hand, stack, graveyard, attackers, defenders, null /*player.getGoddata()*/);
+		return new PlayerSideData(fielddata, hand, stack, graveyard, attackers, defenders, player.getGoddata(), player.getManaData());
 		
 	}
 

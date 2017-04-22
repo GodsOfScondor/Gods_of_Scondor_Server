@@ -13,6 +13,7 @@ import scondor.deck.card.troops.ATCardData;
 import scondor.event.EventMaster;
 import scondor.gnet.packet.Packet;
 import scondor.god.GodData;
+import scondor.mana.ManaData;
 import scondor.player.Player;
 
 /**
@@ -40,6 +41,7 @@ public class PlayerSide {
 	private DTCard[] defenders;
 	private ATCardData[] defenders_data;
 	private GodData goddata;
+	private ManaData manadata;
 	
 	public PlayerSide(Player player, Deck deck) {
 		this.player = player;
@@ -60,6 +62,7 @@ public class PlayerSide {
 		this.attackers_data = new ATCardData[MAX_ROWS];
 		this.defenders_data = new ATCardData[MAX_ROWS];
 		this.goddata = deck.getGod().getData();
+		this.manadata = new ManaData();
 	}
 	
 	public void pickFromStack(int amount) {
@@ -141,9 +144,9 @@ public class PlayerSide {
 	public GodData getGoddata() {
 		return goddata;
 	}
-
-	public void setGoddata(GodData goddata) {
-		this.goddata = goddata;
+	
+	public ManaData getManaData() {
+		return manadata;
 	}
 	
 	public Player getPlayer() {
