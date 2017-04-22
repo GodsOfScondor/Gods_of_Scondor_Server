@@ -1,28 +1,29 @@
 package scondor.event;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import scondor.deck.card.Compilable;
 import scondor.deck.card.fcode.CompileData;
+import scondor.deck.card.fcode.FCode;
+import scondor.deck.card.fcode.FCodeLoader;
 
-public class Event<EFFECT extends Effect> {
+public abstract class Event implements Compilable {
 	
-	private List<EFFECT> events;
-	private List<EFFECT> remove;
+	private FCode fcode;
+	private EventData data;
+	private boolean remove;
 	
-	public Event() {
-		this.events = new ArrayList<>();
+	public Event(EventData data) {
+		this.data = data;
+		this.fcode = FCodeLoader.getFCode(data.getFCode());
+		this.remove = false;
 	}
 	
-	public void addEvent(EFFECT event) {
-		events.add(event);
+	public boolean trigger(CompileData data) {
+		fcode.execute(data, this);
+		return remove;
 	}
 	
-	public void trigger(CompileData data) {
-		for (EFFECT effect : events) {
-			if (effect.trigger(data)) remove.add(effect);
-		}
-		for (EFFECT effect : remove) events.remove(effect);
+	public EventData getData() {
+		return data;
 	}
 	
 }

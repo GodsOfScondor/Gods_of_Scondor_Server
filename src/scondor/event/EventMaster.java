@@ -1,51 +1,22 @@
 package scondor.event;
 
-import scondor.deck.card.Card;
 import scondor.deck.card.fcode.CompileData;
 import scondor.deck.card.fcode.TargetType;
-import scondor.session.GameState;
+import scondor.event.cardevent.CardEvent;
 import scondor.session.SessionController;
 
 public class EventMaster {
 	
-	public static void triggerCardEffects(SessionController controller, GameState state) {
+	private static Events<CardEvent> cardevents = new Events<>();
+	
+	public static void triggerCardEffects(SessionController controller) {
 		
-		if (state==GameState.PLAYER1) for (Card<?> card : controller.getSession().getPlayer().getDeck().getCards()) {
-			for (Effect effect : card.getEffects()) effect.trigger(
-					new CompileData(
-					controller.getSession().getPlayer(),
-					controller.getSession().getEnemy(),
-					-1,
-					TargetType.CARDEFFECT));
-		}
-		
-		if (state==GameState.PLAYER2) for (Card<?> card : controller.getSession().getEnemy().getDeck().getCards()) {
-			for (Effect effect : card.getEffects()) effect.trigger(
-					new CompileData(
-					controller.getSession().getEnemy(),
-					controller.getSession().getPlayer(),
-					-1,
-					TargetType.CARDEFFECT));
-		}
-		
-	}
-
-	public static void triggerATAttack() {
-		
-		// TODO
+		cardevents.trigger(new CompileData(controller, TargetType.CARDEFFECT));
 		
 	}
 	
-	public static void triggerDTAttack() {
-		
-		// TODO
-		
-	}
-
-	public static void triggerGodAttack() {
-		
-		// TODO
-		
+	public static void addCardEvent(CardEvent event) {
+		EventMaster.cardevents.addEvent(event);
 	}
 	
 }

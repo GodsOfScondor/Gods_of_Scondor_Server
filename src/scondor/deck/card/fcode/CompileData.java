@@ -1,18 +1,17 @@
 package scondor.deck.card.fcode;
 
 import scondor.session.PlayerSide;
+import scondor.session.SessionController;
 
 public class CompileData {
 	
 	private PlayerSide player;
 	private PlayerSide enemy;
-	private int target;
 	private TargetType type;
 	
-	public CompileData(PlayerSide player, PlayerSide enemy, int target, TargetType type) {
-		this.player = player;
-		this.enemy = enemy;
-		this.target = target;
+	public CompileData(SessionController controller, TargetType type) {
+		this.player = controller.getSession().getPlayer();
+		this.enemy = controller.getSession().getEnemy();
 		this.type = type;
 	}
 
@@ -22,10 +21,6 @@ public class CompileData {
 
 	public PlayerSide getEnemy() {
 		return enemy;
-	}
-
-	public int getTarget() {
-		return target;
 	}
 
 	public TargetType getType() {
