@@ -14,6 +14,12 @@ public class CompileData {
 		this.enemy = controller.getSession().getEnemy();
 		this.type = type;
 	}
+	
+	public CompileData(PlayerSide player, PlayerSide enemy, TargetType type) {
+		this.player = player;
+		this.enemy = enemy;
+		this.type = type;
+	}
 
 	public PlayerSide getPlayer() {
 		return player;

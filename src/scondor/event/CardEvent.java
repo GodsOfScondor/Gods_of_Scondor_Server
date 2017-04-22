@@ -3,7 +3,7 @@ package scondor.event;
 import scondor.deck.card.fcode.CompileData;
 import scondor.deck.card.fcode.Vars;
 
-public class CardEvent extends Event {
+public class CardEvent extends Event<CompileData> {
 
 	public CardEvent(EventData data) {
 		super(data);

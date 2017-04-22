@@ -5,24 +5,24 @@ import java.util.List;
 
 import scondor.deck.card.fcode.CompileData;
 
-public class Events<EFFECT extends Event> {
+public class Events<COMPILER extends CompileData, EVENT extends Event<COMPILER>> {
 	
-	private List<EFFECT> events;
-	private List<EFFECT> remove;
+	private List<EVENT> events;
+	private List<EVENT> remove;
 	
 	public Events() {
 		this.events = new ArrayList<>();
 	}
 	
-	public void addEvent(EFFECT event) {
+	public void addEvent(EVENT event) {
 		events.add(event);
 	}
 	
-	public void trigger(CompileData data) {
-		for (EFFECT effect : events) {
+	public void trigger(COMPILER data) {
+		for (EVENT effect : events) {
 			if (effect.trigger(data)) remove.add(effect);
 		}
-		for (EFFECT effect : remove) events.remove(effect);
+		for (EVENT effect : remove) events.remove(effect);
 	}
 	
 }

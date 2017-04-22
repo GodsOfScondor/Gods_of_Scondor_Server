@@ -10,6 +10,7 @@ import scondor.deck.card.fieldcard.FieldCard;
 import scondor.deck.card.troops.ATCard;
 import scondor.deck.card.troops.ATCardData;
 import scondor.deck.card.troops.DTCard;
+import scondor.event.EventMaster;
 import scondor.gnet.packet.Packet;
 import scondor.god.GodData;
 import scondor.mana.ManaData;
@@ -159,6 +160,7 @@ public class PlayerSide {
 				if (attackers[slot]==null) {
 					attackers[slot] = (ATCard) card.cloneCard();
 					attackers_data[slot] = (ATCardData) attackers[slot].getData().cloneCard();
+					EventMaster.triggerSpawnATEvents(SessionMaster.getSession(player.getData().getUsername()), attackers[slot]);
 				}
 			}
 		}
@@ -172,6 +174,7 @@ public class PlayerSide {
 				if (defenders[slot]==null) {
 					defenders[slot] = (DTCard) card.cloneCard();
 					defenders_data[slot] = (ATCardData) attackers[slot].getData().cloneCard();
+					EventMaster.triggerSpawnDTEvents(SessionMaster.getSession(player.getData().getUsername()), defenders[slot]);
 				}
 			}
 		}

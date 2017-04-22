@@ -57,7 +57,7 @@ public class SessionController {
 		
 		getSession().getPlayer().attack(getSession().getEnemy());
 		current.switchPlayers();
-		EventMaster.triggerCardEffects(this);
+		EventMaster.triggerCardEvents(this);
 		
 		old_states.add(current.cloneSession());
 		updates++;
