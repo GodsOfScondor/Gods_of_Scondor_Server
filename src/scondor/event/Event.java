@@ -5,7 +5,7 @@ import scondor.deck.card.fcode.CompileData;
 import scondor.deck.card.fcode.FCode;
 import scondor.deck.card.fcode.FCodeLoader;
 
-public abstract class Event<DATA extends CompileData> implements Compilable<DATA> {
+public abstract class Event<COMPILER extends CompileData> implements Compilable<COMPILER> {
 	
 	private FCode fcode;
 	private EventData data;
@@ -17,7 +17,7 @@ public abstract class Event<DATA extends CompileData> implements Compilable<DATA
 		this.remove = false;
 	}
 	
-	public boolean trigger(DATA data) {
+	public boolean trigger(COMPILER data) {
 		fcode.execute(data, this);
 		return remove;
 	}

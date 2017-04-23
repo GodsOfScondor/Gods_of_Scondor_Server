@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import scondor.Console;
+import scondor.deck.card.troops.DTCard;
+import scondor.event.EventData;
 import scondor.event.EventHandler;
+import scondor.event.spawnevent.SpawnTroopEvent;
 import scondor.packets.Message;
 import scondor.player.PlayerMaster;
 
@@ -20,6 +23,9 @@ public class SessionMaster {
 	 * sends player and enemy init informations
 	 */
 	protected static void createSession(PlayerSide ps1, PlayerSide ps2, EventHandler handler, GameType type) {
+		
+		Console.info("new session has been created.");
+		
 		Session session = new Session(0,ps1, ps2);
 		
 		ps1.send(new Message("fight;start;" + type.toString().toLowerCase() + ";" + ps2.getPlayer().getData().getUsername()));
@@ -31,6 +37,9 @@ public class SessionMaster {
 		SessionController controller = new SessionController(session, type, handler);
 		
 		sessions.add(controller);
+		
+		handler.addSpawnTroopEvent(new SpawnTroopEvent<>(new EventData("hallo", "ich bin eine beschreibung!", 0)));
+		session.getPlayer().playDTOut((DTCard) ps1.getHand().get(0), 0);
 		
 		controller.send("start state");
 	}

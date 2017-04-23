@@ -22,6 +22,8 @@ public class FCode {
 
 	public <DATA extends CompileData> void execute(DATA data, Compilable<DATA> compiler) {
 		
+		System.out.println("fcode " + id  + " is triggered!");
+		
 		for (counter = 0;lines[counter]!=null; counter++) {
 				/*
 				 *  Label
@@ -74,6 +76,8 @@ public class FCode {
 					counter = getLabel(lines[counter].substring(3, lines[counter].length()-1).split(",")[1]).getValue();
 				}
 			} else {
+				
+				System.out.println("compiling unknown cmd!");
 				
 				compiler.compile(variablehandler, lines[counter], data);
 				

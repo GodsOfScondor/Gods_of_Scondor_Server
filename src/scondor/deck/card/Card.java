@@ -21,4 +21,8 @@ public abstract class Card<CARDDATA extends CardData> implements Compilable<Comp
 		return data;
 	}
 	
+	public <DATA extends CompileData> void execute(DATA data) {
+		fcode.execute(data, this);
+	}
+	
 }

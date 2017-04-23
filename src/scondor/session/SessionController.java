@@ -57,16 +57,30 @@ public class SessionController {
 		
 		send(params);
 		
+		/*
+		 * switch players
+		 */
 		getSession().getPlayer().attack(getSession().getEnemy());
 		current.switchPlayers();
-		handler.triggerCardEvents(this);
 		
+		/*
+		 * create backup
+		 */
 		old_states.add(current.cloneSession());
 		updates++;
 		
+		/*
+		 * reset timer
+		 */
 		if (!params.equalsIgnoreCase("time is out")) timer.cancel();
 		timer = new Timer();
 		timer.schedule(generateTask(), ROUND_TIME);
+		
+		/*
+		 * countdown and trigger events
+		 */
+		getSession().getPlayer().countdown();
+		handler.triggerCardEvents(this);
 		
 		Console.info("Session updated: " + updates + "(" + 
 		current.getMaster().getPlayer().getData().getUsername() + " vs " +
