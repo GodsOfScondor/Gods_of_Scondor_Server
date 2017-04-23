@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import scondor.Console;
+import scondor.event.EventHandler;
 import scondor.packets.Message;
 import scondor.player.PlayerMaster;
 
@@ -18,7 +19,7 @@ public class SessionMaster {
 	/*
 	 * sends player and enemy init informations
 	 */
-	protected static void createSession(PlayerSide ps1, PlayerSide ps2, GameType type) {
+	protected static void createSession(PlayerSide ps1, PlayerSide ps2, EventHandler handler, GameType type) {
 		Session session = new Session(0,ps1, ps2);
 		
 		ps1.send(new Message("fight;start;" + type.toString().toLowerCase() + ";" + ps2.getPlayer().getData().getUsername()));
@@ -27,7 +28,7 @@ public class SessionMaster {
 		ps1.send(new Message("fight;action;turn"));
 		ps2.send(new Message("fight;action;wait"));
 		
-		SessionController controller = new SessionController(session, type);
+		SessionController controller = new SessionController(session, type, handler);
 		
 		sessions.add(controller);
 		

@@ -6,7 +6,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import scondor.Console;
-import scondor.event.EventMaster;
+import scondor.event.EventHandler;
 import scondor.packets.State;
 import scondor.player.Player;
 
@@ -20,12 +20,14 @@ public class SessionController {
 	private Session current;
 	private GameType type;
 	private Timer timer = new Timer();
+	private EventHandler handler;
 	
-	public SessionController(Session start, GameType type) {
+	public SessionController(Session start, GameType type, EventHandler handler) {
 		this.current = start.cloneSession();
 		this.old_states.add(start);
 		this.id = count++;
 		this.type = type;
+		this.handler = handler;
 		
 		timer.schedule(generateTask(), ROUND_TIME);
 		
@@ -57,7 +59,7 @@ public class SessionController {
 		
 		getSession().getPlayer().attack(getSession().getEnemy());
 		current.switchPlayers();
-		EventMaster.triggerCardEvents(this);
+		handler.triggerCardEvents(this);
 		
 		old_states.add(current.cloneSession());
 		updates++;

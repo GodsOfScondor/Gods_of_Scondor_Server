@@ -10,6 +10,7 @@ import java.util.TimerTask;
 import scondor.Console;
 import scondor.Database;
 import scondor.deck.Deck;
+import scondor.event.EventHandler;
 import scondor.gnet.server.ClientModel;
 import scondor.player.Player;
 import scondor.player.PlayerMaster;
@@ -117,13 +118,15 @@ public class Lobby {
 			
 		}
 		
+		EventHandler handler = new EventHandler();
+		
 		Deck player_deck = new Deck(player.getData().getDecks().get(players.get(player)), player.getData());
-		PlayerSide player_side = new PlayerSide(player, player_deck);
+		PlayerSide player_side = new PlayerSide(player, player_deck, handler);
 
 		Deck enemy_deck = new Deck(enemy.getData().getDecks().get(players.get(enemy)), enemy.getData());
-		PlayerSide enemy_side = new PlayerSide(enemy, enemy_deck);
+		PlayerSide enemy_side = new PlayerSide(enemy, enemy_deck, handler);
 		
-		SessionMaster.createSession(player_side, enemy_side, type);
+		SessionMaster.createSession(player_side, enemy_side, handler, type);
 		
 		leaveQueue(player);
 		leaveQueue(enemy);

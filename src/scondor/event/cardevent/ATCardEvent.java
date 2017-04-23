@@ -1,26 +1,23 @@
 package scondor.event.cardevent;
 
-import scondor.deck.card.Card;
 import scondor.deck.card.fcode.CompileData;
 import scondor.deck.card.fcode.Vars;
-import scondor.event.Event;
+import scondor.deck.card.troops.ATCard;
 import scondor.event.EventData;
 
-public class CardEvent<CARD extends Card<?>> extends Event<CompileData> {
+public class ATCardEvent extends CardEvent<ATCard> {
 
-	private CARD victim;
+	private ATCard victim;
 	
-	public CardEvent(CARD victim, EventData data) {
-		super(data);
+	public ATCardEvent(ATCard victim, EventData data) {
+		super(victim, data);
 		this.victim = victim;
 	}
 
-	public CARD getCard() {
-		return victim;
-	}
-	
 	@Override
 	public void compile(Vars vars, String cmd, CompileData data) {
+		super.compile(vars, cmd, data);
+		
 		victim.getData().getDescription(); // unnedig (temporaer)
 	}
 

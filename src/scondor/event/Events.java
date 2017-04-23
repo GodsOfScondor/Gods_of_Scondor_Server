@@ -24,5 +24,14 @@ public class Events<COMPILER extends CompileData, EVENT extends Event<COMPILER>>
 		}
 		for (EVENT effect : remove) events.remove(effect);
 	}
+
+	public void triggerEvent(EventFilter<COMPILER, EVENT> filter, COMPILER data) {
+		
+		EVENT event = filter.filter(events);
+		
+		if (event.trigger(data)) events.remove(event);
+		
+		
+	}
 	
 }
