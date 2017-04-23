@@ -6,10 +6,13 @@ import java.util.Random;
 
 import scondor.deck.Deck;
 import scondor.deck.card.Card;
+import scondor.deck.card.fcode.CompileData;
+import scondor.deck.card.fcode.TargetType;
 import scondor.deck.card.fieldcard.FieldCard;
 import scondor.deck.card.troops.ATCard;
 import scondor.deck.card.troops.ATCardData;
 import scondor.deck.card.troops.DTCard;
+import scondor.deck.card.troops.DTCardData;
 import scondor.event.EventHandler;
 import scondor.gnet.packet.Packet;
 import scondor.god.GodData;
@@ -39,7 +42,7 @@ public class PlayerSide {
 	private ATCard[] attackers;
 	private ATCardData[] attackers_data;
 	private DTCard[] defenders;
-	private ATCardData[] defenders_data;
+	private DTCardData[] defenders_data;
 	private GodData goddata;
 	private ManaData manadata;
 	
@@ -63,7 +66,7 @@ public class PlayerSide {
 		this.attackers = new ATCard[MAX_ROWS];
 		this.defenders = new DTCard[MAX_ROWS];
 		this.attackers_data = new ATCardData[MAX_ROWS];
-		this.defenders_data = new ATCardData[MAX_ROWS];
+		this.defenders_data = new DTCardData[MAX_ROWS];
 		this.goddata = deck.getGod().getData();
 		this.manadata = new ManaData();
 	}
@@ -156,29 +159,28 @@ public class PlayerSide {
 		return player;
 	}
 	
-	public void playATOut(Card<?> card, int slot) {
+	public void playATOut(ATCard card, int slot) {
 		
 		if (hand.contains(card)) {
-			if (card instanceof ATCard) {
-				if (attackers[slot]==null) {
-					attackers[slot] = (ATCard) card.cloneCard();
-					attackers_data[slot] = (ATCardData) attackers[slot].getData().cloneCard();
-					handler.triggerSpawnATEvents(SessionMaster.getSession(player.getData().getUsername()), attackers[slot]);
-				}
+			if (attackers[slot] == null) {
+				attackers[slot] = (ATCard) card.cloneCard();
+				attackers_data[slot] = (ATCardData) attackers[slot].getData().cloneCard();
+				attackers[slot].execute(new CompileData(null, TargetType.NONE));
+				handler.triggerSpawnATEvents(SessionMaster.getSession(player.getData().getUsername()), attackers[slot]);
 			}
 		}
 		
 	}
 	
-	public void playDTOut(Card<?> card, int slot) {
+	public void playDTOut(DTCard card, int slot) {
 		
 		if (hand.contains(card)) {
-			if (card instanceof ATCard) {
-				if (defenders[slot]==null) {
-					defenders[slot] = (DTCard) card.cloneCard();
-					defenders_data[slot] = (ATCardData) attackers[slot].getData().cloneCard();
-					handler.triggerSpawnDTEvents(SessionMaster.getSession(player.getData().getUsername()), defenders[slot]);
-				}
+			System.out.println("player has this card in his hand!");
+			if (defenders[slot]==null) {
+				defenders[slot] = (DTCard) card.cloneCard();
+				defenders_data[slot] = (DTCardData) defenders[slot].getData().cloneCard();
+				defenders[slot].execute(new CompileData(null, TargetType.NONE));
+				handler.triggerSpawnDTEvents(SessionMaster.getSession(player.getData().getUsername()), defenders[slot]);
 			}
 		}
 		

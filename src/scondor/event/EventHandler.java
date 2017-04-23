@@ -107,6 +107,7 @@ public class EventHandler {
 	}
 	
 	public void triggerSpawnDTEvents(SessionController controller, DTCard card) {
+		System.out.println("trigger all spawn events!");
 		SpawnCompileData<DTCard> compiler = new SpawnCompileData<DTCard>(controller, card);
 		spawntroopevents.trigger(compiler);
 		spawndtcardevents.trigger(compiler);
@@ -114,6 +115,10 @@ public class EventHandler {
 	
 	public void addCardEvent(EventData data, Card<?> card, GameState player) {
 //		EventMaster.cardevents.addEvent(new DTCardEvent(player, victim, ));
+	}
+	
+	public void addSpawnTroopEvent(SpawnTroopEvent<SpawnCompileData<? extends Card<?>>> event) {
+		spawntroopevents.addEvent(event);
 	}
 	
 }
