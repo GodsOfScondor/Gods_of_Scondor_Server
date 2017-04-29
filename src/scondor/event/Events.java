@@ -21,7 +21,6 @@ public class Events<COMPILER extends CompileData, EVENT extends Event<COMPILER>>
 	
 	public void trigger(COMPILER data) {
 		for (EVENT effect : events) {
-			System.out.println("per event triggering...");
 			if (effect.trigger(data)) remove.add(effect);
 		}
 		for (EVENT effect : remove) events.remove(effect);
@@ -32,7 +31,6 @@ public class Events<COMPILER extends CompileData, EVENT extends Event<COMPILER>>
 		EVENT event = filter.filter(events);
 		
 		if (event==null) return;
-		
 		if (event.trigger(data)) events.remove(event);
 		
 	}

@@ -18,7 +18,7 @@ public class ATCardEvent extends CardEvent<ATCard> {
 	public void compile(Vars vars, String cmd, CompileData data) {
 		super.compile(vars, cmd, data);
 		
-		victim.getData().getDescription(); // unnedig (temporaer)
+		System.out.println(victim.getData().getCountdown());
 	}
 
 }

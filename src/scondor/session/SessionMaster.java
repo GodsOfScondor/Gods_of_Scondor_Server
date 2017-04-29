@@ -38,8 +38,8 @@ public class SessionMaster {
 		sessions.add(controller);
 		
 		ATCard atcard = (ATCard) ps1.getHand().get(0);
-		handler.addCardEvent(atcard, new EventData("a", "b", 0));
 		session.getPlayer().playATOut(controller, atcard, 0);
+		handler.addCardEvent((ATCard)session.getPlayer().getAttackers()[0], new EventData("a", "b", 0));
 		
 		controller.send("start state");
 	}

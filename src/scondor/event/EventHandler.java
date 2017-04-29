@@ -50,7 +50,7 @@ public class EventHandler {
 			atcardevents.triggerEvent(new EventFilter<CompileData, ATCardEvent>() {
 				@Override
 				public ATCardEvent filter(List<ATCardEvent> events) {
-					for (ATCardEvent event : events) if (event.getCard()==attacker) return event;
+					for (ATCardEvent event : events) if (event.getCard().getUUID()==attacker.getUUID()) return event;
 					return null;
 				}
 			}, new CompileData(controller, TargetType.NONE));

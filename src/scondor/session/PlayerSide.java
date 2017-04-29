@@ -199,11 +199,13 @@ public class PlayerSide {
 	public void countdown() {
 		for (int n = 0;n<MAX_ROWS;n++) {
 			if (attackers[n]!=null) {
+				System.out.println("there is an AT with coutndown: " + attackers[n].getData().getCountdown());
 				if (attackers[n].getData().getCountdown()>0) {
 					attackers[n].getData().setCountdown(attackers[n].getData().getCountdown()-1);
 				} else {
 					Console.error("Troop has not attacked correctly! (" + getPlayer().getData().getUsername() + ">" + n + ": " + attackers[n].getData().getName() + ")");
 				}
+				System.out.println("now the AT has: " + attackers[n].getData().getCountdown());
 			}
 		}
 	}

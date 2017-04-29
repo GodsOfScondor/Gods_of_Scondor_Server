@@ -11,38 +11,20 @@ public class ATCard extends Card<ATCardData> {
 		super(data, fcode);
 	}
 	
+	public ATCard(int uuid, ATCardData data, FCode fcode) {
+		super(uuid, data, fcode);
+	}
+	
 	@Override
 	public void compile(Vars vars, String cmd, CompileData data) {
 		
-//		
-//		
-//		/*
-//		 * get attack of enemy
-//		 */
-//		if (cmd.startsWith("getEnemyAttack")) {
-//			fc.getVar(cmd.split("\"")[1]).setValue(((TroopCardDat<>) target.getCard()).getAttack());
-//		}
-//		/*
-//		 * set attack of enemy
-//		 */
-//		else if (cmd.startsWith("setEnemyAttack")) {
-//			((TroopCard) target.getCard()).setAttack(Integer.parseInt(cmd.split("\"")[1]));
-//		}
-//		/*
-//		 * set attack of enemy using offset value
-//		 */
-//		else if (cmd.startsWith("editEnemyAttack")) {
-//			((TroopCard) target.getCard()).setAttack(((TroopCard) target.getCard()).getAttack()
-//					+ Integer.parseInt(cmd.split("\"")[1]));
-//		}
-//		
-//		
+		
 		
 	}
 
 	@Override
 	public Card<?> cloneCard() {
-		return new ATCard((ATCardData) data.cloneCard(), fcode);
+		return new ATCard(this.getUUID(), (ATCardData) data.cloneCard(), fcode);
 	}
 
 }
