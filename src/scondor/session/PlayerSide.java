@@ -163,13 +163,13 @@ public class PlayerSide {
 	/*
 	 * 
 	 */
-	public void playATOut(ATCard card, int slot) {
+	public void playATOut(SessionController controller, ATCard card, int slot) {
 		
 		if (hand.contains(card)) {
 			if (attackers[slot] == null) {
 				attackers[slot] = (ATCard) card.cloneCard();
 				attackers_data[slot] = (ATCardData) attackers[slot].getData().cloneCard();
-				attackers[slot].execute(new CompileData(null, TargetType.NONE));
+				attackers[slot].execute(new CompileData(controller, TargetType.NONE));
 				handler.triggerSpawnATEvents(SessionMaster.getSession(player.getData().getUsername()), attackers[slot]);
 			}
 		}
@@ -179,14 +179,14 @@ public class PlayerSide {
 	/*
 	 * 
 	 */
-	public void playDTOut(DTCard card, int slot) {
+	public void playDTOut(SessionController controller, DTCard card, int slot) {
 		
 		if (hand.contains(card)) {
 			System.out.println("player has this card in his hand!");
 			if (defenders[slot]==null) {
 				defenders[slot] = (DTCard) card.cloneCard();
 				defenders_data[slot] = (DTCardData) defenders[slot].getData().cloneCard();
-				defenders[slot].execute(new CompileData(null, TargetType.NONE));
+				defenders[slot].execute(new CompileData(controller, TargetType.NONE));
 				handler.triggerSpawnDTEvents(SessionMaster.getSession(player.getData().getUsername()), defenders[slot]);
 			}
 		}

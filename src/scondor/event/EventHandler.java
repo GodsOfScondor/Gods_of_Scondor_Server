@@ -14,7 +14,6 @@ import scondor.event.spawnevent.SpawnATEvent;
 import scondor.event.spawnevent.SpawnCompileData;
 import scondor.event.spawnevent.SpawnDTEvent;
 import scondor.event.spawnevent.SpawnTroopEvent;
-import scondor.session.GameState;
 import scondor.session.PlayerSide;
 import scondor.session.SessionController;
 
@@ -113,8 +112,8 @@ public class EventHandler {
 		spawndtcardevents.trigger(compiler);
 	}
 	
-	public void addCardEvent(EventData data, Card<?> card, GameState player) {
-//		EventMaster.cardevents.addEvent(new DTCardEvent(player, victim, ));
+	public void addCardEvent(ATCard card, EventData data) {
+		atcardevents.addEvent(new ATCardEvent(card, data));
 	}
 	
 	public void addSpawnTroopEvent(SpawnTroopEvent<SpawnCompileData<? extends Card<?>>> event) {

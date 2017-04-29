@@ -12,9 +12,9 @@ public class SpawnTroopEvent<DATA extends CompileData> extends Event<DATA> {
 	}
 
 	@Override
-	public void compile(Vars vars, String cmd, CompileData data) {
+	public void compile(Vars vars, String cmd, DATA data) {
 		
-		System.out.println(cmd);
+		
 		
 	}
 	

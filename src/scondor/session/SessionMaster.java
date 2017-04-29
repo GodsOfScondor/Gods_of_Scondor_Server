@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import scondor.Console;
-import scondor.deck.card.troops.DTCard;
+import scondor.deck.card.troops.ATCard;
 import scondor.event.EventData;
 import scondor.event.EventHandler;
-import scondor.event.spawnevent.SpawnTroopEvent;
 import scondor.packets.Message;
 import scondor.player.PlayerMaster;
 
@@ -38,8 +37,9 @@ public class SessionMaster {
 		
 		sessions.add(controller);
 		
-		handler.addSpawnTroopEvent(new SpawnTroopEvent<>(new EventData("hallo", "ich bin eine beschreibung!", 0)));
-		session.getPlayer().playDTOut((DTCard) ps1.getHand().get(0), 0);
+		ATCard atcard = (ATCard) ps1.getHand().get(0);
+		handler.addCardEvent(atcard, new EventData("a", "b", 0));
+		session.getPlayer().playATOut(controller, atcard, 0);
 		
 		controller.send("start state");
 	}
